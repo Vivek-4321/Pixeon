@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import OtpVerification from "./OtpVerification.jsx";
@@ -9,9 +9,9 @@ import BottomNavigationBar from "./BottomNavigationBar.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContent />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
