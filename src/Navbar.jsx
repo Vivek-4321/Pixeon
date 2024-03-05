@@ -2,6 +2,7 @@ import React from "react";
 import "./Navbar.css";
 import Pixeon from "./assets/pixeon.png";
 import { IoSearchOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 function Navbar() {
   return (
@@ -27,7 +28,10 @@ function Navbar() {
       </div>
       <div className="navbar__container__mb">
         <div className="navbar__container__mb__top__wrapper">
-          
+          <img src={Pixeon} className="navbar__container__mb__top__img"/>
+        </div>
+        <div className="navbar__container__mb__top__left">
+          <CgProfile/>
         </div>
       </div>
     </>
