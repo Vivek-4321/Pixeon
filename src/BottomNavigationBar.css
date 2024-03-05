@@ -1,0 +1,13 @@
+.bottom-navigation-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    color: white;
+  }
+  
+  .nav-item {
+    padding: 10px;
+  }

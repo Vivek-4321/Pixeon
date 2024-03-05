@@ -1,0 +1,182 @@
+.otp__container {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.otp__container__logo__container {
+  width: 100%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2rem;
+}
+
+.otp__container__logo__img {
+  width: 9rem;
+  height: 6rem;
+}
+
+.otp__verification__image {
+  width: 15rem;
+  height: 15rem;
+}
+
+.otp__container__contents__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 88%;
+  /* background-color: aliceblue; */
+  color: white;
+}
+
+.otp__container__contents__wrapper__container {
+  width: 30rem;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+
+  h1 {
+    opacity: 0;
+    animation: fadeInFromBottom 0.5s ease-out forwards;
+    color: rgb(228, 226, 226);
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeInFromBottom 0.5s ease-out forwards;
+    color: rgb(228, 226, 226);
+    color: rgb(210, 210, 210);
+  }
+}
+
+.input-fade-in {
+  opacity: 0;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  transition: all 0.5s ease-out;
+  background-color: var(--secondary-color);
+  font-size: 24px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  outline: none;
+  animation: fadeInFromBottom 0.5s ease-out forwards;
+}
+
+.input-fade-in:hover {
+  transform: scale(1.1);
+  border: 2px solid #0bc2fb;
+}
+
+.input-fade-in_button_otp {
+  margin-top: 1rem;
+  opacity: 0;
+  width: 50%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  color: white;
+  border: none;
+  transition: all 0.5s ease-out;
+  /* background: linear-gradient(90deg, #0bc2fb 0%, rgba(8, 106, 229, 1) 100%); */
+  font-size: 16px;
+  margin-bottom: 1rem;
+  position: relative;
+  background-color: var(--secondary-color);
+  z-index: 1;
+  animation: fadeInFromBottom 0.5s ease-out forwards;
+  button {
+    /* animation: fadeInFromBottom 0.5s ease-out forwards; */
+    width: 100%;
+    height: 3rem;
+    border-radius: 1rem;
+    color: white;
+    border: none;
+    transition: all 0.5s ease-out;
+    /* background: linear-gradient(90deg, #0bc2fb 0%, rgba(8, 106, 229, 1) 100%); */
+    font-size: 16px;
+    margin-bottom: 1rem;
+    position: relative;
+    background-color: var(--secondary-color);
+    z-index: 1;
+  }
+}
+
+.otp__verification__image {
+  opacity: 0;
+  animation: fadeInFromBottom 0.5s ease-out forwards;
+}
+
+.input-fade-in_button_otp::before,
+.input-fade-in_button_otp::after {
+  content: "";
+  position: absolute;
+  inset: -0.2rem;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    rgba(227, 40, 12, 1) 0%,
+    #0bc2fb 0%,
+    rgba(8, 106, 229, 1) 100%
+  );
+  animation: rotation 2s linear infinite;
+  z-index: -1;
+  border-radius: 1rem;
+}
+
+.input-fade-in_button_otp::after {
+  filter: blur(3.5rem);
+}
+
+.input-fade-in_button_otp:hover {
+  button {
+    background: linear-gradient(90deg, #5ddcff, #0bc3fb 43%, #086ae5);
+  }
+}
+
+.input-fade-in_button_otp:active {
+  transform: scale(0.9);
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .otp__form{
+    margin-top: -3rem;
+  }
+
+  .otp__container__contents__wrapper__container {
+    width: 100%;
+  }
+
+  .input-fade-in_button_otp{
+    margin-top: 3rem;
+  }
+}
