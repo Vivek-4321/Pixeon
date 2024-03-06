@@ -34,6 +34,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
   justify-content: center;
   transition: all 0.3s ease-out;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-item-link.active {
