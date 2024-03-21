@@ -18,6 +18,7 @@
   flex-direction: column;
   background-color: var(--background-color);
   color: var(--primary-color);
+  overflow: none;
 }
 
 .signup__container__logo__container {
@@ -27,6 +28,7 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 2rem;
+  overflow: none;
 }
 
 .signup__container__logo__img {

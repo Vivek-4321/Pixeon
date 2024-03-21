@@ -1,12 +1,14 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 
 :root {
-  --primary-color: #0676FE;
-  --secondary-color: #122E40;
-  --background-color: #0A1720;
+  --primary-color: #1D1C1D;
+  --secondary-color: #0190FD;
+  --accent-color: #85C923;
+  --orange-color: #FD9F37;
+  --grey-color: grey;
 }

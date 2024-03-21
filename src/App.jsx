@@ -1,17 +1,18 @@
 import "./App.css";
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation, BrowserRouter } from "react-router-dom";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import OtpVerification from "./OtpVerification.jsx";
 import Loader from "./Loader.jsx";
 import Navbar from "./Navbar.jsx";
 import BottomNavigationBar from "./BottomNavigationBar.jsx";
+import Content from "./Content.jsx";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <AppContent />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
@@ -34,6 +35,7 @@ function AppContent() {
         <Route path="/otp_verification" element={<OtpVerification />} />
         <Route path="/loading" element={<Loader />} />
         <Route path="/navbar" element={<Navbar />} />
+        <Route path="/content" element={<Content/>} />
       </Routes>
       <BottomNavigationBar/>
     </>
@@ -41,3 +43,4 @@ function AppContent() {
 }
 
 export default App;
+
