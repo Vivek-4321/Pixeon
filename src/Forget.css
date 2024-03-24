@@ -1,47 +1,31 @@
-.navbar_pixeon{
+.navbar_pixeon_forgot{
     font-family: var(--font-family);
  margin-left: 1rem;
  margin-top: 1rem;
- font-size: 0.9rem;
+font-size: 0.9rem;
 }
 
-.container_1{
+.container_forgot{
 color:var(--black-color);
 background-color: var(--white-color);
 width: 25rem;
 height: 30rem;
 text-align: center;
 margin-left: 37%;
-margin-top:7rem ;
+margin-top:13rem ;
 font-family: var(--font-family);
 font-size: 14px;
-
-}
-.google_box{
-
-    padding-top: 0.5rem;
-    height: 2.8rem;
-    width: 21rem;
-    margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-text-align: inherit;
-color: var(--black-color);
-font-weight: bolder;
-font-size: 18px;
-letter-spacing: 1px;
-padding-top: 1px;
-margin-top: 4rem;
-background-color:url('google__logo.png');
-background-size: cover;
-background-repeat: no-repeat;
-padding: 10px 20px;
-background-color:var(--white-color);
+border: 3rem black;
 
 
 }
-.Email{
-    margin-top: 2rem;
+.container_forgot_1{
+
+    margin-top: 3rem;
+}
+
+.Email_forgot{
+    margin-top: 6rem;
     padding-bottom: 1px;
     width: 21rem;
     height: 1.5rem;
@@ -69,7 +53,7 @@ padding: 1rem;
 font-size: 20px;
  
 }
-.password{
+.Email_retype{
    
     margin-top: 2rem;
     padding-bottom: 0.5px;
@@ -84,7 +68,7 @@ letter-spacing: 1px;
 padding-left: 1rem;
 padding: 1rem;
 }
-.submit_button{
+.submit_reset{
 
     margin-top: 2rem;
     padding-bottom: 1px;
@@ -101,30 +85,23 @@ color:white;
 background-color: var(--black-color);
 font-size: 15px;
 }
-.container_2{
-  display: flex;
- flex-direction: row;
-  margin-top: 0.5rem;
-  margin-right: 1rem;
+.container_forgot_2{
+display: flex;
+flex-direction: row;
+justify-content: center;
+   
 
 }
-.not_account
+.Go_back
 {
-font-size: 0.9rem;
-
-margin: 1px;
-width: 9rem;
-margin-top: 0.5rem;
-margin-left: 4rem;
+font-size: 1rem;
 color: var(--grey-color);
 font-family: var(--font-family);
 
 }
-.create_account{
- font-size: 0.9rem; 
-margin-top: 0.5rem;
+.Home_page{
+ font-size: 1rem; 
 text-decoration: none;
-margin-right: 5px;
 color: var(--secondary-color);
 font-family: var(--font-family);
 
@@ -133,4 +110,7 @@ a{
     color: var(--secondary-color);
     text-decoration: none;
   
+}
+.sa{
+    color: aliceblue;
 }
