@@ -1,37 +1,50 @@
-.otp_container{
-    margin-left: 37%;
-    margin-top:13rem ;
-    border: 3px solid black;
-display: flex;
-justify-content: center;
-    width: 25rem;
-    height: 25rem;
-}
-.enter_otp{
-    font-family: var(--font-family);
-height: rem;
-    width: 10rem;
-    margin-left: 19rem;
-
+.otp__container__wrapper{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-
-.otpInput{
-width: 4rem;
-height: 4rem;
-margin: 5px;
-text-align: center;
-font-size: 1.2em;
-margin-top: 9rem;
-border-radius: 0.5rem;
-margin-bottom: 1rem;
-
-
-
+.otp_container {
+  margin-bottom: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-   button{
-    width: 5rem;
-    height: 1rem;
+.otp__input__group{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding-left: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.container__header__otp{
+    display: flex;
+    align-items: center;
     justify-content: center;
-   }
+    margin-bottom: -5rem;
+}
+
+.otp__input {
+  width: 4.4rem;
+  height: 4.2rem;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 9rem;
+  border-radius: 0.6rem;
+  margin-right: 0.5rem;
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+
+button {
+  width: 5rem;
+  height: 1rem;
+  justify-content: center;
+}

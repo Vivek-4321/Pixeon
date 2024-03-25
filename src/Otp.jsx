@@ -1,8 +1,7 @@
+import { useEffect, useRef, useState } from "react";
+import "./Otp.css";
 
-import {useEffect, useRef, useState} from "react";
-import "./Otp.css"
-
-const OtpInput = ({length = 4, onOtpSubmit = () => {}}) => {
+const OtpInput = ({ length = 4, onOtpSubmit = () => {} }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const inputRefs = useRef([]);
 
@@ -53,34 +52,32 @@ const OtpInput = ({length = 4, onOtpSubmit = () => {}}) => {
   };
 
   return (
-    <div>
-           
-        <div className="otp_container">
-        <h1 className="enter_otp">Enter OTP</h1>
-            <div>
-         
-
-            </div>
-      
-      {otp.map((value, index) => {
-        return (
-          <input
-            key={index}
-            type="text"
-            ref={(input) => (inputRefs.current[index] = input)}
-            value={value}
-            onChange={(e) => handleChange(index, e)}
-            onClick={() => handleClick(index)}
-            onKeyDown={(e) => handleKeyDown(index, e)}
-            className="otpInput"
-          />
-        );
-      })}
-      <button></button>
-           <div>
-
-           </div>
-           </div>
+    <div className="otp__container__wrapper">
+       <div className="navbar_pixeon">
+        <h1>Pixeon</h1>
+      </div>
+      <div className="otp_container">
+        <div className="container__header__otp">
+        <span className="container__header__signup">📨 Enter OTP</span>
+        </div>
+        <div className="otp__input__group">
+        {otp.map((value, index) => {
+          return (
+            <input
+              className="otp__input"
+              key={index}
+              type="text"
+              ref={(input) => (inputRefs.current[index] = input)}
+              value={value}
+              onChange={(e) => handleChange(index, e)}
+              onClick={() => handleClick(index)}
+              onKeyDown={(e) => handleKeyDown(index, e)}
+            />
+          );
+        })}
+        </div>
+        <button className="submit_button">Confirm</button>
+      </div>
     </div>
   );
 };

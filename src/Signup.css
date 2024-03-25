@@ -1,3 +1,12 @@
+.login__container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .navbar_pixeon_1{
   font-family: var(--font-family);
 margin-left: 1rem;
@@ -6,132 +15,42 @@ font-size: 0.5rem;
 }
 
 .container_3{
-color:black;
-background-color: var(--white-color);
-
-width: 25rem;
-height: 30rem;
-text-align: center;
-
-margin-left: 37%;
-margin-top:5.5rem ;
-font-family: var(--font-family);
-font-size: 14px;
-
-
-
+  margin-top: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-.google_box_1{
 
-  padding-top: 0.5rem;
-  height: 2.8rem;
-  width: 21rem;
-  margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-text-align: inherit;
-color: black;
-font-weight: bolder;
-font-size: 18px;
-letter-spacing: 1px;
-padding-top: 1px;
-margin-top: 4rem;
-background-color:url('google__logo.png');
-background-size: cover;
-background-repeat: no-repeat;
-padding: 10px 20px;
-background-color:white;
-
-cursor: pointer;
-
-
-
-
+.container__header__signup{
+  font-weight: 500;
+  font-size: 24px;
 }
-.Email_1{
-  margin-top: 2rem;
-  padding-bottom: 1px;
-  width: 21rem;
-  height: 1.5rem;
-  margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 15px;
-letter-spacing: 1px;
-padding-left: 1rem;
-padding: 1rem;
-}
-/* input{
 
-  border-radius: 1rem;
-  font-family: var(--font-family);
- 
-  font-weight: bolder;
-  color: rgb(255, 34, 34);
-  text-align: center;
-
- 
-} */
 .or{
 font-size: 20px;
 
 }
-.password_1{
- 
-  margin-top: 2rem;
-  padding-bottom: 0.5px;
-  width: 21rem;
-  height: 1.5rem;
-  margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 15px;
-letter-spacing: 1px;
-padding-left: 1rem;
-padding: 1rem;
-}
-.submit_button_1{
 
-  margin-top: 2rem;
-  padding-bottom: 1px;
-  width: 21rem;
-  height: 3rem;
-  margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 20px;
-letter-spacing: 1px;
-padding-left: 1rem;
-color: white;
-background-color: var(--black-color);
-font-size: 15px;
-}
-.container_4{
-display: flex;
-flex-direction: row;
-margin-top: 0.1rem;
-margin-left: 2rem;
-
-}
-.have_account
-{
-font-size: 0.9rem;
-
-margin: 1px;
-width: 9rem;
-
-margin-left: 4rem;
-color: var(--grey-color);
-font-family: var(--font-family);
-
+.retype_password{
+  margin-top: -0.2rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.6rem;
+  font-size: 15px;
+  width: 19.5rem;
+  height: 2.8rem;
+  padding-left: 1rem;
 }
 
-
-a{
+.log_in{
   color: var(--secondary-color);
   text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+}
 
+@media (max-width: 768px) {
+  .container_3{
+    margin-top: 15vh;
+  }
 }

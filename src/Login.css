@@ -1,136 +1,147 @@
-.navbar_pixeon{
-    font-family: var(--font-family);
- margin-left: 1rem;
- margin-top: 1rem;
- font-size: 0.9rem;
-}
-
-.container_1{
-color:var(--black-color);
-background-color: var(--white-color);
-width: 25rem;
-height: 30rem;
-text-align: center;
-margin-left: 37%;
-margin-top:7rem ;
-font-family: var(--font-family);
-font-size: 14px;
-
-}
-.google_box{
-
-    padding-top: 0.5rem;
-    height: 2.8rem;
-    width: 21rem;
-    margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-text-align: inherit;
-color: var(--black-color);
-font-weight: bolder;
-font-size: 18px;
-letter-spacing: 1px;
-padding-top: 1px;
-margin-top: 4rem;
-background-color:url('google__logo.png');
-background-size: cover;
-background-repeat: no-repeat;
-padding: 10px 20px;
-background-color:var(--white-color);
-
-
-}
-.Email{
-    margin-top: 2rem;
-    padding-bottom: 1px;
-    width: 21rem;
-    height: 1.5rem;
-    margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 15px;
-letter-spacing: 1px;
-padding-left: 1rem;
-padding: 1rem;
-}
-/* input{
-
-    border-radius: 1rem;
-    font-family: var(--font-family);
-   
-    font-weight: bolder;
-    color: rgb(255, 34, 34);
-    text-align: center;
-  
-   
-} */
-.or{
-font-size: 20px;
- 
-}
-.password{
-   
-    margin-top: 2rem;
-    padding-bottom: 0.5px;
-    width: 21rem;
-    height: 1.5rem;
-    margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 15px;
-letter-spacing: 1px;
-padding-left: 1rem;
-padding: 1rem;
-}
-.submit_button{
-
-    margin-top: 2rem;
-    padding-bottom: 1px;
-    width: 21rem;
-    height: 3rem;
-    margin: 1rem;
-border: 3px solid black;
-border-radius: 0.5rem;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 20px;
-letter-spacing: 1px;
-padding-left: 1rem;
-color:white;
-background-color: var(--black-color);
-font-size: 15px;
-}
-.container_2{
+.login__container {
+  width: 100%;
+  height: 100vh;
   display: flex;
- flex-direction: row;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar_pixeon {
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  padding-left: 3rem;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  font-weight: 800;
+  justify-content: flex-start;
+
+  h1 {
+    margin-top: 1.8rem;
+  }
+}
+
+.container_1 {
+  color: var(--black-color);
+  background-color: var(--white-color);
+  width: 100%;
+  height: 30rem;
+  text-align: center;
+  /* margin-top: 7rem; */
+  font-family: var(--font-family);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: bisque; */
+  margin-bottom: 17vh;
+
+  .container__header {
+    font-weight: 600;
+    font-size: 24px;
+  }
+}
+.google_box {
+  height: 2.8rem;
+  width: 19.5rem;
+  margin: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.6rem;
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 3rem;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 1rem;
+  }
+}
+.Email {
+  margin-top: 2rem;
+  padding-bottom: 1px;
+  width: 19.5rem;
+  height: 2.8rem;
+  margin-top: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.6rem;
+  font-size: 15px;
+  padding-left: 1rem;
+  outline: none;
+}
+
+.or {
+  font-size: 14px !important;
+  font-weight: 300;
+}
+.password {
+  margin-top: 1rem;
+  width: 19.8rem;
+  height: 2.8rem;
+  margin: 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.6rem;
+  font-size: 15px;
+  padding-left: 1rem;
+  outline: none;
+}
+.submit_button {
+  margin-top: 2rem;
+  width: 19.8rem;
+  height: 2.8rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.6rem;
+  font-size: 20px;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reset_password {
+  margin-top: 1rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.container_2 {
   margin-top: 0.5rem;
-  margin-right: 1rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.not_account
-{
-font-size: 0.9rem;
-
-margin: 1px;
-width: 9rem;
-margin-top: 0.5rem;
-margin-left: 4rem;
-color: var(--grey-color);
-font-family: var(--font-family);
-
+.not_account {
+  font-size: 14px;
+  width: 9rem;
+  color: var(--grey-color);
+  font-weight: regular;
+  cursor: pointer;
 }
-.create_account{
- font-size: 0.9rem; 
-margin-top: 0.5rem;
-text-decoration: none;
-margin-right: 5px;
-color: var(--secondary-color);
-font-family: var(--font-family);
-
+.create_account {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--secondary-color);
+  margin-left: -1rem;
+  cursor: pointer;
 }
-a{
-    color: var(--secondary-color);
-    text-decoration: none;
-  
+
+@media (max-width: 768px) {
+  .container_1{
+    margin-bottom: 20vh;
+  }
+
+  .google_box{
+    font-size: 14px;
+  }
+
+  .navbar_pixeon{
+    margin-left: -1rem;
+  }
 }

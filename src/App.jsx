@@ -25,13 +25,12 @@ function AppContent() {
 
   return (
     <>
-      Conditionally render Navbar based on the current route
       {/* {!isNavbarHidden && <Navbar />} */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/Forget" element={<Forget/>}/>
-        <Route path="/Otp" element={<Otp/>}/>
+        <Route path="/forget" element={<Forget/>}/>
+        <Route path="/otp" element={<Otp/>}/>
       
       </Routes>
    
