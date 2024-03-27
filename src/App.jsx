@@ -1,16 +1,24 @@
 import "./App.css";
-import { HashRouter, Routes, Route, useLocation, BrowserRouter } from "react-router-dom";
+import {
+  HashRouter,
+  Routes,
+  Route,
+  useLocation,
+  BrowserRouter,
+} from "react-router-dom";
 import Login from "./Login.jsx";
 import Signup from "./Signup.jsx";
 import Forget from "./Forget.jsx";
 import Otp from "./Otp.jsx";
-
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </CookiesProvider>
   );
 }
 
@@ -29,14 +37,11 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/forget" element={<Forget/>}/>
-        <Route path="/otp" element={<Otp/>}/>
-      
+        <Route path="/forget" element={<Forget />} />
+        <Route path="/otp/:id" element={<Otp />} />
       </Routes>
-   
     </>
   );
 }
 
 export default App;
-

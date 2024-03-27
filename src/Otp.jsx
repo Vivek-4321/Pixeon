@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import "./Otp.css";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const OtpInput = ({ length = 4, onOtpSubmit = () => {} }) => {
+const OtpInput = ({ length = 6 }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
   const inputRefs = useRef([]);
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const email = decodeURIComponent(id);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
+    console.log(email);
   }, []);
 
   const handleChange = (index, e) => {
@@ -22,7 +31,7 @@ const OtpInput = ({ length = 4, onOtpSubmit = () => {} }) => {
 
     // submit trigger
     const combinedOtp = newOtp.join("");
-    if (combinedOtp.length === length) onOtpSubmit(combinedOtp);
+    // if (combinedOtp.length === length) handleSubmit();
 
     // Move to next input if current field is filled
     if (value && index < length - 1 && inputRefs.current[index + 1]) {
@@ -51,32 +60,69 @@ const OtpInput = ({ length = 4, onOtpSubmit = () => {} }) => {
     }
   };
 
+  const handleSubmit = () => {
+    const otpValue = otp.join("");
+    setLoading(true);
+    console.log(otpValue);
+
+    const promise = axios.post("http://localhost:3000/verify", {
+      email,
+      verificationCode: otpValue,
+    });
+
+    // Use toast.promise to handle loading, success, and error states
+    toast.promise(promise, {
+      loading: "Verifying OTP...",
+      success: () => {
+        setLoading(false);
+        navigate("/");
+        return "OTP verified successfully";
+      },
+      error: (error) => {
+        console.error("Error verifying OTP:", error);
+        setLoading(false);
+        return "Failed to verify OTP. Please try again.";
+      },
+    });
+  };
+
   return (
     <div className="otp__container__wrapper">
-       <div className="navbar_pixeon">
+      <Toaster position="top-right" reverseOrder={false} />
+      <div className="navbar_pixeon">
         <h1>Pixeon</h1>
       </div>
       <div className="otp_container">
         <div className="container__header__otp">
-        <span className="container__header__signup">📨 Enter OTP</span>
+          <span className="container__header__signup">📨 Enter OTP</span>
         </div>
         <div className="otp__input__group">
-        {otp.map((value, index) => {
-          return (
-            <input
-              className="otp__input"
-              key={index}
-              type="text"
-              ref={(input) => (inputRefs.current[index] = input)}
-              value={value}
-              onChange={(e) => handleChange(index, e)}
-              onClick={() => handleClick(index)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-            />
-          );
-        })}
+          {otp.map((value, index) => {
+            return (
+              <input
+                className="otp__input"
+                key={index}
+                type="text"
+                ref={(input) => (inputRefs.current[index] = input)}
+                value={value}
+                onChange={(e) => handleChange(index, e)}
+                onClick={() => handleClick(index)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+              />
+            );
+          })}
         </div>
-        <button className="submit_button">Confirm</button>
+        <button
+          className="submit_button"
+          style={{
+            backgroundColor: loading ? "#CCCCCC" : "",
+            border: loading ? "1px solid #CCCCCC" : "",
+          }}
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          {loading ? "Loading..." : "Confirm"}
+        </button>
       </div>
     </div>
   );
