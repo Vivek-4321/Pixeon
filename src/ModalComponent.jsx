@@ -6,12 +6,15 @@ import { IoCloseSharp } from "react-icons/io5";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase.js";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import { toast, Toaster } from "react-hot-toast";
 
 const ModalComponent = ({ isOpen, onClose }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isVideo, setIsVideo] = useState(false);
+  const [cookie, setCookie] = useState(["token"]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -32,7 +35,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
         content: inputValue,
         link: downloadUrl,
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${cookie}`
         }
       });
 
