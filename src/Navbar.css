@@ -95,3 +95,28 @@
   background-color: var(--primary-color);
   color: white;
 }
+
+@media (max-width: 768px) {
+  .navbar__container {
+    padding: 1rem;
+  }
+
+  .navbar__logo{
+    span{
+      font-size: 24px;
+    }
+  }
+
+  .navbar__searchbar {
+    margin-right: -3rem;
+    margin-left: 5rem;
+  }
+
+  .navbar__contents__icon__group{
+    display: none;
+  }
+
+  .navbar__contents__btn__group{
+    display: none;
+  }
+}

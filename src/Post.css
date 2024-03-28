@@ -1,0 +1,113 @@
+
+.post__show__container {
+    width: 100%;
+    height: 45rem;
+    background-color: var(--white-color);
+    margin-top: 1.5rem;
+    border-radius: 0.6rem;
+    display: flex;
+    flex-direction: column; /* Keep this */
+    align-items: center;
+  }
+  
+  .post__show__container__top {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    /* background-color: aliceblue; */
+    align-items: center;
+    border-radius: 0.6rem;
+    justify-content: space-between;
+    padding: 0 1rem;
+    padding-top: 0.7rem;
+  }
+  
+  .post__image__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .post__image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .post__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    font-size: 14px;
+  
+    .post__content__heading {
+      color: var(--primary-color);
+      font-weight: 400;
+    }
+  
+    .post__content__date {
+      font-weight: 600;
+      color: var(--grey-color);
+      font-size: 12px;
+      margin-left: -0.3rem;
+    }
+  }
+  
+  .post__show__container__middle {
+    margin-top: 1rem;
+    width: 96%;
+    height: 90%;
+    border-radius: 0.6rem;
+    overflow: hidden;
+  
+    .post__contents{
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    img {
+      margin-top: 0.6rem;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.6rem;
+    }
+  }
+
+  .post__show__container__bottom{
+    margin-top: 0.6rem;
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+
+  .post__icon{
+    margin-right: 0.5rem;
+  }
+
+
+
+  .post__icon__group__left{
+    display: flex;
+
+    p{
+        margin-right: 3rem;
+    }
+  }
+
+  .post__icon__group__right{
+    display: flex;
+  }
+  

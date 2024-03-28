@@ -1,0 +1,85 @@
+/* Custom Upload */
+.custom_upload {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  height: 40%;
+  width: 100%;
+}
+
+.wysiwyg-editor {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* Custom Upload Button */
+.custom_upload_button {
+  background-color: #0071ff;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+}
+
+/* Hover state for Custom Upload Button */
+.custom_upload_button:hover {
+  background-color: #005cbf;
+}
+
+.file-upload-wrapper {
+  margin: 1rem;
+  /* display: flex;
+  align-items: center;
+  justify-content: space-between; */
+}
+
+.close-modal-button {
+  position: absolute;
+  top: -30px;
+  color: white;
+}
+
+.preview {
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  video {
+    border-radius: 0.6rem;
+  }
+
+  img {
+    border-radius: 0.6rem;
+  }
+}
+
+.modal-title {
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+
+.submit {
+  background-color: #0071ff;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+  margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 90%;
+    height: 70%;
+  }
+}
