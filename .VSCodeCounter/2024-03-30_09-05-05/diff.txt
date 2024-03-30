@@ -1,0 +1,41 @@
+Date : 2024-03-30 09:05:05
+Directory : /home/vivek/Desktop/Pixeon
+Total : 13 files,  1527 codes, 25 comments, 89 blanks, all 1641 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |          6 |        607 |         25 |         36 |        668 |
+| JSON           |          2 |        599 |          0 |          0 |        599 |
+| CSS            |          5 |        321 |          0 |         53 |        374 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                              | files      | code       | comment    | blank      | total      |
++---------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                 |         13 |      1,527 |         25 |         89 |      1,641 |
+| . (Files)                                         |          2 |        599 |          0 |          0 |        599 |
+| src                                               |         11 |        928 |         25 |         89 |      1,042 |
++---------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                          | language       | code       | comment    | blank      | total      |
++---------------------------------------------------+----------------+------------+------------+------------+------------+
+| /home/vivek/Desktop/Pixeon/package-lock.json      | JSON           |        596 |          0 |          0 |        596 |
+| /home/vivek/Desktop/Pixeon/package.json           | JSON           |          3 |          0 |          0 |          3 |
+| /home/vivek/Desktop/Pixeon/src/Home.css           | CSS            |          5 |          0 |          1 |          6 |
+| /home/vivek/Desktop/Pixeon/src/Home.jsx           | JavaScript JSX |         14 |          0 |          2 |         16 |
+| /home/vivek/Desktop/Pixeon/src/Login.jsx          | JavaScript JSX |          1 |          0 |          0 |          1 |
+| /home/vivek/Desktop/Pixeon/src/ModalComponent.css | CSS            |          1 |          0 |          0 |          1 |
+| /home/vivek/Desktop/Pixeon/src/ModalComponent.jsx | JavaScript JSX |          7 |         -3 |         -2 |          2 |
+| /home/vivek/Desktop/Pixeon/src/Post.css           | CSS            |        169 |          0 |         26 |        195 |
+| /home/vivek/Desktop/Pixeon/src/Post.jsx           | JavaScript JSX |        195 |         19 |         13 |        227 |
+| /home/vivek/Desktop/Pixeon/src/Profile.css        | CSS            |        141 |          0 |         26 |        167 |
+| /home/vivek/Desktop/Pixeon/src/Profile.jsx        | JavaScript JSX |        374 |          9 |         20 |        403 |
+| /home/vivek/Desktop/Pixeon/src/VideoPlayer.css    | CSS            |          5 |          0 |          0 |          5 |
+| /home/vivek/Desktop/Pixeon/src/VideoPlayer.jsx    | JavaScript JSX |         16 |          0 |          3 |         19 |
+| Total                                             |                |      1,527 |         25 |         89 |      1,641 |
++---------------------------------------------------+----------------+------------+------------+------------+------------+

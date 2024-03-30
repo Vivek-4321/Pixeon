@@ -1,24 +1,22 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Home.css";
-import { HiOutlineHome } from "react-icons/hi2";
-import { BiTask } from "react-icons/bi";
-import { MdOutlineLeaderboard } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import { MdOutlineSettings } from "react-icons/md";
-import Google from "./assets/google__logo.png";
-import { LuSendHorizonal } from "react-icons/lu";
-import { IoImageOutline } from "react-icons/io5";
-import { FaRegImage } from "react-icons/fa6";
-import { GoPaperclip } from "react-icons/go";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import UserRecommendation from "./UserRecommendations";
 import AddPost from "./AddPost";
 import Post from "./Post";
 import ModalComponent from "./ModalComponent";
+import { useCookies } from "react-cookie";
+import SideBar from "./SideBar";
+import RecommendationSideBar from "./RecommendationSideBar";
+import SidebarSkeletonLoader from "./SidebarSkeletonLoader";
+import RecommendationSkeletonLoader from "./RecommendationSkeletonLoader";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 function Home() {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -28,78 +26,93 @@ function Home() {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    const token = cookies.token;
+    const fetchPosts = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get("http://localhost:3000/posts", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setPosts(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <div className="home__container">
-      <div className="sidebar__navigation">
-        <div className="sidebar__tabs">
-          <HiOutlineHome />
-          <span>Home</span>
-        </div>
-        <div className="sidebar__tabs">
-          <BiTask />
-          <span>Task</span>
-        </div>
-        <div className="sidebar__tabs">
-          <MdOutlineLeaderboard />
-          <span>Leaderboard</span>
-        </div>
-        <div className="sidebar__tabs">
-          <CgProfile />
-          <span>Profile</span>
-        </div>
-        <div className="sidebar__tabs">
-          <MdOutlineSettings />
-          <span>Settings</span>
-        </div>
+      <div className="sidebar__wrapper__home">
+        {isLoading ? <SidebarSkeletonLoader /> : <SideBar />}
       </div>
       <div className="post__container">
-      <div className="post__user__recommendation">
-      <UserRecommendation/>
-      </div>
-      <div className="post__add__post">
-      <AddPost handleOpenModal={handleOpenModal} />
-      <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal}/>
-      </div>
-      <div className="post__show__wrapper">
-      <Post/>
-      <Post/>
-      <Post/>
-      </div>
-      </div>
-      <div className="recommendation__container">
-        <span className="recommendation__title">Recommendation</span>
-        <div className="recommendation__tab">
-          <img
-            className="recommendation__image"
-            alt="profile_photo"
-            src={Google}
-          />
-          <span>Ellyse Perry Davis</span>
+        <div className="post__user__recommendation">
+          {isLoading ? (
+             <SkeletonTheme
+             baseColor={cookies.theme === "dark" ? "#202020" : ""}
+             highlightColor={cookies.theme === "dark" ? "#444" : ""}
+             borderRadius={8}
+           >
+              <Skeleton
+                width={850}
+                height={120}
+                style={{ marginBottom: "10px" }}
+              />
+            </SkeletonTheme>
+          ) : (
+            <UserRecommendation />
+          )}
         </div>
-        <div className="recommendation__tab">
-          <img
-            className="recommendation__image"
-            alt="profile_photo"
-            src={Google}
-          />
-          <span>Riya Perry Davis</span>
+        <div className="post__add__post">
+          {isLoading ? (
+             <SkeletonTheme
+             baseColor={cookies.theme === "dark" ? "#202020" : ""}
+             highlightColor={cookies.theme === "dark" ? "#444" : ""}
+             borderRadius={8}
+           >
+              <Skeleton
+                width={850}
+                height={120}
+                style={{ marginBottom: "10px" }}
+              />
+            </SkeletonTheme>
+          ) : (
+            <>
+              <AddPost handleOpenModal={handleOpenModal} />
+              <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />
+            </>
+          )}
         </div>
-        <div className="recommendation__tab">
-          <img
-            className="recommendation__image"
-            alt="profile_photo"
-            src={Google}
-          />
-          <span>Priya Perry Davis</span>
+        <div className="post__show__wrapper">
+          {isLoading ? (
+             <SkeletonTheme
+             baseColor={cookies.theme === "dark" ? "#202020" : ""}
+             highlightColor={cookies.theme === "dark" ? "#444" : ""}
+             borderRadius={8}
+           >
+              <Skeleton height={400} style={{ marginTop: "16px" }} />
+              <Skeleton height={400} style={{ marginTop: "16px" }} />
+              <Skeleton height={400} style={{ marginTop: "16px" }} />
+            </SkeletonTheme>
+          ) : (
+            posts.map((post) => <Post key={post.id} post={post} />)
+          )}
         </div>
-        <div className="recommendation__tab">
-          <img
-            className="recommendation__image"
-            alt="profile_photo"
-            src={Google}
-          />
-          <span>Sahithya Perry Davis</span>
-        </div>
+      </div>
+      <div className="recommendation__wrappper__home">
+        {isLoading ? (
+          <RecommendationSkeletonLoader />
+        ) : (
+          <RecommendationSideBar />
+        )}
       </div>
     </div>
   );

@@ -1,113 +1,333 @@
-
 .post__show__container {
+  width: 100%;
+  height: 47rem;
+  background-color: var(--white-color);
+  margin-top: 1.5rem;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column; /* Keep this */
+  align-items: center;
+  color: var(--primary-color);
+}
+
+.post__show__container__top {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  /* background-color: aliceblue; */
+  align-items: center;
+  border-radius: 0.6rem;
+  justify-content: space-between;
+  padding: 0 1rem;
+  padding-top: 0.7rem;
+}
+
+.post__image__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post__image__big{
+  width: 100%;
+  border-radius: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+.post__image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--secondary-color);
+
+  img {
     width: 100%;
-    height: 45rem;
-    background-color: var(--white-color);
-    margin-top: 1.5rem;
-    border-radius: 0.6rem;
-    display: flex;
-    flex-direction: column; /* Keep this */
-    align-items: center;
+    height: 100%;
+    object-fit: cover;
   }
-  
-  .post__show__container__top {
+}
+
+.post__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 1rem;
+  font-size: 14px;
+
+  .post__content__heading {
+    color: var(--primary-color);
+    font-weight: 400;
+  }
+
+  .post__content__date {
+    font-weight: 600;
+    color: var(--grey-color);
+    font-size: 12px;
+  }
+}
+
+.post__show__container__middle {
+  margin-top: 1rem;
+  width: 96%;
+  height: 90%;
+  border-radius: 0.6rem;
+  overflow: hidden;
+
+  .post__contents {
     width: 100%;
-    height: 4rem;
-    display: flex;
-    /* background-color: aliceblue; */
-    align-items: center;
-    border-radius: 0.6rem;
-    justify-content: space-between;
-    padding: 0 1rem;
-    padding-top: 0.7rem;
-  }
-  
-  .post__image__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .post__image {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    overflow: hidden;
-  
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-  
-  .post__content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 1rem;
-    font-size: 14px;
-  
-    .post__content__heading {
-      color: var(--primary-color);
-      font-weight: 400;
-    }
-  
-    .post__content__date {
-      font-weight: 600;
-      color: var(--grey-color);
-      font-size: 12px;
-      margin-left: -0.3rem;
-    }
-  }
-  
-  .post__show__container__middle {
     margin-top: 1rem;
-    width: 96%;
-    height: 90%;
-    border-radius: 0.6rem;
-    overflow: hidden;
-  
-    .post__contents{
-        width: 100%;
-        margin-top: 1rem;
-    }
-
-    img {
-      margin-top: 0.6rem;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0.6rem;
-    }
   }
 
-  .post__show__container__bottom{
+  img {
     margin-top: 0.6rem;
     width: 100%;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.6rem;
+  }
+}
+
+.post__show__container__bottom {
+  margin-top: 0.6rem;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.post__icon {
+  margin-right: 0.5rem;
+}
+
+.post__icon__group__left {
+  display: flex;
+
+  p {
+    margin-right: 3rem;
+  }
+}
+
+.post__icon__group__right {
+  display: flex;
+}
+
+.post__image {
+  max-width: 100%;
+  max-height: 400px; /* Set a maximum height for the image in the post */
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.post__image__big:hover {
+  transform: scale(1.1); /* Add a hover effect to the image */
+}
+
+.post__image--expanded {
+  max-width: none; /* Remove the maximum width restriction for the expanded image */
+  max-height: none; /* Remove the maximum height restriction for the expanded image */
+  object-fit: fill; /* Change the object-fit property to contain to show the full image */
+  position: fixed; /* Position the expanded image fixed relative to the viewport */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); /* Center the expanded image and reset the transform scale */
+  z-index: 999; /* Set a high z-index value to ensure the expanded image appears above other content */
+}
+
+.post__image__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Set a semi-transparent black background for the overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post__contents__comments__wrapper {
+  margin: 1rem;
+  color: var(--primary-color);
+}
+
+.post__contents__comments {
+  margin-top: 1rem !important;
+}
+
+.modal__image__div {
+  width: 100%; /* Set the width to 100% */
+  height: 0; /* Set the initial height to 0 */
+  padding-top: 59.25%;
+  position: relative;
+  border-radius: 0.6rem;
+  overflow: hidden;
+}
+
+.post__content__container {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.post__icon__container{
+  color: var(--primary-color);
+}
+
+.post__content__comment {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+
+  .post__content__date {
+    font-size: 13px;
+    color: var(--grey-color);
+    font-weight: 600;
+  }
+}
+
+.modal__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal__comment__form {
+  margin-top: 1rem;
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.6rem;
+}
+
+.modal__comment__input {
+  border: var(--google-border) solid var(--primary-color);
+  background-color: var(--white-color);
+  height: 3rem;
+  border-radius: 0.6rem;
+  padding-left: 1rem;
+  width: 88%;
+}
+
+.modal__comment__button {
+  width: 10%;
+  height: 3rem;
+  border: none;
+  border-radius: 0.6rem;
+  background-color: var(--secondary-color);
+  color: var(--common-white);
+}
+
+.modal__comments {
+  margin-top: 1rem;
+}
+
+.modal__comment {
+  width: 100%;
+  min-height: 3.5rem;
+  background-color: var(--white-color);
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
+  margin-top: 0.6rem;
+  color: var(--primary-color);
+}
+
+.model__comment__image {
+  width: 2rem;
+  height: 2rem;
+  overflow: hidden;
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--secondary-color);
+  }
+}
+
+.model__comment__top {
+  display: flex;
+}
+
+.model__comment__content {
+  margin-left: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.model__comment__date {
+  font-size: 14px;
+  color: var(--grey-color);
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.model__comment__heading {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey-color);
+}
+
+.model__comment__bottom {
+  margin-left: 3rem;
+}
+
+.like__count {
+  margin-left: 0.2rem;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+
+  .post__show__container{
+    height: 37rem !important;
+  }  
+
+  .modal__comment__input {
+    width: 80%;
   }
 
-  .post__icon{
-    margin-right: 0.5rem;
+  .modal__comment__button {
+    width: 18%;
   }
 
-
-
-  .post__icon__group__left{
-    display: flex;
-
-    p{
-        margin-right: 3rem;
-    }
+  .model__comment__content {
+    flex-direction: column;
+    margin-bottom: 1rem;
   }
 
-  .post__icon__group__right{
-    display: flex;
+  .model__comment__date {
+    margin-top: 0.3rem;
+    font-size: 13px;
   }
-  
+}

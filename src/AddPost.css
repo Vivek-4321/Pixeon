@@ -32,7 +32,15 @@
   }
   
   .add__post__icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 22px;
+    border-radius: 0.6rem;
+    color: var(--common-white);
+    background-color: var(--secondary-color);
   }
   
   .add__post__bottom {
@@ -43,6 +51,7 @@
     justify-content: flex-start;
     padding-left: 1rem;
     margin-bottom: 0.5rem;
+    color: var(--primary-color);
   
     .add__post__tab {
       margin-right: 1.5rem;

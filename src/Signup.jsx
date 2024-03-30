@@ -5,6 +5,8 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "./firebase.js";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -12,6 +14,44 @@ function Signup() {
   const [cookie, setCookie] = useCookies(["user"]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
+  provider.addScope("email");
+
+  const signInWithGoogle = async () => {
+    toast.promise(
+      new Promise(async (resolve, reject) => {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const User = result.user;
+          const userEmail = User.email;
+          console.log(User);
+
+          const response = await axios.post(
+            `http://localhost:3000/api/auth/google-login`,
+            { User }
+          );
+          const token = response.data.token;
+          const maxAge = 10 * 24 * 60 * 60;
+          setCookie("token", token, {
+            path: "/",
+            maxAge,
+            sameSite: "none",
+            secure: true,
+          });
+          console.log("Token:", token);
+          resolve("Registration successful!");
+        } catch (error) {
+          reject(error.msg);
+          resolve("Error Occured");
+        }
+      }),
+      {
+        pending: "Processing...", // Optional message shown when promise is pending
+        success: (msg) => msg, // The success message will be the resolved value of the promise
+        error: (msg) => msg, // The error message will be the rejected value of the promise
+      }
+    );
+  };
 
   const handleSignup = async () => {
     // Display loading toast while waiting for response
@@ -25,9 +65,13 @@ function Signup() {
         // Assuming the token is returned in the response data
         setLoading(!loading);
         const token = response.data.token;
-        setCookie("token", token, { path: "/", sameSite: "none", secure: true });
+        setCookie("token", token, {
+          path: "/",
+          sameSite: "none",
+          secure: true,
+        });
         console.log("Token:", token);
-        navigate(`/otp/${encodeURIComponent(email)}`)
+        navigate(`/otp/${encodeURIComponent(email)}`);
         // Return data to be used in the resolved state of toast.promise
         return response.data;
       })
@@ -36,7 +80,8 @@ function Signup() {
         console.error("Error signing up:", error);
         // Throw error to be used in the rejected state of toast.promise
         throw error;
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoading(false); // Set loading state to false after login process completes
       });
 
@@ -57,7 +102,7 @@ function Signup() {
       <div className="container_3">
         <span className="container__header__signup">Sign up to Pixeon</span>
 
-        <button className="google_box">
+        <button className="google_box" onClick={signInWithGoogle}>
           {" "}
           <img src={Google} alt="Google Logo" /> continue with google
         </button>
@@ -77,11 +122,20 @@ function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input className="retype_password" type="password" placeholder="Retype Password" />
-        <button className="submit_button" onClick={handleSignup} disabled={loading}  style={{
-            backgroundColor: loading ? "#CCCCCC" : "", 
+        <input
+          className="retype_password"
+          type="password"
+          placeholder="Retype Password"
+        />
+        <button
+          className="submit_button"
+          onClick={handleSignup}
+          disabled={loading}
+          style={{
+            backgroundColor: loading ? "#CCCCCC" : "",
             border: loading ? "1px solid #CCCCCC" : "",
-          }}>
+          }}
+        >
           {loading ? "Creating Account.." : "Create Account"}
         </button>
 

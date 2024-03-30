@@ -9,12 +9,36 @@
 
 :root {
   --primary-color: #1D1C1D;
-  --secondary-color-white: #f2f2f3;
+  --secondary-color-white: #F0ECF6;
   --secondary-color: #0190FD;
   --accent-color: #85C923;
   --orange-color: #FD9F37;
   --grey-color: grey;
   --black-color:black;
   --white-color: white;
-  font-family: "Poppins", sans-serif;
+  --login-bg: white;
+  --border-px: 2px;
+  --border-color: #1D1C1D;
+  --google-border: 2px;
+  --link-color: #0190FD;
+  --common-white: white;
+  --drop-down: drop-shadow(0px 0px 21px #bababa);
+}
+
+[data-theme="dark"] {
+  --primary-color: #f2f2f3;
+  --secondary-color-white: #000101;
+  --secondary-color: #D73D63;
+  --accent-color: #FD9F37;
+  --orange-color: #0190FD;
+  --grey-color: #999999;
+  --black-color: white;
+  --white-color: #14111D;
+  --login-bg: #000101;
+  --border-px: 1px;
+  --border-color: #D73D63;
+  --google-border: 0px;
+  --link-color: #0190FD;
+  --common-white: white;
+  --drop-down: drop-shadow(0px 0px 22px #D73D63);
 }

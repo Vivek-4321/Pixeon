@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Login.css";
 import Google from "./assets/google__logo.png";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "./firebase.js";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [cookie, setCookie] = useCookies(["user"]);
+  const [cookie, setCookie, getCookie] = useCookies(["user"]);
+  const provider = new GoogleAuthProvider();
+  provider.addScope("email");
+
+  const [darkTheme, setDarkTheme] = useState(cookie.theme === 'dark');
+
+  useEffect(() => {
+    // Apply the theme on component mount
+    document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light');
+  }, [darkTheme]);
 
   const handleLogin = async () => {
     setLoading(!loading); // Set loading state to true when login process starts
@@ -21,7 +32,13 @@ function Login() {
       .then((response) => {
         // Assuming the token is returned in the response data
         const token = response.data.token;
-        setCookie("token", token, { path: "/", sameSite: "none", secure: true });
+        const maxAge = 10 * 24 * 60 * 60;
+        setCookie("token", token, {
+          path: "/",
+          maxAge,
+          sameSite: "none",
+          secure: true,
+        });
         console.log("Token:", token);
         return response.data;
       })
@@ -40,6 +57,42 @@ function Login() {
     });
   };
 
+  const signInWithGoogle = async () => {
+    toast.promise(
+      new Promise(async (resolve, reject) => {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const User = result.user;
+          const userEmail = User.email;
+          console.log(User);
+
+          const response = await axios.post(
+            `http://localhost:3000/api/auth/google-login`,
+            { User }
+          );
+          const token = response.data.token;
+          const maxAge = 10 * 24 * 60 * 60;
+          setCookie("token", token, {
+            path: "/",
+            maxAge,
+            sameSite: "none",
+            secure: true,
+          });
+          console.log("Token:", token);
+          resolve("Login successful!");
+        } catch (error) {
+          reject(error);
+          resolve("Error Occured")
+        }
+      }),
+      {
+        pending: "Processing...", // Optional message shown when promise is pending
+        success: (msg) => msg, // The success message will be the resolved value of the promise
+        error: (msg) => msg, // The error message will be the rejected value of the promise
+      }
+    );
+  };
+
   return (
     <div className="login__container">
       <Toaster position="top-right" reverseOrder={false} />
@@ -49,7 +102,7 @@ function Login() {
       <div className="container_1">
         <h1 className="container__header">Sign in to Pixeon</h1>
 
-        <button className="google_box">
+        <button className="google_box" onClick={signInWithGoogle}>
           {" "}
           <img src={Google} alt="Google Logo" /> continue with google
         </button>
@@ -74,7 +127,7 @@ function Login() {
           onClick={handleLogin}
           disabled={loading} // Disable button when loading
           style={{
-            backgroundColor: loading ? "#CCCCCC" : "", 
+            backgroundColor: loading ? "#CCCCCC" : "",
             border: loading ? "1px solid #CCCCCC" : "",
           }}
         >

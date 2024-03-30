@@ -69,12 +69,13 @@
   color: #fff;
   cursor: pointer;
   border: none;
-  padding: 8px 16px;
   border-radius: 5px;
   text-align: center;
   display: inline-block;
   font-size: small;
   margin-left: 2rem;
+  width: 5rem;
+  height: 2.3rem;
 }
 
 @media (max-width: 768px) {

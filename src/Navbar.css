@@ -5,12 +5,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  background-color: var(--white-color);
 }
 
 .navbar__logo {
   font-size: 29px;
   font-weight: 700;
-  color: #1d1c1d;
+  color: var(--primary-color);
 }
 
 .navbar__searchbar {
@@ -32,20 +33,28 @@
   padding-right: 2.5rem;
   transition: all 0.2s ease-out;
   background-color: var(--secondary-color-white);
+  color: var(--primary-color);
 }
 
-.navbar__searchbar__input:hover {
-  background-color: white;
+/* .navbar__searchbar__input:hover {
+  background-color: var(--white-color);
   -webkit-box-shadow: 3px -1px 105px 17px rgba(232, 232, 232, 1);
   -moz-box-shadow: 3px -1px 105px 17px rgba(232, 232, 232, 1);
   box-shadow: 3px -1px 105px 17px rgba(232, 232, 232, 1);
-}
+} */
 
 .navbar__searchbar__icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  right: 0.7rem;
-  top: 0.5rem;
+  right: 0;
   font-size: 22px;
+  color: var(--common-white);
+  background-color: var(--secondary-color);
+  border-radius: 0.6rem;
 }
 
 .navbar__contents {
@@ -66,7 +75,15 @@
 }
 
 .navbar__contents__icon {
+  color: var(--primary-color);
   font-size: 22px;
+  margin-right: 1rem;
+}
+
+.theme__toggle{
+  color: var(--primary-color);
+  font-size: 22px;
+  margin-right: 1rem;
 }
 
 .navbar__contents__btn__group {
@@ -85,6 +102,7 @@
   border-radius: 0.5rem;
   border: 1px solid var(--primary-color);
   background-color: var(--white-color);
+  color: var(--primary-color);
 }
 
 .navbar__signup__btn {
@@ -92,8 +110,8 @@
   height: 60%;
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--common-white);
 }
 
 @media (max-width: 768px) {

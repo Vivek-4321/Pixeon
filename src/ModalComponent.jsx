@@ -3,8 +3,22 @@ import Modal from "react-modal";
 import Wysiwyg from "react-simple-wysiwyg";
 import "./ModalComponent.css";
 import { IoCloseSharp } from "react-icons/io5";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import { db } from "./firebase.js";
+import {
+  updateDoc,
+  doc,
+  getDoc,
+  addDoc,
+  collection,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
@@ -14,7 +28,10 @@ const ModalComponent = ({ isOpen, onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isVideo, setIsVideo] = useState(false);
-  const [cookie, setCookie] = useState(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [downloadUrl, setDownloadUrl] = useState("");
+  const storage = getStorage();
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -22,29 +39,78 @@ const ModalComponent = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     try {
-      // Upload file to Firebase storage
-      const storageRef = firebase.storage().ref();
-      const fileRef = storageRef.child(selectedFile.name);
-      await fileRef.put(selectedFile);
-
-      // Get download URL
-      const downloadUrl = await fileRef.getDownloadURL();
-
-      // Post data to API
-      await axios.post("http://localhost:300/posts", {
-        content: inputValue,
-        link: downloadUrl,
-        headers: {
-          Authorization: `Bearer ${cookie}`
-        }
+      setLoading(true);
+      const storageRef = ref(storage, `/assets/${selectedFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+  
+      const fileUploadPromise = new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Track upload progress
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            // Update the toast message with the upload progress
+            toast.update(toastId, {
+              loading: `Uploading... ${progress.toFixed(2)}%`,
+            });
+          },
+          (error) => {
+            console.error(error);
+            reject(error);
+          },
+          () => {
+            // Upload complete, get the download URL
+            getDownloadURL(uploadTask.snapshot.ref)
+              .then((downloadURL) => {
+                console.log("File available at", downloadURL);
+                setDownloadUrl(downloadURL);
+                resolve(downloadURL);
+              })
+              .catch((error) => {
+                console.error("Error getting download URL:", error);
+                reject(error);
+              });
+          }
+        );
       });
-
-      // Close the modal
-      onClose();
+  
+      const toastId = toast.promise(fileUploadPromise, {
+        loading: "Uploading...",
+        success: "File uploaded successfully!",
+        error: "Error uploading file",
+      });
+  
+      fileUploadPromise
+        .then(async (downloadURL) => {
+          // Make API call after file upload is complete
+          console.log(downloadURL);
+          const token = cookies.token;
+          const result = await axios.post(
+            "http://localhost:3000/posts",
+            {
+              content: inputValue,
+              link: downloadURL,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+  
+          setLoading(false);
+          onClose();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          setLoading(false);
+        });
     } catch (error) {
       console.error("Error:", error);
+      toast.error("Error uploading file");
     }
-  };
+  };  
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -72,7 +138,6 @@ const ModalComponent = ({ isOpen, onClose }) => {
     linkColor: "#888",
     borderColor: "#333",
   };
-  
 
   const customStyles = {
     content: {
@@ -103,6 +168,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
       contentLabel="Example Modal"
       style={customStyles}
     >
+      <Toaster position="top-right" reverseOrder={false} />
       <h2 className="modal-title">Create Post</h2>
       <Wysiwyg
         className="wysiwyg-editor"
@@ -114,7 +180,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
       />
       <div className="file-upload-wrapper">
         <label htmlFor="file-upload" className="custom_upload_button">
-         Select File
+          Select File
         </label>
         <input
           id="file-upload"
@@ -122,7 +188,11 @@ const ModalComponent = ({ isOpen, onClose }) => {
           className="custom_upload"
           onChange={handleFileChange}
         />
-         <button className="submit" onClick={handleSubmit}>
+        <button
+          className="submit"
+          onClick={handleSubmit}
+          disabled={loading}
+        >
           Submit
         </button>
       </div>
