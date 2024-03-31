@@ -1,7 +1,7 @@
 .sidebar__navigation {
   width: 16%;
   height: 48vh;
-  margin-top: 0.7rem;
+  margin-top: 1rem;
   margin-left: 0.5rem;
   margin-right: 0.7rem;
   background-color: var(--white-color);
@@ -22,6 +22,7 @@
 }
 
 .sidebar__tabs {
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -42,6 +43,12 @@
 .sidebar__tabs:hover {
   background-color: var(--secondary-color-white);
   border-left: 4px solid var(--secondary-color);
+}
+
+.sidebar__tabs.active {
+  background-color: var(--secondary-color-white);
+  border-left: 4px solid var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .sidebar__navigation__loading{

@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,13 +15,17 @@ function Login() {
   const [cookie, setCookie, getCookie] = useCookies(["user"]);
   const provider = new GoogleAuthProvider();
   provider.addScope("email");
-
-  const [darkTheme, setDarkTheme] = useState(cookie.theme === 'dark');
+  const navigate = useNavigate();
+  const [cookies] = useCookies(["selectedTheme"]);
+  const selectedTheme = cookies.selectedTheme || "blue-dark";
 
   useEffect(() => {
-    // Apply the theme on component mount
-    document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light');
-  }, [darkTheme]);
+    const themeClass = selectedTheme.endsWith("-dark")
+      ? selectedTheme
+      : `${selectedTheme}-light`;
+    document.documentElement.setAttribute("data-theme", themeClass);
+  }, [selectedTheme]);
+  
 
   const handleLogin = async () => {
     setLoading(!loading); // Set loading state to true when login process starts
@@ -52,8 +57,16 @@ function Login() {
 
     toast.promise(promise, {
       loading: "Logging in...",
-      success: "Logged in successfully!",
-      error: "Failed to log in. Please try again.",
+      success: () => {
+        setLoading(false);
+        navigate("/");
+        return "Login Successfull";
+      },
+      error: (error) => {
+        console.error("Error :", error);
+        setLoading(false);
+        return "Failed to login.";
+      },
     });
   };
 
@@ -85,16 +98,25 @@ function Login() {
           resolve("Error Occured")
         }
       }),
-      {
-        pending: "Processing...", // Optional message shown when promise is pending
-        success: (msg) => msg, // The success message will be the resolved value of the promise
-        error: (msg) => msg, // The error message will be the rejected value of the promise
+      { // Optional message shown when promise is pending
+          loading: "Logging in...",
+          success: () => {
+            setLoading(false);
+            navigate("/");
+            return "Login Successfull";
+          },
+          error: (error) => {
+            console.error("Error :", error);
+            setLoading(false);
+            return "Failed to login.";
+          },
       }
     );
   };
 
   return (
     <div className="login__container">
+      {/* <div className="color"></div> */}
       <Toaster position="top-right" reverseOrder={false} />
       <div className="navbar_pixeon">
         <h1>Pixeon</h1>

@@ -4,15 +4,14 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useCookies } from "react-cookie";
 
 function RecommendationSideBar() {
-
-    const [cookies, setCookie] = useCookies(["theme"]);
+  const [cookies, setCookie] = useCookies(["theme"]);
 
   return (
     <SkeletonTheme
-    baseColor={cookies.theme === "dark" ? "#202020" : ""}
-    highlightColor={cookies.theme === "dark" ? "#444" : ""}
-    borderRadius={8}
-  >
+      baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
+      highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
+      borderRadius={8}
+    >
       <div className="recommendation__container">
         <div className="recommendation__container__loading">
           <Skeleton width={200} height={30} style={{ marginBottom: "10px" }} />

@@ -6,6 +6,7 @@
   cursor: pointer;
   height: 40%;
   width: 100%;
+  z-index: 99999;
 }
 
 .wysiwyg-editor {
@@ -15,8 +16,8 @@
 
 /* Custom Upload Button */
 .custom_upload_button {
-  background-color: #0071ff;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--common-white);
   cursor: pointer;
   border: none;
   padding: 8px 16px;
@@ -27,9 +28,9 @@
 }
 
 /* Hover state for Custom Upload Button */
-.custom_upload_button:hover {
+/* .custom_upload_button:hover {
   background-color: #005cbf;
-}
+} */
 
 .file-upload-wrapper {
   margin: 1rem;
@@ -62,11 +63,12 @@
 .modal-title {
   font-size: 18px;
   margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 .submit {
-  background-color: #0071ff;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--common-white);
   cursor: pointer;
   border: none;
   border-radius: 5px;

@@ -82,7 +82,7 @@
     width: 10rem;
     height: 2rem;
     background-color: var(--secondary-color);
-    color: var(--common-color);
+    color: var(--common-white);
     border-radius: 0.6rem;
     border: none;
 }

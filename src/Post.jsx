@@ -11,8 +11,9 @@ import { formatDistanceToNow } from "date-fns";
 import VideoPlayer from "./VideoPlayer";
 import ReactHlsPlayer from "react-hls-player";
 import { toast, Toaster } from "react-hot-toast";
+import { BiSolidLike } from "react-icons/bi";
 
-function Post({ post }) {
+function Post({ post, userLiked }) {
   const [isViewingImage, setIsViewingImage] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [content, setContent] = useState("");
@@ -95,9 +96,9 @@ function Post({ post }) {
       success: "🔥",
       error: "😭",
       style: {
-        borderRadius: '10px',
-        backgroundColor: '#333',
-        color: '#fff',
+        borderRadius: "10px",
+        backgroundColor: "#333",
+        color: "#fff",
       },
     });
   }
@@ -119,6 +120,7 @@ function Post({ post }) {
       alignItems: "center",
       justifyContent: "center",
       color: "white",
+      zIndex: "2222",
     },
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -133,7 +135,7 @@ function Post({ post }) {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "#000101",
+      backgroundColor: "#000e0e",
       borderRadius: "0.6rem",
       width: "80%",
       height: "75%",
@@ -141,6 +143,7 @@ function Post({ post }) {
       overflowX: "hidden",
       alignItems: "center",
       justifyContent: "center",
+      border: "0.1px solid grey",
     },
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -176,7 +179,7 @@ function Post({ post }) {
           ></span>
         </div>
         <div className="post__image__wrapper" onClick={handleImageClick}>
-          {post?.link?.includes(".m3u8") ? (
+          {post.link?.includes(".m3u8") || post.link?.includes(".mp4") ? (
             <ReactHlsPlayer
               src={post.link}
               autoPlay={false}
@@ -198,9 +201,13 @@ function Post({ post }) {
       </div>
       <div className="post__show__container__bottom">
         <div className="post__icon__group__left">
-          <span className="post__icon" onClick={() => likePost(post.id)}>
-            <SlLike />
+          <span
+            className={`post__icon${userLiked ? " liked" : ""}`}
+            onClick={() => likePost(post.id)}
+          >
+            {userLiked ? <BiSolidLike /> : <SlLike />}
           </span>
+
           <span className="like__count">{post?.likes?.length || 0}</span>
           <span className="post__icon">
             <IoShareSocialOutline />
@@ -223,7 +230,7 @@ function Post({ post }) {
         isOpen={isCommentModalOpen}
         onRequestClose={handleCommentClick}
         contentLabel="Comment Modal"
-        style={cookie.theme === "dark" ? darkCustomStyles : customStyles}
+        style={cookie.theme.includes("dark") ? darkCustomStyles : customStyles}
       >
         {/* <button onClick={handleCommentClick} className="modal__close__button">
           X
@@ -252,7 +259,7 @@ function Post({ post }) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></span>
         </div>
-        {post.link?.includes(".m3u8") && (
+        {post.link?.includes(".m3u8") || post.link?.includes(".mp4") ? (
           <ReactHlsPlayer
             src={post.link}
             autoPlay={false}
@@ -260,9 +267,9 @@ function Post({ post }) {
             width="100%"
             height="auto"
             poster={post.thumbnail}
+            style={{ width: "100%", height: "90%" }}
           />
-        )}
-        {!post.link?.includes(".m3u8") && (
+        ) : (
           <img
             src={post.link}
             className={

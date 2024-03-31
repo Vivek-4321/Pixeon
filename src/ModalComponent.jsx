@@ -42,7 +42,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
       setLoading(true);
       const storageRef = ref(storage, `/assets/${selectedFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, selectedFile);
-  
+
       const fileUploadPromise = new Promise((resolve, reject) => {
         uploadTask.on(
           "state_changed",
@@ -51,9 +51,8 @@ const ModalComponent = ({ isOpen, onClose }) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             // Update the toast message with the upload progress
-            toast.update(toastId, {
-              loading: `Uploading... ${progress.toFixed(2)}%`,
-            });
+
+            console.log(progress);
           },
           (error) => {
             console.error(error);
@@ -74,13 +73,13 @@ const ModalComponent = ({ isOpen, onClose }) => {
           }
         );
       });
-  
+
       const toastId = toast.promise(fileUploadPromise, {
         loading: "Uploading...",
         success: "File uploaded successfully!",
         error: "Error uploading file",
       });
-  
+
       fileUploadPromise
         .then(async (downloadURL) => {
           // Make API call after file upload is complete
@@ -95,10 +94,26 @@ const ModalComponent = ({ isOpen, onClose }) => {
             {
               headers: {
                 Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
               },
             }
           );
-  
+
+          console.log(result);
+
+          console.log("This is working...",downloadURL)
+          const videoTranscoderResult = await axios.post(
+            "http://localhost:8000/transcode",
+            {
+              url: downloadURL,
+              videoName: selectedFile.name,
+              postId: result.data.id,
+              authenticationBearer: `Bear ${token}`,
+            },
+          );
+
+          console.log(videoTranscoderResult.data);
+
           setLoading(false);
           onClose();
         })
@@ -110,7 +125,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
       console.error("Error:", error);
       toast.error("Error uploading file");
     }
-  };  
+  };
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -161,12 +176,36 @@ const ModalComponent = ({ isOpen, onClose }) => {
     },
   };
 
+  const darkCustomStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#14111d",
+      borderRadius: "0.6rem",
+      width: "80%",
+      height: "75%",
+      overflowY: "auto",
+      overflowX: "hidden",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#ffff",
+      border: "0.3px solid grey",
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+    },
+  };
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Example Modal"
-      style={customStyles}
+      style={cookies.theme.includes("dark") ? darkCustomStyles : customStyles}
     >
       <Toaster position="top-right" reverseOrder={false} />
       <h2 className="modal-title">Create Post</h2>
@@ -175,7 +214,11 @@ const ModalComponent = ({ isOpen, onClose }) => {
         placeholder="Write your post here..."
         value={inputValue}
         onChange={handleInputChange}
-        style={{ maxHeight: "200px", overflowY: "auto" }}
+        style={{
+          maxHeight: "200px",
+          overflowY: "auto",
+          color: cookies.theme.includes("dark") ? "#ffff" : "#000",
+        }}
         theme={darkTheme}
       />
       <div className="file-upload-wrapper">
@@ -186,13 +229,11 @@ const ModalComponent = ({ isOpen, onClose }) => {
           id="file-upload"
           type="file"
           className="custom_upload"
+          accept="image/*, video/mp4, video/webm"
           onChange={handleFileChange}
         />
-        <button
-          className="submit"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
+
+        <button className="submit" onClick={handleSubmit} disabled={loading}>
           Submit
         </button>
       </div>

@@ -5,12 +5,13 @@ import { LuSendHorizonal } from "react-icons/lu";
 import { GoPaperclip } from "react-icons/go";
 import "./AddPost.css";
 
-function AddPost({handleOpenModal}) {
+function AddPost({handleOpenModal,link}) {
+  
   return (
     <div className="add__post" onClick={handleOpenModal}>
           <div className="add__post__top">
             <span className="add__post__image">
-              <img src="https://images.unsplash.com/photo-1527082395-e939b847da0d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG9ydHJhaXRzfGVufDB8MXwwfHx8MA%3D%3D" />
+              <img src={link} />
             </span>
             <input
               className="add__post__input"

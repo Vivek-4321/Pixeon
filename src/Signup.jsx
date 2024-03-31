@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import Google from "./assets/google__logo.png";
 import axios from "axios";
@@ -15,7 +15,16 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
+  const [cookies] = useCookies(["selectedTheme"]);
+  const selectedTheme = cookies.selectedTheme || "blue-dark";
   provider.addScope("email");
+
+  useEffect(() => {
+    const themeClass = selectedTheme.endsWith("-dark")
+      ? selectedTheme
+      : `${selectedTheme}-light`;
+    document.documentElement.setAttribute("data-theme", themeClass);
+  }, [selectedTheme]);
 
   const signInWithGoogle = async () => {
     toast.promise(
@@ -40,6 +49,7 @@ function Signup() {
           });
           console.log("Token:", token);
           resolve("Registration successful!");
+          navigate("/");
         } catch (error) {
           reject(error.msg);
           resolve("Error Occured");
@@ -99,7 +109,7 @@ function Signup() {
       <div className="navbar_pixeon">
         <h1>Pixeon</h1>
       </div>
-      <div className="container_3">
+      <div className="container_1">
         <span className="container__header__signup">Sign up to Pixeon</span>
 
         <button className="google_box" onClick={signInWithGoogle}>

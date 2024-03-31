@@ -8,10 +8,10 @@ function SideBar() {
   const [cookies, setCookies] = useCookies(["theme"]);
   return (
     <SkeletonTheme
-    baseColor={cookies.theme === "dark" ? "#202020" : ""}
-    highlightColor={cookies.theme === "dark" ? "#444" : ""}
-    borderRadius={8}
-  >
+      baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
+      highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
+      borderRadius={8}
+    >
       <div className="sidebar__navigation">
         <div className="sidebar__navigation__loading">
           <Skeleton

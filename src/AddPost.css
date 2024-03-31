@@ -7,6 +7,7 @@
     flex-direction: column;
     background-color: var(--white-color);
     border-radius: 0.6rem;
+    margin-top: 0.6rem;
   }
   
   .add__post__top {
@@ -29,6 +30,7 @@
     padding-left: 1rem;
     border: none;
     background-color: var(--secondary-color-white);
+    color: var(--primary-color);
   }
   
   .add__post__icon {

@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--login-bg);
+  overflow-y: hidden;
 }
 
 .navbar_pixeon {
@@ -83,6 +84,8 @@
   font-size: 15px;
   padding-left: 1rem;
   outline: none;
+  color: var(--primary-color);
+
 }
 
 .or {
@@ -100,6 +103,8 @@
   font-size: 15px;
   padding-left: 1rem;
   outline: none;
+  color: var(--primary-color);
+
 }
 
 .submit_button {
@@ -114,6 +119,7 @@
   font-size: 14px;
   font-weight: 600;
   transition: all 0.4s ease-out;
+  
 
 }
 
@@ -128,6 +134,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .not_account {
   font-size: 14px;
@@ -135,6 +142,7 @@
   color: var(--grey-color);
   font-weight: regular;
   cursor: pointer;
+
 }
 .create_account {
   font-size: 14px;
@@ -142,33 +150,15 @@
   color: var(--link-color);
   margin-left: -1rem;
   cursor: pointer;
+
 }
 
 .submit_button {
   position: relative;
   overflow: hidden;
+
 }
 
-.submit_button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to right, transparent, #D73D63, transparent);
-  z-index: -1;
-  animation: borderGradient 3s linear infinite;
-}
-
-@keyframes borderGradient {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
-}
 
 
 @media (max-width: 768px) {

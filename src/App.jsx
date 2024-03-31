@@ -27,14 +27,15 @@ function App() {
 }
 
 function AppContent() {
-  // const location = useLocation();
+  const location = useLocation(); // Import and use useLocation hook
 
-  // // Define an array of paths where the Navbar should be hidden
-  const hiddenPaths = [ "/login","/signup", "/otp"];
+  // Define an array of paths where the Navbar should be hidden
+  const hiddenPaths = ["/login", "/signup", "/forget", /^\/otp\/\d+$/]; // Update the path to use regex
 
-
-  // // Check if the current path is in the hiddenPaths array
-  const isNavbarHidden = hiddenPaths.includes(location.pathname);
+  // Check if the current path is in the hiddenPaths array
+  const isNavbarHidden = hiddenPaths.some((path) =>
+    typeof path === 'string' ? location.pathname === path : path.test(location.pathname)
+  );
 
   return (
     <>

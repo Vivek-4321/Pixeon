@@ -1,0 +1,29 @@
+"filename", "language", "JSON", "JavaScript", "JavaScript JSX", "CSS", "comment", "blank", "total"
+"/home/vivek/Desktop/Pixeon/package-lock.json", "JSON", 8168, 0, 0, 0, 0, 0, 8168
+"/home/vivek/Desktop/Pixeon/package.json", "JSON", 12, 0, 0, 0, 0, 0, 12
+"/home/vivek/Desktop/Pixeon/src/AddPost.css", "CSS", 0, 0, 0, 9, 0, 0, 9
+"/home/vivek/Desktop/Pixeon/src/AddPost.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 1, 1
+"/home/vivek/Desktop/Pixeon/src/App.jsx", "JavaScript JSX", 0, 0, 3, 0, -1, -1, 1
+"/home/vivek/Desktop/Pixeon/src/Home.jsx", "JavaScript JSX", 0, 0, 38, 0, 0, 0, 38
+"/home/vivek/Desktop/Pixeon/src/Login.css", "CSS", 0, 0, 0, 32, 0, 8, 40
+"/home/vivek/Desktop/Pixeon/src/Login.jsx", "JavaScript JSX", 0, 0, 65, 0, 1, 4, 70
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.css", "CSS", 0, 0, 0, -2, 3, 0, 1
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.jsx", "JavaScript JSX", 0, 0, 26, 0, 0, 1, 27
+"/home/vivek/Desktop/Pixeon/src/Navbar.css", "CSS", 0, 0, 0, 11, 6, 1, 18
+"/home/vivek/Desktop/Pixeon/src/Navbar.jsx", "JavaScript JSX", 0, 0, 21, 0, 1, 4, 26
+"/home/vivek/Desktop/Pixeon/src/Otp.css", "CSS", 0, 0, 0, 4, 0, 0, 4
+"/home/vivek/Desktop/Pixeon/src/Post.css", "CSS", 0, 0, 0, 22, 0, 5, 27
+"/home/vivek/Desktop/Pixeon/src/Post.jsx", "JavaScript JSX", 0, 0, 38, 0, -4, 2, 36
+"/home/vivek/Desktop/Pixeon/src/Profile.css", "CSS", 0, 0, 0, 5, 0, 0, 5
+"/home/vivek/Desktop/Pixeon/src/RecommendationSideBar.css", "CSS", 0, 0, 0, 10, 0, 1, 11
+"/home/vivek/Desktop/Pixeon/src/RecommendationSkeletonLoader.jsx", "JavaScript JSX", 0, 0, 27, 0, 0, 5, 32
+"/home/vivek/Desktop/Pixeon/src/SideBar.css", "CSS", 0, 0, 0, 15, 0, 1, 16
+"/home/vivek/Desktop/Pixeon/src/SideBar.jsx", "JavaScript JSX", 0, 0, 9, 0, 0, 1, 10
+"/home/vivek/Desktop/Pixeon/src/SidebarSkeletonLoader.jsx", "JavaScript JSX", 0, 0, 27, 0, 0, 3, 30
+"/home/vivek/Desktop/Pixeon/src/Signup.jsx", "JavaScript JSX", 0, 0, 53, 0, 0, 2, 55
+"/home/vivek/Desktop/Pixeon/src/Test.jsx", "JavaScript JSX", 0, 0, 22, 0, 0, 5, 27
+"/home/vivek/Desktop/Pixeon/src/Test.test.jsx", "JavaScript JSX", 0, 0, 27, 0, 0, 6, 33
+"/home/vivek/Desktop/Pixeon/src/index.css", "CSS", 0, 0, 0, 23, 5, 1, 29
+"/home/vivek/Desktop/Pixeon/src/setup.js", "JavaScript", 0, 3, 0, 0, 0, 2, 5
+"/home/vivek/Desktop/Pixeon/vite.config.js", "JavaScript", 0, 6, 0, 0, 0, 0, 6
+"Total", "-", 8180, 9, 356, 129, 11, 52, 8737
