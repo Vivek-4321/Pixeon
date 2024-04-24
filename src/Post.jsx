@@ -179,7 +179,7 @@ function Post({ post, userLiked }) {
           ></span>
         </div>
         <div className="post__image__wrapper" onClick={handleImageClick}>
-          {post.link?.includes(".m3u8") || post.link?.includes(".mp4") ? (
+          {post.link?.includes(".m3u8") ? (
             <ReactHlsPlayer
               src={post.link}
               autoPlay={false}
@@ -189,6 +189,11 @@ function Post({ post, userLiked }) {
               poster={post.thumbnail}
               style={{ width: "100%", height: "90%" }}
             />
+          ) : post.link?.includes(".mp4") ? (
+            <video controls style={{ width: "100%", height: "auto" }}>
+              <source src={post.link} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           ) : (
             <img
               src={post.link}
@@ -217,7 +222,7 @@ function Post({ post, userLiked }) {
           <span className="post__icon" onClick={handleCommentClick}>
             <AiOutlineComment />
           </span>
-          <p>{post?.comments?.length} K</p>
+          <p>{post?.comments?.length}</p>
         </div>
       </div>
       {isViewingImage && (
@@ -230,7 +235,7 @@ function Post({ post, userLiked }) {
         isOpen={isCommentModalOpen}
         onRequestClose={handleCommentClick}
         contentLabel="Comment Modal"
-        style={cookie.theme.includes("dark") ? darkCustomStyles : customStyles}
+        style={cookie.selectedTheme.includes("dark") ? darkCustomStyles : customStyles}
       >
         {/* <button onClick={handleCommentClick} className="modal__close__button">
           X
@@ -259,7 +264,8 @@ function Post({ post, userLiked }) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           ></span>
         </div>
-        {post.link?.includes(".m3u8") || post.link?.includes(".mp4") ? (
+
+        {post.link?.includes(".m3u8") ? (
           <ReactHlsPlayer
             src={post.link}
             autoPlay={false}
@@ -269,6 +275,11 @@ function Post({ post, userLiked }) {
             poster={post.thumbnail}
             style={{ width: "100%", height: "90%" }}
           />
+        ) : post.link?.includes(".mp4") ? (
+          <video controls style={{ width: "100%", height: "auto" }}>
+            <source src={post.link} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         ) : (
           <img
             src={post.link}
@@ -277,6 +288,7 @@ function Post({ post, userLiked }) {
             }
           />
         )}
+
         <form className="modal__comment__form" onSubmit={handleSubmit}>
           <input
             type="text"

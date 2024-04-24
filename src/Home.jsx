@@ -38,12 +38,11 @@ function Home() {
     const token = cookies.token;
     const fetchPosts = async () => {
       setIsLoading(true);
+      console.log(cookies.token);
       try {
-        const response = await axios.get("http://localhost:3000/posts", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await axios.get("http://localhost:3000/api/Post/getAllUsersPost", {
         });
+      
         setPosts(response.data);
         console.log(response.data);
       } catch (error) {
@@ -91,8 +90,8 @@ function Home() {
         <div className="post__user__recommendation">
           {isLoading ? (
             <SkeletonTheme
-              baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
-              highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
+              baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
+              highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
               borderRadius={8}
             >
               <Skeleton
@@ -107,11 +106,11 @@ function Home() {
         </div>
         <div className="post__add__post">
           {isLoading ? (
-           <SkeletonTheme
-           baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
-           highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
-           borderRadius={8}
-         >
+            <SkeletonTheme
+            baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
+            highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
+            borderRadius={8}
+          >
               <Skeleton
                 width={850}
                 height={120}
@@ -130,11 +129,11 @@ function Home() {
         </div>
         <div className="post__show__wrapper">
           {isLoading ? (
-            <SkeletonTheme
-            baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
-            highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
-            borderRadius={8}
-          >
+             <SkeletonTheme
+             baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
+             highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
+             borderRadius={8}
+           >
               <Skeleton height={400} style={{ marginTop: "16px" }} />
               <Skeleton height={400} style={{ marginTop: "16px" }} />
               <Skeleton height={400} style={{ marginTop: "16px" }} />

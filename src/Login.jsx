@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -29,22 +29,24 @@ function Login() {
 
   const handleLogin = async () => {
     setLoading(!loading); // Set loading state to true when login process starts
+    
+
     const promise = axios
-      .post("http://localhost:3000/login", {
-        email,
-        password,
-      })
+      .post("http://localhost:3000/api/User/login",{email,password},{withCredentials: true, credentials: 'include' })
       .then((response) => {
         // Assuming the token is returned in the response data
-        const token = response.data.token;
-        const maxAge = 10 * 24 * 60 * 60;
-        setCookie("token", token, {
-          path: "/",
-          maxAge,
-          sameSite: "none",
-          secure: true,
-        });
-        console.log("Token:", token);
+        // const token = response.data.token;
+        // const maxAge = 10 * 24 * 60 * 60;
+        // setCookie("token", token, {
+        //   path: "/",
+        //   maxAge,
+        //   sameSite: "none",
+        //   secure: true,
+        // });
+        console.log(response.headers);
+        console.log(response.data);
+        // console.log("Token:", token);
+        navigate("/");
         return response.data;
       })
       .catch((error) => {
@@ -158,7 +160,9 @@ function Login() {
         <span className="reset_password">Reset Password</span>
         <div className="container_2">
           <span className="not_account">No account ?</span>
+          <Link to="/signup">
           <span className="create_account">Create one</span>
+          </Link>
         </div>
       </div>
     </div>

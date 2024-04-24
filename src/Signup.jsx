@@ -4,19 +4,23 @@ import Google from "./assets/google__logo.png";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState('');
   const [cookie, setCookie] = useCookies(["user"]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
   const [cookies] = useCookies(["selectedTheme"]);
   const selectedTheme = cookies.selectedTheme || "blue-dark";
+  const [regNo, setRegNo] = useState("");
   provider.addScope("email");
 
   useEffect(() => {
@@ -27,6 +31,7 @@ function Signup() {
   }, [selectedTheme]);
 
   const signInWithGoogle = async () => {
+    // You can return the document data and ID if needed
     toast.promise(
       new Promise(async (resolve, reject) => {
         try {
@@ -39,15 +44,15 @@ function Signup() {
             `http://localhost:3000/api/auth/google-login`,
             { User }
           );
-          const token = response.data.token;
-          const maxAge = 10 * 24 * 60 * 60;
-          setCookie("token", token, {
-            path: "/",
-            maxAge,
-            sameSite: "none",
-            secure: true,
-          });
-          console.log("Token:", token);
+          // const token = response.data.token;
+          // const maxAge = 10 * 24 * 60 * 60;
+          // setCookie("token", token, {
+          //   path: "/",
+          //   maxAge,
+          //   sameSite: "none",
+          //   secure: true,
+          // });
+          // console.log("Token:", token);
           resolve("Registration successful!");
           navigate("/");
         } catch (error) {
@@ -66,22 +71,27 @@ function Signup() {
   const handleSignup = async () => {
     // Display loading toast while waiting for response
     setLoading(!loading);
+
     const promise = axios
-      .post("http://localhost:3000/signup", {
+      .post("http://localhost:3000/api/User/signUp", {
         email,
         password,
+        username,
+        role,
       })
       .then((response) => {
         // Assuming the token is returned in the response data
         setLoading(!loading);
-        const token = response.data.token;
-        setCookie("token", token, {
-          path: "/",
-          sameSite: "none",
-          secure: true,
-        });
-        console.log("Token:", token);
-        navigate(`/otp/${encodeURIComponent(email)}`);
+        // const token = response.data.token;
+        // const maxAge = 10 * 24 * 60 * 60;
+        // setCookie("token", token, {
+        //   path: "/",
+        //   maxAge,
+        //   sameSite: "none",
+        //   secure: true,
+        // });
+        // console.log("Token:", token);
+        navigate(`/otp/${encodeURIComponent(response.data.id)}`);
         // Return data to be used in the resolved state of toast.promise
         return response.data;
       })
@@ -120,6 +130,13 @@ function Signup() {
         <h1 className="or">or</h1>
         <input
           className="Email"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          className="Email"
           type="Email"
           placeholder="Email"
           value={email}
@@ -134,8 +151,10 @@ function Signup() {
         />
         <input
           className="retype_password"
-          type="password"
-          placeholder="Retype Password"
+          type="text"
+          placeholder="Role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
         />
         <button
           className="submit_button"
@@ -151,7 +170,9 @@ function Signup() {
 
         <div className="container_2">
           <span className="not_account">Have an account ?</span>
-          <span className="log_in">Login in</span>
+          <Link to="/login">
+            <span className="log_in">Login in</span>
+          </Link>
         </div>
       </div>
     </div>

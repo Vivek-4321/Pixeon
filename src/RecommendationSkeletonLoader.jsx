@@ -8,10 +8,10 @@ function RecommendationSideBar() {
 
   return (
     <SkeletonTheme
-      baseColor={cookies.theme.includes("dark") ? "#000d0d" : ""}
-      highlightColor={cookies.theme.includes("dark") ? "#14111d" : ""}
-      borderRadius={8}
-    >
+    baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
+    highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
+    borderRadius={8}
+  >
       <div className="recommendation__container">
         <div className="recommendation__container__loading">
           <Skeleton width={200} height={30} style={{ marginBottom: "10px" }} />

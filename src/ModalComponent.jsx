@@ -205,7 +205,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="Example Modal"
-      style={cookies.theme.includes("dark") ? darkCustomStyles : customStyles}
+      style={cookies?.selectedTheme?.includes("dark") ? darkCustomStyles : customStyles}
     >
       <Toaster position="top-right" reverseOrder={false} />
       <h2 className="modal-title">Create Post</h2>
@@ -217,7 +217,7 @@ const ModalComponent = ({ isOpen, onClose }) => {
         style={{
           maxHeight: "200px",
           overflowY: "auto",
-          color: cookies.theme.includes("dark") ? "#ffff" : "#000",
+          color: cookies?.selectedTheme?.includes("dark") ? "#ffff" : "#000",
         }}
         theme={darkTheme}
       />

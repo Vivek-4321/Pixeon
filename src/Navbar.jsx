@@ -24,13 +24,13 @@ function Navbar() {
     const newTheme = selectedTheme;
     const maxAgeInDays = 7;
     const maxAgeInSeconds = maxAgeInDays * 24 * 60 * 60;
-  
-    setCookie('theme', newTheme, {
-      path: '/',
+
+    setCookie("theme", newTheme, {
+      path: "/",
       maxAge: maxAgeInSeconds,
     });
-  
-    setDarkTheme(newTheme.endsWith('-dark'));
+
+    setDarkTheme(newTheme.endsWith("-dark"));
   };
 
   useEffect(() => {
@@ -42,6 +42,11 @@ function Navbar() {
 
     // Update the selectedTheme cookie
     setCookie("selectedTheme", selectedTheme, { path: "/" });
+    console.log("Theme:", cookies.theme);
+    console.log(
+      "Is Dark Theme:",
+      cookies.theme && cookies.theme.includes("dark")
+    );
   }, [selectedTheme]);
 
   return (
@@ -63,70 +68,70 @@ function Navbar() {
           >
             {cookies.theme === "dark" ? <MdOutlineWbSunny /> : <LuMoon />}
           </div> */}
-          
         </div>
         <div className="navbar__contents__icon__group">
-          <span className="theme__toggle" onClick={() => setShowDropdown(!showDropdown)}>
-            {cookies.theme === "dark" ? <MdOutlineWbSunny /> : <LuMoon />}
+          <span
+            className="theme__toggle"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            {cookies.theme && cookies.theme !== "" ? (
+              cookies?.selectedTheme?.includes("dark") ? (
+                <LuMoon />
+              ) : (
+                <MdOutlineWbSunny />
+              )
+            ) : (
+              <MdOutlineWbSunny />
+            )}
             {showDropdown && (
-            <div className="dropdown-menu">
-              <div
-                className={`dropdown-item-blue-dark ${
-                  selectedTheme === "blue-dark" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedTheme("blue-dark");
-                  setShowDropdown(false);
-                }}
-              >
-                Blue Dark
+              <div className="dropdown-menu">
+                <div
+                  className={`dropdown-item-blue-dark ${
+                    selectedTheme === "blue-dark" ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedTheme("blue-dark");
+                    setShowDropdown(false);
+                  }}
+                >
+                  Blue Dark
+                </div>
+                <div
+                  className={`dropdown-item-green-dark ${
+                    selectedTheme === "green-dark" ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedTheme("green-dark");
+                    setShowDropdown(false);
+                  }}
+                >
+                  Green Dark
+                </div>
+                <div
+                  className={`dropdown-item-red-dark ${
+                    selectedTheme === "red-dark" ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedTheme("red-dark");
+                    setShowDropdown(false);
+                  }}
+                >
+                  Red Dark
+                </div>
+                <div
+                  className={`dropdown-item ${
+                    selectedTheme === "blue-light" ? "active" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedTheme("blue-light");
+                    setShowDropdown(false);
+                    console.log(selectedTheme);
+                  }}
+                >
+                  Blue Light
+                </div>
               </div>
-              <div
-                className={`dropdown-item-green-dark ${
-                  selectedTheme === "green-dark" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedTheme("green-dark");
-                  setShowDropdown(false);
-                }}
-              >
-                Green Dark
-              </div>
-              <div
-                className={`dropdown-item-red-dark ${
-                  selectedTheme === "red-dark" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedTheme("red-dark");
-                  setShowDropdown(false);
-                }}
-              >
-                Red Dark
-              </div>
-              <div
-                className={`dropdown-item ${
-                  selectedTheme === "blue-light" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedTheme("blue-light");
-                  setShowDropdown(false);
-                }}
-              >
-                Blue Light
-              </div>
-              <div
-                className={`dropdown-item ${
-                  selectedTheme === "green-light" ? "active" : ""
-                }`}
-                onClick={() => {
-                  setSelectedTheme("green-light");
-                  setShowDropdown(false);
-                }}
-              >
-                Green Light
-              </div>
-            </div>
-          )}
+            )}
           </span>
           <span className="navbar__contents__icon">
             <MdOutlineSettings />
@@ -142,7 +147,7 @@ function Navbar() {
           </div>
         ) : (
           <div onClick={() => navigate("/profile")} className="profile__pic">
-            <img src={cookies.user.profilePicLink} />
+            <img src={cookies.user.profilePicLink || "https://imgs.search.brave.com/K0dB0P72H9JRxFsZG-pTF8xlPmqPzd_fa94PwnTWJN8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/d2luaGVscG9ubGlu/ZS5jb20vYmxvZy93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxNy8x/Mi91c2VyLnBuZw"} />
           </div>
         )}
       </div>

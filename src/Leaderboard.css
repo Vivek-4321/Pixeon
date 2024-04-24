@@ -1,0 +1,94 @@
+.leaderboard__container {
+  background-color: var(--secondary-color-white);
+  width: 100%;
+  min-height: 89.5vh;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  color: var(--primary-color);
+  flex-direction: column;
+  align-items: center;
+}
+
+.leaderboard__poster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+  height: 8rem;
+  background: rgb(227, 40, 12);
+  background: linear-gradient(
+    90deg,
+    rgba(227, 40, 12, 1) 0%,
+    rgba(205, 98, 224, 1) 0%,
+    rgba(225, 180, 250, 1) 56%,
+    rgba(231, 188, 242, 1) 100%
+  );
+  margin-top: 0.6rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  padding-left: 2rem;
+
+  img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+  }
+
+  .leaderboard__poster__contents {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.user__details__container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  overflow: hidden;
+  width: 55%;
+  height: 5.5rem;
+  background-color: var(--white-color);
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  transition: all 0.5s ease-in;
+
+  .user__rank{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 3.5rem;
+        height: 4rem;
+      }
+
+      .user__name{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 1.5rem;
+        font-size: 17px;
+        font-weight: 600;
+      }
+  }
+
+  img{
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.user__points{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+
+  img{
+    margin-right: 0.6rem;
+  }
+}

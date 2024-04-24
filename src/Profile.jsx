@@ -47,6 +47,13 @@ function Profile() {
         );
         console.log(response.data);
         setUser(response.data.user);
+        const maxAge = 10 * 24 * 60 * 60;
+        setCookie("user", response.data.user, {
+          path: "/",
+          maxAge,
+          sameSite: "none",
+          secure: true,
+        });
         console.log(user);
         setLoading(false);
       } catch (err) {
@@ -151,6 +158,13 @@ function Profile() {
                 },
               }
             );
+            const maxAge = 10 * 24 * 60 * 60;
+            setCookie("user", response.data, {
+              path: "/",
+              maxAge,
+              sameSite: "none",
+              secure: true,
+            });
 
             setLoading(false);
           })
@@ -217,14 +231,16 @@ function Profile() {
       </div>
       {loading ? (
         <SkeletonTheme
-        baseColor={cookie.theme.includes("dark") ? "#000d0d" : ""}
-        highlightColor={cookie.theme.includes("dark") ? "#14111d" : ""}
-        borderRadius={8}
-      >
+          baseColor={cookie?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
+          highlightColor={
+            cookie?.selectedTheme?.includes("dark") ? "#14111d" : ""
+          }
+          borderRadius={8}
+        >
           <Skeleton
             count={1}
             height={1500}
-            width={900}
+            width={850}
             style={{ marginLeft: "19rem", marginTop: "1rem" }}
           />
         </SkeletonTheme>

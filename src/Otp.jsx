@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const OtpInput = ({ length = 6 }) => {
   const [otp, setOtp] = useState(new Array(length).fill(""));
@@ -12,6 +13,7 @@ const OtpInput = ({ length = 6 }) => {
   const { id } = useParams();
   const email = decodeURIComponent(id);
   const navigate = useNavigate();
+  const [cookie, setCookie, getCookie] = useCookies(["user"]);
 
   useEffect(() => {
     if (inputRefs.current[0]) {
@@ -60,15 +62,26 @@ const OtpInput = ({ length = 6 }) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const otpValue = otp.join("");
     setLoading(true);
     console.log(otpValue);
 
-    const promise = axios.post("http://localhost:3000/verify", {
-      email,
-      verificationCode: otpValue,
+    const promise = await axios.post("http://localhost:3000/api/User/verify", {
+      id : email,
+      otp: otpValue,
     });
+
+    // if (promise) {
+    //   const maxAge = 10 * 24 * 60 * 60;
+    //   setCookie("token", promise.data, {
+    //     path: "/",
+    //     maxAge,
+    //     sameSite: "none",
+    //     secure: true,
+    //   });
+    //   navigate("/");
+    // }
 
     // Use toast.promise to handle loading, success, and error states
     toast.promise(promise, {
@@ -89,9 +102,7 @@ const OtpInput = ({ length = 6 }) => {
   return (
     <div className="otp__container__wrapper">
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="navbar_pixeon">
-        <h1>Pixeon</h1>
-      </div>
+      <div className="navbar_pixeon"><h1>Pixeon</h1></div>
       <div className="otp_container">
         <div className="container__header__otp">
           <span className="container__header__signup">📨 Enter OTP</span>

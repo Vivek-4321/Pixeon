@@ -1,0 +1,30 @@
+"filename", "language", "CSS", "JavaScript JSX", "comment", "blank", "total"
+"/home/vivek/Desktop/Pixeon/src/AddPost.css", "CSS", 2, 0, 0, 0, 2
+"/home/vivek/Desktop/Pixeon/src/AddPost.jsx", "JavaScript JSX", 0, 2, 0, 1, 3
+"/home/vivek/Desktop/Pixeon/src/App.jsx", "JavaScript JSX", 0, 4, 0, 1, 5
+"/home/vivek/Desktop/Pixeon/src/Home.jsx", "JavaScript JSX", 0, 6, 1, 1, 8
+"/home/vivek/Desktop/Pixeon/src/Leaderboard.css", "CSS", 84, 0, 0, 11, 95
+"/home/vivek/Desktop/Pixeon/src/Leaderboard.jsx", "JavaScript JSX", 0, 31, 0, 4, 35
+"/home/vivek/Desktop/Pixeon/src/Login.css", "CSS", -18, 0, 0, 6, -12
+"/home/vivek/Desktop/Pixeon/src/Login.jsx", "JavaScript JSX", 0, -3, 8, 2, 7
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.css", "CSS", 1, 0, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.jsx", "JavaScript JSX", 0, 1, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/Navbar.css", "CSS", 70, 0, 4, 13, 87
+"/home/vivek/Desktop/Pixeon/src/Navbar.jsx", "JavaScript JSX", 0, 82, 7, 2, 91
+"/home/vivek/Desktop/Pixeon/src/Otp.jsx", "JavaScript JSX", 0, 10, 0, 1, 11
+"/home/vivek/Desktop/Pixeon/src/Post.css", "CSS", 2, 0, 0, 8, 10
+"/home/vivek/Desktop/Pixeon/src/Post.jsx", "JavaScript JSX", 0, 12, 0, 2, 14
+"/home/vivek/Desktop/Pixeon/src/Profile.jsx", "JavaScript JSX", 0, 34, 0, 1, 35
+"/home/vivek/Desktop/Pixeon/src/RecommendationSideBar.css", "CSS", 2, 0, 0, 0, 2
+"/home/vivek/Desktop/Pixeon/src/RecommendationSideBar.jsx", "JavaScript JSX", 0, 0, 0, 1, 1
+"/home/vivek/Desktop/Pixeon/src/RecommendationSkeletonLoader.jsx", "JavaScript JSX", 0, 0, 0, -1, -1
+"/home/vivek/Desktop/Pixeon/src/SideBar.jsx", "JavaScript JSX", 0, 15, 0, 1, 16
+"/home/vivek/Desktop/Pixeon/src/Signup.css", "CSS", 2, 0, 0, -1, 1
+"/home/vivek/Desktop/Pixeon/src/Signup.jsx", "JavaScript JSX", 0, 9, 19, 2, 30
+"/home/vivek/Desktop/Pixeon/src/TaskDashboard.css", "CSS", 121, 0, 1, 20, 142
+"/home/vivek/Desktop/Pixeon/src/TaskDashboard.jsx", "JavaScript JSX", 0, 70, 0, 6, 76
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.css", "CSS", 33, 0, 0, 5, 38
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.jsx", "JavaScript JSX", 0, 49, 0, 8, 57
+"/home/vivek/Desktop/Pixeon/src/UserRecommendations.css", "CSS", 2, 0, -1, -2, -1
+"/home/vivek/Desktop/Pixeon/src/index.css", "CSS", 51, 0, -2, 5, 54
+"Total", "-", 352, 322, 37, 97, 808
