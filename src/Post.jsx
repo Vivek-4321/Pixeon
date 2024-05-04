@@ -12,20 +12,41 @@ import VideoPlayer from "./VideoPlayer";
 import ReactHlsPlayer from "react-hls-player";
 import { toast, Toaster } from "react-hot-toast";
 import { BiSolidLike } from "react-icons/bi";
+import ModalOptions from "./ModalOptions";
+import ModalComponent from "./ModalComponent";
 
-function Post({ post, userLiked }) {
+function Post({ post, userLiked, posts, setPosts }) {
   const [isViewingImage, setIsViewingImage] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [content, setContent] = useState("");
   const videoRef = useRef(null);
+  const [isModalComponentOpen, setIsModalComponentOpen] = useState(false);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [cookie, setCookie, removeCookie] = useCookies(["token"]);
+  const [isModalOpenPost, setIsModalOpenPost] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const threeDotsButtonRef = useRef(null);
+
+  const handleOpenModalPost = (post) => {
+    console.log(post);
+    setSelectedPost(post);
+    setIsModalOpenPost(true);
+  };
+
+  const handleCloseModalPost = () => {
+    setIsModalOpenPost(false);
+  };
+
+  const handleCloseModalComponent = () => {
+    setIsModalComponentOpen(false);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
     // Construct the request body
     const requestBody = {
       content: content,
-      postId: post.id,
+      postId: post.postId,
     };
 
     const token = cookie.token;
@@ -40,7 +61,10 @@ function Post({ post, userLiked }) {
 
     // Make the POST request to the API endpoint using Axios
     const promise = axios
-      .post("http://localhost:3000/comments", requestBody, config)
+      .post("http://localhost:3000/api/Comment/create", requestBody, {
+        withCredentials: true,
+        credentials: "include",
+      })
       .then((response) => {
         // Handle the successful response from the server
         console.log("Comment submitted successfully:", response.data);
@@ -68,6 +92,7 @@ function Post({ post, userLiked }) {
 
   async function likePost(postId) {
     // Define the request headers including the Authorization header with the bearer token
+    console.log(postId);
     const token = cookie.token;
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -81,7 +106,10 @@ function Post({ post, userLiked }) {
 
     // Make a POST request to the /likes endpoint with the postId and authentication headers
     const promise = axios
-      .post("http://localhost:3000/likes", requestBody, { headers })
+      .post("http://localhost:3000/api/Like/create", requestBody, {
+        withCredentials: true,
+        credentials: "include",
+      })
       .then((response) => {
         // Handle the successful response
         console.log("Post liked successfully:", response.data);
@@ -97,8 +125,8 @@ function Post({ post, userLiked }) {
       error: "😭",
       style: {
         borderRadius: "10px",
-        backgroundColor: "#333",
-        color: "#fff",
+        backgroundColor: "#333 !important",
+        color: "#fff !important",
       },
     });
   }
@@ -150,29 +178,88 @@ function Post({ post, userLiked }) {
     },
   };
 
+  const handleEditPost = (post) => {
+    console.log("Editing post:", post);
+    handleCloseModalPost();
+    setIsModalComponentOpen(true);
+  };
+
+  const handleDeletePost = (postId) => {
+    // Use toast.promise to handle loading, success, and error states
+    toast.promise(
+        // Create a promise for the deletion operation
+        axios.delete("http://localhost:3000/api/Post/deletePost", {
+            data: { postId: postId.postId },
+            withCredentials: true,
+            credentials: "include",
+        }),
+        {
+            loading: 'Deleting post...', // Displayed while the request is in progress
+            success: (response) => {
+                // Called when the request succeeds
+                console.log("Post deleted:", response.data);
+                const updatedPosts = posts.filter(
+                    (post) => post.postId !== postId.postId
+                );
+                setPosts(updatedPosts);
+                handleCloseModalPost();
+                return "Post deleted successfully";
+            },
+            error: (error) => {
+                // Called when the request fails
+                console.error("Error deleting post:", error);
+                return "Failed to delete post. Please try again.";
+            },
+        }
+    );
+};
+
   return (
     <div className="post__show__container">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
       <div className="post__show__container__top">
         <div className="post__image__container">
           <div className="post__image">
-            <img src={post.user.profile_link} alt="profile" />
+            <img
+              src={
+                post.user
+                  ? post.user.profilePicLink
+                  : post.userPost.profilePicLink
+              }
+              alt="profile"
+            />
           </div>
           <div className="post__content">
-            <span className="post__content__heading">{post.user.name}</span>
+            <span className="post__content__heading">
+              {post.user ? post.user.name : post.userPost.userName}
+            </span>
             <span className="post__content__date">
-              {formatDistanceToNow(new Date(post.timestamp), {
-                addSuffix: true,
-              })}
+              {formatDistanceToNow(
+                new Date(post.timestamp ? post.timestamp : post.timeStamp),
+                {
+                  addSuffix: true,
+                }
+              )}
             </span>
           </div>
         </div>
-        <div className="post__icon__container">
+        <div
+          ref={threeDotsButtonRef}
+          className="post__icon__container"
+          onClick={() => handleOpenModalPost(post)}
+        >
           <BsThreeDotsVertical />
         </div>
       </div>
       <div className="post__show__container__middle">
         <div className="post__content__container">
+          <span className="post__title__wrapper">{post.title}</span>
           <span
             className="post__contents"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -208,7 +295,7 @@ function Post({ post, userLiked }) {
         <div className="post__icon__group__left">
           <span
             className={`post__icon${userLiked ? " liked" : ""}`}
-            onClick={() => likePost(post.id)}
+            onClick={() => likePost(post.postId)}
           >
             {userLiked ? <BiSolidLike /> : <SlLike />}
           </span>
@@ -230,12 +317,21 @@ function Post({ post, userLiked }) {
           <img src={post.link} className="post__image--expanded" />
         </div>
       )}
+      <ModalOptions
+        isModalOpen={isModalOpenPost}
+        handleCloseModal={handleCloseModalPost}
+        post={selectedPost}
+      />
 
       <Modal
         isOpen={isCommentModalOpen}
         onRequestClose={handleCommentClick}
         contentLabel="Comment Modal"
-        style={cookie.selectedTheme.includes("dark") ? darkCustomStyles : customStyles}
+        style={
+          cookie.selectedTheme.includes("dark")
+            ? darkCustomStyles
+            : customStyles
+        }
       >
         {/* <button onClick={handleCommentClick} className="modal__close__button">
           X
@@ -243,14 +339,26 @@ function Post({ post, userLiked }) {
         <div className="post__show__container__top">
           <div className="post__image__container">
             <div className="post__image">
-              <img src={post.user.profile_link} alt="profile" />
+              <img
+                src={
+                  post.user
+                    ? post.user.profilePicLink
+                    : post.userPost.profilePicLink
+                }
+                alt="profile"
+              />
             </div>
             <div className="post__content__comment">
-              <span className="post__content__heading">{post.user.name}</span>
+              <span className="post__content__heading">
+                {post.user ? post.user.name : post.userPost.userName}
+              </span>
               <span className="post__content__date">
-                {formatDistanceToNow(new Date(post.timestamp), {
-                  addSuffix: true,
-                })}
+                {formatDistanceToNow(
+                  new Date(post.timestamp ? post.timestamp : post.timeStamp),
+                  {
+                    addSuffix: true,
+                  }
+                )}
               </span>
             </div>
           </div>
@@ -259,6 +367,7 @@ function Post({ post, userLiked }) {
           </div>
         </div>
         <div className="post__contents__comments__wrapper">
+          <span className="post__title__wrapper">{post.title}</span>
           <span
             className="post__contents__comments"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -308,11 +417,20 @@ function Post({ post, userLiked }) {
               <p className="modal__comment__text">{comment.content}</p> */}
               <div className="model__comment__top">
                 <div className="model__comment__image">
-                  <img src={comment.user.profile_link} alt="profile" />
+                  <img
+                    src={
+                      comment?.user
+                        ? comment?.user?.profilePicLink
+                        : comment?.userComment?.profilePicLink
+                    }
+                    alt="profile"
+                  />
                 </div>
                 <div className="model__comment__content">
                   <span className="model__comment__heading">
-                    {comment.user.name}
+                    {comment.user?.name
+                      ? comment.user.name
+                      : comment?.userComment.userName}
                   </span>
                   <span className="model__comment__date">
                     .{" "}
@@ -329,6 +447,21 @@ function Post({ post, userLiked }) {
           ))}
         </div>
       </Modal>
+      <ModalOptions
+        isModalOpen={isModalOpenPost}
+        handleCloseModal={handleCloseModalPost}
+        post={selectedPost}
+        buttonRef={threeDotsButtonRef}
+        items={[
+          { title: "Edit Post", onClick: () => handleEditPost(post) },
+          { title: "Delete Post", onClick: () => handleDeletePost(post) },
+        ]}
+      />
+      <ModalComponent
+        isOpen={isModalComponentOpen}
+        onClose={handleCloseModalComponent}
+        post={post}
+      />
     </div>
   );
 }

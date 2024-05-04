@@ -49,7 +49,8 @@
   justify-content: space-between; 
   overflow: hidden;
   width: 55%;
-  height: 5.5rem;
+  min-height: 5.5rem !important;
+  overflow-y: scroll;
   background-color: var(--white-color);
   margin-top: 1rem;
   border-radius: 0.5rem;
@@ -91,4 +92,13 @@
   img{
     margin-right: 0.6rem;
   }
+}
+
+.user__details__container{
+  display: flex;
+}
+
+.user__details__map{
+  background-color: antiquewhite;
+  margin: 1rem;
 }

@@ -12,8 +12,12 @@ import { PiCoinLight } from "react-icons/pi";
 import { useCookies } from "react-cookie";
 import Coin from "./assets/Vivecoin1.png";
 import { MdDateRange } from "react-icons/md";
+import { FaWpforms } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 function TaskSidebar() {
+  const navigate = useNavigate();
+
   return (
     <div className="sidebar__container">
         <div className="sidebar__item__wrapper">
@@ -39,6 +43,11 @@ function TaskSidebar() {
         <div className="sidebar__item__wrapper">
           <MdOutlineTaskAlt />
           <span>My Contributions</span>
+        </div>
+
+        <div className="sidebar__item__wrapper" onClick={() => {navigate("/my_applications")}}>
+          <FaWpforms />
+          <span>Applications</span>
         </div>
 
         <div className="sidebar__item__wrapper">

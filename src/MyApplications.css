@@ -1,0 +1,100 @@
+.my_applications__container {
+  background-color: var(--secondary-color-white);
+  width: 100%;
+  min-height: 89.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  color: var(--primary-color);
+  flex-direction: column;
+}
+
+.application__title {
+    max-width: 200px; /* Set the desired maximum width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    span{
+        margin-right: 0.5rem;
+    }
+}
+
+.application__points{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 4rem;
+
+    img{
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        margin-right: 0.5rem;
+    }
+}
+
+.application__button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+
+    button{
+        width: 100%;
+        height: 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        color: var(--common-white);
+        background-color: var(--secondary-color);
+        transition: all 0.3s ease-out;
+    }
+
+    button:hover{
+        color: var(--common-white);
+        background-color: var(--secondary-color-white);
+        border: 1px solid var(--secondary-color);
+    }
+}
+
+.application__card {
+    width: 56rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    margin-left: -2.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.my_applications_header {
+  margin-top: 0.5rem;
+  width: 58.5%;
+  margin-left: -2.6rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 2rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+
+  h3{
+    margin-bottom: 5rem;
+  }
+
+  .userProfile__buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import useStore from "./store";
 import "./Home.css";
 import UserRecommendation from "./UserRecommendations";
 import AddPost from "./AddPost";
@@ -12,7 +13,7 @@ import SidebarSkeletonLoader from "./SidebarSkeletonLoader";
 import RecommendationSkeletonLoader from "./RecommendationSkeletonLoader";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useNavigate, Link } from "react-router-dom";
-
+import { toast, Toaster } from "react-hot-toast";
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +21,10 @@ function Home() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const notifications = useStore((state) => state.notifications);
+  const setNotifications = useStore((state) => state.setNotifications);
+  const user = useStore((state) => state.user);
+  const setUser = useStore((state) => state.setUser);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -31,7 +35,7 @@ function Home() {
   };
 
   const hasUserLikedPost = (postId) => {
-    return user.likes.some((like) => like.postId === postId);
+    return user?.likes?.some((like) => like.postId === postId);
   };
 
   useEffect(() => {
@@ -39,49 +43,68 @@ function Home() {
     const fetchPosts = async () => {
       setIsLoading(true);
       console.log(cookies.token);
+      //http://localhost:3000/api/Post/getAllUsersPost
       try {
-        const response = await axios.get("http://localhost:3000/api/Post/getAllUsersPost", {
-        });
-      
+        const response = await axios.get(
+          "http://localhost:3000/api/Post/getAllUsersPost",
+          { withCredentials: true, credentials: "include" }
+        );
+
         setPosts(response.data);
         console.log(response.data);
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {
         try {
-          const response = await axios.get("http://localhost:3000/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await axios.get(
+            "http://localhost:3000/api/User/mydetails",
+            { withCredentials: true, credentials: "include" }
+          );
           setUser(response.data);
+          const maxAge = 10 * 24 * 60 * 60;
+          setCookie("user", response.data, {
+            path: "/",
+            maxAge,
+            sameSite: "none",
+            secure: false,
+          });
+
           console.log(response.data);
+          console.log(cookies.user);
         } catch (error) {
           console.error("Error fetching posts:", error);
         } finally {
-          const maxAge = 10 * 24 * 60 * 60;
-          {
-            !cookies.user
-              ? setCookie("user", user, {
-                  path: "/",
-                  maxAge,
-                  sameSite: "none",
-                  secure: true,
-                })
-              : "";
-
-            console.log(cookies.user);
-          }
           setIsLoading(false);
         }
       }
     };
 
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/Notify/notifications",
+          { withCredentials: true, credentials: "include" }
+        );
+        console.log("This is from notifications: ",response.data);
+        setNotifications(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    }
+
+    fetchNotifications();
     fetchPosts();
   }, []);
 
   return (
     <div className="home__container">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
       {/* <div className="color"></div> */}
       <div className="sidebar__wrapper__home">
         {isLoading ? <SidebarSkeletonLoader /> : <SideBar />}
@@ -89,51 +112,79 @@ function Home() {
       <div className="post__container">
         <div className="post__user__recommendation">
           {isLoading ? (
-            <SkeletonTheme
-              baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
-              highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
-              borderRadius={8}
+            <div
+              className="user_profile_recommendation"
+              style={{
+                overflow: "hidden",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
+              }}
             >
-              <Skeleton
-                width={880}
-                height={120}
-                style={{ marginBottom: "10px" }}
-              />
-            </SkeletonTheme>
+              <SkeletonTheme
+                baseColor={
+                  cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""
+                }
+                highlightColor={
+                  cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""
+                }
+                borderRadius={8}
+              >
+                <Skeleton
+                  width={860}
+                  height={120}
+                  style={{ marginBottom: "10px" }}
+                />
+              </SkeletonTheme>
+            </div>
           ) : (
             <UserRecommendation />
           )}
         </div>
         <div className="post__add__post">
           {isLoading ? (
-            <SkeletonTheme
-            baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
-            highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
-            borderRadius={8}
-          >
-              <Skeleton
-                width={850}
-                height={120}
-                style={{ marginBottom: "10px" }}
-              />
-            </SkeletonTheme>
+            <div className="add__post" style={{ paddingTop: "0.5rem" }}>
+              <SkeletonTheme
+                baseColor={
+                  cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""
+                }
+                highlightColor={
+                  cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""
+                }
+                borderRadius={8}
+              >
+                <Skeleton
+                  width={870}
+                  height={105}
+                  style={{ marginBottom: "10px" }}
+                />
+              </SkeletonTheme>
+            </div>
           ) : (
             <>
               <AddPost
                 handleOpenModal={handleOpenModal}
-                link={posts[0]?.user.profile_link}
+                link={cookies.user?.profilePicLink}
               />
-              <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />
+              <ModalComponent
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                posts={posts}
+                setPosts={setPosts}
+              />
             </>
           )}
         </div>
         <div className="post__show__wrapper">
           {isLoading ? (
-             <SkeletonTheme
-             baseColor={cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""}
-             highlightColor={cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""}
-             borderRadius={8}
-           >
+            <SkeletonTheme
+              baseColor={
+                cookies?.selectedTheme?.includes("dark") ? "#000d0d" : ""
+              }
+              highlightColor={
+                cookies?.selectedTheme?.includes("dark") ? "#14111d" : ""
+              }
+              borderRadius={8}
+            >
               <Skeleton height={400} style={{ marginTop: "16px" }} />
               <Skeleton height={400} style={{ marginTop: "16px" }} />
               <Skeleton height={400} style={{ marginTop: "16px" }} />
@@ -141,9 +192,11 @@ function Home() {
           ) : (
             posts.map((post) => (
               <Post
-                key={post.id}
+                key={post.postId}
                 post={post}
-                userLiked={hasUserLikedPost(post.id)}
+                userLiked={hasUserLikedPost(post.postId)}
+                posts={posts}
+                setPosts={setPosts}
               />
             ))
           )}

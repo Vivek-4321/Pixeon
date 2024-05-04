@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import Google from "./assets/google__logo.png";
 import axios from "axios";
@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
-import { useNavigate , Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -25,24 +25,26 @@ function Login() {
       : `${selectedTheme}-light`;
     document.documentElement.setAttribute("data-theme", themeClass);
   }, [selectedTheme]);
-  
 
   const handleLogin = async () => {
     setLoading(!loading); // Set loading state to true when login process starts
-    
 
     const promise = axios
-      .post("http://localhost:3000/api/User/login",{email,password},{withCredentials: true, credentials: 'include' })
+      .post(
+        "http://localhost:3000/api/User/login",
+        { email, password },
+        { withCredentials: true, credentials: "include" }
+      )
       .then((response) => {
         // Assuming the token is returned in the response data
-        // const token = response.data.token;
-        // const maxAge = 10 * 24 * 60 * 60;
-        // setCookie("token", token, {
-        //   path: "/",
-        //   maxAge,
-        //   sameSite: "none",
-        //   secure: true,
-        // });
+        const token = response.data.token;
+        const maxAge = 10 * 24 * 60 * 60;
+        setCookie("token", token, {
+          path: "/",
+          maxAge,
+          sameSite: "none",
+          secure: false,
+        });
         console.log(response.headers);
         console.log(response.data);
         // console.log("Token:", token);
@@ -82,8 +84,12 @@ function Login() {
           console.log(User);
 
           const response = await axios.post(
-            `http://localhost:3000/api/auth/google-login`,
-            { User }
+            `http://localhost:3000/api/User/google-login`,
+            {
+              data: { userData: User },
+              withCredentials: true,
+              credentials: "include",
+            }
           );
           const token = response.data.token;
           const maxAge = 10 * 24 * 60 * 60;
@@ -97,21 +103,22 @@ function Login() {
           resolve("Login successful!");
         } catch (error) {
           reject(error);
-          resolve("Error Occured")
+          resolve("Error Occured");
         }
       }),
-      { // Optional message shown when promise is pending
-          loading: "Logging in...",
-          success: () => {
-            setLoading(false);
-            navigate("/");
-            return "Login Successfull";
-          },
-          error: (error) => {
-            console.error("Error :", error);
-            setLoading(false);
-            return "Failed to login.";
-          },
+      {
+        // Optional message shown when promise is pending
+        loading: "Logging in...",
+        success: () => {
+          setLoading(false);
+          navigate("/");
+          return "Login Successfull";
+        },
+        error: (error) => {
+          console.error("Error :", error);
+          setLoading(false);
+          return "Failed to login.";
+        },
       }
     );
   };
@@ -119,7 +126,13 @@ function Login() {
   return (
     <div className="login__container">
       {/* <div className="color"></div> */}
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
       <div className="navbar_pixeon">
         <h1>Pixeon</h1>
       </div>
@@ -157,11 +170,13 @@ function Login() {
         >
           {loading ? "Logging in..." : "Login"}
         </button>
-        <span className="reset_password">Reset Password</span>
+        <span className="reset_password" onClick={() => navigate("/forget")}>
+          Reset Password
+        </span>
         <div className="container_2">
           <span className="not_account">No account ?</span>
           <Link to="/signup">
-          <span className="create_account">Create one</span>
+            <span className="create_account">Create one</span>
           </Link>
         </div>
       </div>

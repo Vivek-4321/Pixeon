@@ -25,6 +25,15 @@
   text-align: center;
   display: inline-block;
   font-size: small;
+  margin-right: 1rem;
+}
+
+select{
+  margin-left: 0.5rem;
+
+  option {
+    padding-left: 0.3rem;
+  }
 }
 
 /* Hover state for Custom Upload Button */
@@ -78,6 +87,29 @@
   margin-left: 2rem;
   width: 5rem;
   height: 2.3rem;
+}
+
+.date_input, .time_input{
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-color: var(--secondary-color-white);
+  outline: none;
+  border: none;
+  color: var(--primary-color);
+  width:9rem;
+  height: 2rem;
+}
+
+.title__inputbar{
+  margin-bottom: 0.5rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding-left: 0.6rem;
+  height: 2rem;
+  background-color: var(--secondary-color-white);
+  border: 1plx solid var(--white-color);
+  color: var(--primary-color);
+  outline: none;
 }
 
 @media (max-width: 768px) {

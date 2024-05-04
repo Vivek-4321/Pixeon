@@ -13,7 +13,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState("");
   const [cookie, setCookie] = useCookies(["user"]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -44,15 +44,15 @@ function Signup() {
             `http://localhost:3000/api/auth/google-login`,
             { User }
           );
-          // const token = response.data.token;
-          // const maxAge = 10 * 24 * 60 * 60;
-          // setCookie("token", token, {
-          //   path: "/",
-          //   maxAge,
-          //   sameSite: "none",
-          //   secure: true,
-          // });
-          // console.log("Token:", token);
+          const token = response.data.token;
+          const maxAge = 10 * 24 * 60 * 60;
+          setCookie("token", token, {
+            path: "/",
+            maxAge,
+            sameSite: "none",
+            secure: false,
+          });
+          console.log("Token:", token);
           resolve("Registration successful!");
           navigate("/");
         } catch (error) {
@@ -77,7 +77,6 @@ function Signup() {
         email,
         password,
         username,
-        role,
       })
       .then((response) => {
         // Assuming the token is returned in the response data
@@ -115,7 +114,13 @@ function Signup() {
 
   return (
     <div className="signup__container">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
       <div className="navbar_pixeon">
         <h1>Pixeon</h1>
       </div>
@@ -148,13 +153,6 @@ function Signup() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          className="retype_password"
-          type="text"
-          placeholder="Role"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
         />
         <button
           className="submit_button"

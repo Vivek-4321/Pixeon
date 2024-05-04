@@ -65,44 +65,52 @@ const OtpInput = ({ length = 6 }) => {
   const handleSubmit = async () => {
     const otpValue = otp.join("");
     setLoading(true);
-    console.log(otpValue);
 
-    const promise = await axios.post("http://localhost:3000/api/User/verify", {
-      id : email,
-      otp: otpValue,
-    });
+    try {
+      const promise = axios.post("http://localhost:3000/api/User/verify", {
+        id: email,
+        otp: otpValue,
+      });
 
-    // if (promise) {
-    //   const maxAge = 10 * 24 * 60 * 60;
-    //   setCookie("token", promise.data, {
-    //     path: "/",
-    //     maxAge,
-    //     sameSite: "none",
-    //     secure: true,
-    //   });
-    //   navigate("/");
-    // }
+      const maxAge = 10 * 24 * 60 * 60;
+      const response = await promise;
+      setCookie("token", response.data.token, {
+        path: "/",
+        maxAge,
+        sameSite: "none",
+        secure: false,
+      });
+      setLoading(false);
+      navigate("/");
 
-    // Use toast.promise to handle loading, success, and error states
-    toast.promise(promise, {
-      loading: "Verifying OTP...",
-      success: () => {
-        setLoading(false);
-        navigate("/");
-        return "OTP verified successfully";
-      },
-      error: (error) => {
-        console.error("Error verifying OTP:", error);
-        setLoading(false);
-        return "Failed to verify OTP. Please try again.";
-      },
-    });
+      // Use toast.promise to handle loading, success, and error states
+      toast.promise(promise, {
+        loading: "Verifying OTP...",
+        success: () => "OTP verified successfully",
+        error: (error) => {
+          console.error("Error verifying OTP:", error);
+          return "Failed to verify OTP. Please try again.";
+        },
+      });
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      setLoading(false);
+      toast.error("Failed to verify OTP. Please try again.");
+    }
   };
 
   return (
     <div className="otp__container__wrapper">
-      <Toaster position="top-right" reverseOrder={false} />
-      <div className="navbar_pixeon"><h1>Pixeon</h1></div>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
+      <div className="navbar_pixeon">
+        <h1>Pixeon</h1>
+      </div>
       <div className="otp_container">
         <div className="container__header__otp">
           <span className="container__header__signup">📨 Enter OTP</span>

@@ -21,6 +21,7 @@
   justify-content: center;
   width: 30rem;
   height: 2.8rem;
+  position: relative;
 }
 
 .navbar__searchbar__input {
@@ -57,6 +58,7 @@
   border-radius: 0.6rem;
 }
 
+
 .navbar__contents {
   height: 100%;
   width: 20%;
@@ -78,9 +80,33 @@
   color: var(--primary-color);
   font-size: 22px;
   margin-right: 1rem;
+  position: relative;
 }
 
-.theme__toggle{
+.navbar__notification__bar{
+  z-index: 111;
+  position: absolute;
+  top: 3rem;
+  width: 20rem;
+  min-height: 0rem;
+  max-height: 15rem;
+  overflow-y: auto;
+  left: -10rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease-out;
+  background-color: var(--white-color);
+  z-index: 111;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-x: hidden;
+  box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+-webkit-box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+-moz-box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+}
+
+.theme__toggle {
   color: var(--primary-color);
   font-size: 22px;
   margin-right: 1rem;
@@ -114,13 +140,13 @@
   color: var(--common-white);
 }
 
-.profile__pic{
+.profile__pic {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
   overflow: hidden;
 
-  img{
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -144,7 +170,7 @@
   z-index: 1;
   border-radius: 0.6rem;
   font-size: 14px;
-  width:7rem;
+  width: 7rem;
   border-bottom: 1px solid white;
 }
 
@@ -158,7 +184,7 @@
   background-color: #e0e0e0;
 }
 
-.dropdown-item-blue-dark{
+.dropdown-item-blue-dark {
   background-color: #000101;
   color: #0190fd;
   display: flex;
@@ -171,26 +197,26 @@
   transition: all 0.3s ease-out;
 }
 
-.dropdown-item-blue-dark:hover{
+.dropdown-item-blue-dark:hover {
   background-color: #0190fd;
   color: white;
 }
 
-.dropdown-item-green-dark{
+.dropdown-item-green-dark {
   background-color: #000101;
-  color: #13A280;
+  color: #13a280;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 3px solid #13A280;
+  border-left: 3px solid #13a280;
   /* border-radius: 0.6rem; */
   width: 100%;
   height: 2rem;
   transition: all 0.3s ease-out;
 }
 
-.dropdown-item-green-dark:hover{
-  background-color: #13A280;
+.dropdown-item-green-dark:hover {
+  background-color: #13a280;
   color: white;
 }
 
@@ -207,9 +233,70 @@
   transition: all 0.3s ease-out;
 }
 
-.dropdown-item-red-dark:hover{
+.dropdown-item-red-dark:hover {
   background-color: #d73d63;
   color: white;
+}
+
+.suggestion__container {
+  padding-top: 0.5rem;
+  border-radius: 0.6rem;
+  position: absolute;
+  width: 40rem;
+  min-height: 0rem;
+  max-height: 20rem;
+  top: 3.5rem;
+  transition: all 0.2s ease-out;
+  background-color: var(--white-color);
+  z-index: 111;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+-webkit-box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+-moz-box-shadow: 3px 20px 38px 6px var(--box-shadow-1);
+}
+
+.search-results {
+  width: 100%;
+  height: 3.7rem;
+  transition: all 0.2s ease-out;
+  /* background-color: var(--secondary-color-white); */
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
+  color: var(--primary-color);
+  font-size: 14px;
+  border-radius: 0.5rem;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .search-username {
+    font-weight: 700;
+  }
+
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.search-results:hover {
+  background-color: var(--secondary-color-white);
 }
 
 @media (max-width: 768px) {
@@ -217,8 +304,8 @@
     padding: 1rem;
   }
 
-  .navbar__logo{
-    span{
+  .navbar__logo {
+    span {
       font-size: 24px;
     }
   }
@@ -228,12 +315,11 @@
     margin-left: 5rem;
   }
 
-  .navbar__contents__icon__group{
+  .navbar__contents__icon__group {
     display: none;
   }
 
-  .navbar__contents__btn__group{
+  .navbar__contents__btn__group {
     display: none;
   }
 }
-

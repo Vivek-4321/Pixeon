@@ -1,0 +1,125 @@
+.userProfile__wrapper{
+    background-color: var(--secondary-color-white);
+    width: 100%;
+    min-height: 89.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    color: var(--primary-color);
+    flex-direction: column;
+}
+
+.userProfile__container{
+    margin-top: 0.5rem;
+    width: 59%;
+    height: 20rem;
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    margin-left: -2.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.userProfile__card{
+    width: 100%;
+    height: 23%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-left: 1rem;
+
+    img{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    span{
+        margin-left: 1rem;
+    }
+}
+
+.userProfile__description{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-top: 3rem;
+}
+
+.userProfile__info{
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+    span{
+        margin-left: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    img{
+        margin-left: -0.2rem;
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+.userProfile__data{
+    display: flex;
+    align-items: flex-start !important;
+    justify-content: flex-start;
+    flex-direction: column;
+    font-weight: 700;
+
+    .userProfile__headline{
+        margin-top: 0.4rem;
+        font-weight: 400;
+    }
+}
+
+.userProfile__buttons{
+    margin-top: 2rem;
+    width: 85%;
+    height: 2rem;
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--secondary-color-white);
+    transition: all 0.3s ease-out;
+
+    .userProfile__button{
+        width: 15rem;
+        height: 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: var(--secondary-color-white);
+        color: var(--primary-color);
+    }
+
+    .userProfile__button.active{
+        color: var(--common-white);
+        background-color: var(--secondary-color);
+    }
+
+}
+
+.userProfile__data__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 58%;
+    margin-left: -2.6rem;
+}

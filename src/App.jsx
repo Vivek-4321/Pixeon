@@ -16,6 +16,11 @@ import Navbar from "./Navbar.jsx";
 import Profile from "./Profile.jsx";
 import TaskDashboard from "./TaskDashboard.jsx";
 import Leaderboard from "./Leaderboard.jsx";
+import UserProfile from "./UserProfile.jsx"
+import MyApplications from "./MyApplications.jsx";
+import ResetPassword from "./ResetPassword.jsx";
+import TaskPage from "./TaskPage.jsx";
+import Admin_Dashboard from "./Admin_Dashboard.jsx";
 
 function App() {
   return (
@@ -35,9 +40,10 @@ function AppContent() {
 
   // Check if the current path starts with "/otp/"
   const isOtpPath = location.pathname.startsWith("/otp/");
+  const isResetPath = location.pathname.startsWith("/password_reset/");
 
   // Check if the current path is in the hiddenPaths array or is an OTP path
-  const isNavbarHidden = hiddenPaths.includes(location.pathname) || isOtpPath;
+  const isNavbarHidden = hiddenPaths.includes(location.pathname) || isOtpPath || isResetPath;
 
   return (
     <>
@@ -51,6 +57,11 @@ function AppContent() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<TaskDashboard />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/userProfile/:id" element={<UserProfile/>} key={location.pathname}/>
+        <Route path="/my_applications" element={<MyApplications />} />
+        <Route path="/password_reset/:id" element={<ResetPassword />} />
+        <Route path="/task/:id" element={<TaskPage />} />
+        <Route path="/admin" element={<Admin_Dashboard/>} />
       </Routes>
     </>
   );

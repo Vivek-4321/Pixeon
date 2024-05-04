@@ -23,7 +23,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 
-const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
+const ModalComponent = ({ isOpen, onClose, task }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -32,15 +32,27 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
   const [downloadUrl, setDownloadUrl] = useState("");
   const storage = getStorage();
   const [loading, setLoading] = useState(false);
+  const [deadLine, setDeadLine] = useState("");
+  const [points, setPoints] = useState(0);
+  const [status, setStatus] = useState("OPEN");
   const [title, setTitle] = useState("");
-  const [progressValue, setProgressValue] = useState(0);
 
   useEffect(() => {
-    if (post) {
-      setInputValue(post.content);
-      setPreviewUrl(post.link);
+    if (task) {
+      console.log(task);
+      setTitle(task.title);
+      setInputValue(task.description);
+      if (task && task.deadline) {
+        setDeadLine(task.deadline.split("T")[0]);
+        console.log(task.deadline.split("T")[0]);
+      }
+      setPoints(task.points);
+      setStatus(task.status);
+      setPreviewUrl(task.link);
+      setIsVideo(task.link?.includes(".mp4"));
     }
-  }, [post]);
+    console.log(task);
+  }, [task]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -49,21 +61,21 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const fileUploadPromise = new Promise(async (resolve, reject) => {
-        let downloadURL = "";
+      let promise;
 
-        if (selectedFile) {
-          // Upload image
-          const storageRef = ref(storage, `/assets/${selectedFile.name}`);
-          const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+      if (selectedFile) {
+        // Upload the file first
+        const storageRef = ref(storage, `/assets/${selectedFile.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, selectedFile);
 
+        // Show a loading toast while uploading
+        const promise = new Promise((resolve, reject) => {
           uploadTask.on(
             "state_changed",
             (snapshot) => {
               // Track upload progress
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              setProgressValue(progress);
-          
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
               console.log(progress);
             },
             (error) => {
@@ -73,61 +85,48 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
             () => {
               // Upload complete, get the download URL
               getDownloadURL(uploadTask.snapshot.ref)
-                .then(async (downloadURL_) => {
-                  console.log("File available at", downloadURL_);
-                  downloadURL = downloadURL_;
+                .then(async (url) => {
+                  console.log("File available at", url);
+
+                  // Make the API call after file upload (if any)
                   let result;
-                  if (post) {
-                    // Update post
-                    console.log(post);
+                  if (task) {
+                    // Call the update API
                     result = await axios.put(
-                      "http://localhost:3000/api/Post/updatePost",
+                      "http://localhost:3000/api/Task/updateTask",
                       {
-                        postId: post.postId,
-                        newPostData: {
-                          content: inputValue,
-                          link: downloadURL,
+                        taskId: task.taskId,
+                        taskData: {
                           title: title,
+                          description: inputValue,
+                          deadline: new Date(deadLine).toISOString(),
+                          points: points,
+                          status: status.toUpperCase(),
+                          link: url, // Include the download URL if available
                         },
                       },
                       { withCredentials: true, credentials: "include" }
                     );
-                    console.log(result.data);
+                    console.log("This is for testing...", url);
                   } else {
-                    // Create post
+                    // Call the create API
                     result = await axios.post(
-                      "http://localhost:3000/api/Post/createPost",
+                      "http://localhost:3000/api/Task/createTask",
                       {
-                        content: inputValue,
-                        title: title,
-                        link: downloadURL,
+                        taskData: {
+                          title: title,
+                          description: inputValue,
+                          deadLine: deadLine,
+                          points: points,
+                          status: status.toUpperCase(),
+                          link: url, // Include the download URL if available
+                        },
                       },
                       { withCredentials: true, credentials: "include" }
                     );
-
-                    console.log(result.data);
-
-                    const token = cookies.token;
-
-                    if (downloadURL.includes("mp4")) {
-                      const videoTranscoderResult = await axios.post(
-                        "http://localhost:8000/transcode",
-                        {
-                          url: downloadURL,
-                          videoName: selectedFile?.name || "",
-                          postId: result.data.postId,
-                          authenticationBearer: `Bear ${token}`,
-                        }
-                      );
-
-                      console.log(videoTranscoderResult.data);
-                    }
                   }
-
-                  console.log(result);
-                  setLoading(false);
-                  onClose();
-                  resolve(downloadURL_);
+                  console.log("This is for testing...", url);
+                  resolve(result);
                 })
                 .catch((error) => {
                   console.error("Error getting download URL:", error);
@@ -135,22 +134,75 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
                 });
             }
           );
-        } else if (post && post.link) {
-          // Use existing image URL for update case if no new image is selected
-          downloadURL = post.link;
-          resolve(downloadURL);
-        }
-      });
+        });
 
-      const toastId = toast.promise(fileUploadPromise, {
-        loading: `Uploading...`,
-        success: "File uploaded successfully",
-        error: "Error uploading file",
-      });
+        // Use toast.promise to handle loading, success, and error states
+        await toast.promise(promise, {
+          loading: "Uploading...",
+          success: task
+            ? "Task updated successfully!"
+            : "Task created successfully!",
+          error: "Error uploading file",
+        });
+      } else {
+        const promise = new Promise(async (resolve, reject) => {
+          let result;
+          if (task) {
+            // Call the update API
+            result = await axios.put(
+              "http://localhost:3000/api/Task/updateTask",
+              {
+                taskId: task.taskId,
+                taskData: {
+                  title: title,
+                  description: inputValue,
+                  deadline: new Date(deadLine).toISOString(),
+                  points: points,
+                  status: status.toUpperCase(),
+                  link: "", // Include the download URL if available
+                },
+              },
+              { withCredentials: true, credentials: "include" }
+            );
+            console.log("This is for testing...", url);
+          } else {
+            // Call the create API
+            result = await axios.post(
+              "http://localhost:3000/api/Task/createTask",
+              {
+                taskData: {
+                  title: title,
+                  description: inputValue,
+                  deadLine: deadLine,
+                  points: points,
+                  status: status.toUpperCase(),
+                  link: "", // Include the download URL if available
+                },
+              },
+              { withCredentials: true, credentials: "include" }
+            );
+          }
+      
+          if (result) {
+            resolve(result);
+          } else {
+            reject(new Error("Error uploading file"));
+          }
+        });
+      
+        // Use toast.promise to handle loading, success, and error states
+        await toast.promise(promise, {
+          loading: "Uploading...",
+          success: task ? "Task updated successfully!" : "Task created successfully!",
+          error: "Error uploading file",
+        });
+      }
 
-      const downloadURL = await fileUploadPromise;
+      setLoading(false);
+      onClose();
     } catch (error) {
       console.error("Error:", error);
+      setLoading(false);
       toast.error("Error uploading file");
     }
   };
@@ -239,18 +291,18 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
           : customStyles
       }
     >
-      {/* <Toaster
+      <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{
           className: "toast__popup",
         }}
-      /> */}
-      <h2 className="modal-title">{post ? "Edit Post" : "Create Post"}</h2>
+      />
+      <h2 className="modal-title">{task ? "Edit Task" : "Create Task"}</h2>
       <input
         className="title__inputbar"
-        placeholder="Title..."
-        value={post ? post.title : title}
+        placeholder="Title.."
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <Wysiwyg
@@ -276,7 +328,35 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
           accept="image/*, video/mp4, video/webm"
           onChange={handleFileChange}
         />
-
+        Deadline :
+        <input
+          type="date"
+          className="date_input"
+          onChange={(e) => {
+            setDeadLine(e.target.value);
+            console.log(e.target.value);
+          }}
+          value={deadLine}
+        />
+        Points:
+        <input
+          type="number"
+          placeholder="Points"
+          className="time_input"
+          onChange={(e) => {
+            setPoints(e.target.value);
+          }}
+          value={points}
+        />
+        <label htmlFor="status-select">Status:</label>
+        <select
+          id="status-select"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+        >
+          <option value="OPEN">Open</option>
+          <option value="COMPLETED">Completed</option>
+        </select>
         <button className="submit" onClick={handleSubmit} disabled={loading}>
           Submit
         </button>
@@ -297,9 +377,6 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
           )}
         </div>
       )}
-      {/* <button className="close-modal-button" onClick={onClose}>
-        <IoCloseSharp/>
-      </button> */}
     </Modal>
   );
 };

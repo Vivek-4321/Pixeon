@@ -33,20 +33,16 @@ function Profile() {
         const token = cookie.token;
         console.log(token);
 
-        // Set the Authorization header with the JWT token
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        // Make the API call to fetch the user profile
+        // Make the API call to fetch the user? profile
         const response = await axios.get(
-          "http://localhost:3000/profile",
-          config
+          "http://localhost:3000/api/User/mydetails",
+          {
+            withCredentials: true,
+            credentials: "include",
+          }
         );
         console.log(response.data);
-        setUser(response.data.user);
+        setUser(response.data);
         const maxAge = 10 * 24 * 60 * 60;
         setCookie("user", response.data.user, {
           path: "/",
@@ -62,7 +58,7 @@ function Profile() {
       }
     };
 
-    console.log(cookie.user.userId);
+    console.log(cookie.user?.userId);
     fetchProfile();
   }, []);
 
@@ -86,7 +82,7 @@ function Profile() {
   };
 
   const handleSubmit = () => {
-    // Save user data
+    // Save user? data
     setEditMode(false);
   };
 
@@ -127,7 +123,7 @@ function Profile() {
 
         const toastId = toast.promise(fileUploadPromise, {
           loading: "Uploading...",
-          success: "File uploaded successfully!",
+          success: "Profile Updated!",
           error: "Error uploading file",
         });
 
@@ -137,29 +133,30 @@ function Profile() {
             console.log(downloadURL);
             const token = cookie.token;
             const result = await axios.put(
-              "http://localhost:3000/profile",
+              "http://localhost:3000/api/User/update",
               {
-                profilePicLink: downloadURL,
-                userName: user.userName,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                role: user.role,
-                headLine: user.headLine,
-                summary: user.summary,
-                skills: user.skills,
-                contactInfo: user.contactInfo,
-                DOB: user.DOB,
-                updatedAt: new Date(), // add updatedAt field
+                newUserData: {
+                  profilePicLink: downloadURL,
+                  userName: user?.userName,
+                  email: user?.email,
+                  firstName: user?.firstName,
+                  lastName: user?.lastName,
+                  role: user?.role,
+                  headLine: user?.headLine,
+                  summary: user?.summary,
+                  skills: user?.skills,
+                  contactInfo: user?.contactInfo,
+                  DOB: user?.DOB,
+                  updatedAt: new Date(),
+                }, // add updatedAt field
               },
               {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
+                withCredentials: true,
+                credentials: "include",
               }
             );
             const maxAge = 10 * 24 * 60 * 60;
-            setCookie("user", response.data, {
+            setCookie("user?", response.data, {
               path: "/",
               maxAge,
               sameSite: "none",
@@ -178,24 +175,26 @@ function Profile() {
         const resultPromise = new Promise((resolve, reject) => {
           axios
             .put(
-              "http://localhost:3000/profile",
+              "http://localhost:3000/api/User/update",
               {
-                userName: user.userName,
-                email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                role: user.role,
-                headLine: user.headLine,
-                summary: user.summary,
-                skills: user.skills,
-                contactInfo: user.contactInfo,
-                DOB: user.DOB,
-                updatedAt: new Date(), // add updatedAt field
+                newUserData: {
+                  userName: user?.userName,
+                  email: user?.email,
+                  firstName: user?.firstName,
+                  lastName: user?.lastName,
+                  role: user?.role.toUpperCase(),
+                  headLine: user?.headLine,
+                  summary: user?.summary,
+                  skills: user?.skills,
+                  contactInfo: user?.contactInfo,
+                  DOB: user?.DOB,
+                  updatedAt: new Date(),
+                }, // add updatedAt field
               },
+
               {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
+                withCredentials: true,
+                credentials: "include",
               }
             )
             .then((response) => resolve(response.data))
@@ -225,7 +224,13 @@ function Profile() {
 
   return (
     <div className="profile__container">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{
+          className: "toast__popup",
+        }}
+      />
       <div className="sidebar__wrapper">
         {loading ? <SidebarSkeletonLoader /> : <SideBar />}
       </div>
@@ -240,7 +245,7 @@ function Profile() {
           <Skeleton
             count={1}
             height={1500}
-            width={850}
+            width={900}
             style={{ marginLeft: "19rem", marginTop: "1rem" }}
           />
         </SkeletonTheme>
@@ -249,7 +254,7 @@ function Profile() {
           <div className="profile__data">
             {editMode ? (
               <div className="profile__data__image__edit">
-                {!loading && <img src={user.profilePicLink} alt="Profile" />}
+                {!loading && <img src={user?.profilePicLink} alt="Profile" />}
                 <span
                   className="pencil__icon"
                   onClick={() => fileInputRef.current.click()}
@@ -262,12 +267,12 @@ function Profile() {
                   style={{ display: "none" }}
                   onChange={handleFileChange}
                 />
-                <div>{user.userName}</div>
+                <div>{user?.userName}</div>
               </div>
             ) : (
               <div className="profile__data__image">
-                {!loading && <img src={user.profilePicLink} alt="Profile" />}
-                <span>{user.userName}</span>
+                {!loading && <img src={user?.profilePicLink} alt="Profile" />}
+                <span>{user?.userName}</span>
               </div>
             )}
 
@@ -279,11 +284,11 @@ function Profile() {
                     type="text"
                     name="userName"
                     placeholder="Username"
-                    value={user.userName}
+                    value={user?.userName}
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="profile__data__description">{user.userName}</p>
+                  <p className="profile__data__description">{user?.userName}</p>
                 )}
               </span>
               <span className="profile__data__paragraph">
@@ -293,11 +298,11 @@ function Profile() {
                     type="text"
                     name="email"
                     placeholder="Email"
-                    value={user.email}
+                    value={user?.email}
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="profile__data__description"> {user.email}</p>
+                  <p className="profile__data__description"> {user?.email}</p>
                 )}
               </span>
               <span className="profile__data__paragraph">
@@ -307,11 +312,13 @@ function Profile() {
                     type="text"
                     name="firstName"
                     placeholder="First Name"
-                    value={user.firstName}
+                    value={user?.firstName}
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="profile__data__description">{user.firstName}</p>
+                  <p className="profile__data__description">
+                    {user?.firstName}
+                  </p>
                 )}
               </span>
               <span className="profile__data__paragraph">
@@ -321,11 +328,11 @@ function Profile() {
                     type="text"
                     name="lastName"
                     placeholder="Last Name"
-                    value={user.lastName}
+                    value={user?.lastName}
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="profile__data__description">{user.lastName}</p>
+                  <p className="profile__data__description">{user?.lastName}</p>
                 )}
               </span>
               <span className="profile__data__paragraph">
@@ -333,7 +340,7 @@ function Profile() {
                 {editMode ? (
                   <select
                     name="role"
-                    value={user.role}
+                    value={user?.role}
                     onChange={handleInputChange}
                   >
                     <option>None</option>
@@ -341,14 +348,14 @@ function Profile() {
                     <option value="faculty">Faculty</option>
                   </select>
                 ) : (
-                  <p className="profile__data__description">{user.role}</p>
+                  <p className="profile__data__description">{user?.role}</p>
                 )}
               </span>
               <span className="profile__data__paragraph">
                 <p className="profile__data__title">Created At: </p>{" "}
                 <p className="profile__data__description">
                   {" "}
-                  {new Date(user.createdAt).toLocaleDateString("en-US", {
+                  {new Date(user?.createdAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
@@ -358,7 +365,7 @@ function Profile() {
               <span className="profile__data__paragraph">
                 <p className="profile__data__title">Updated At: </p>{" "}
                 <p className="profile__data__description">
-                  {new Date(user.updatedAt).toLocaleDateString("en-US", {
+                  {new Date(user?.updatedAt).toLocaleDateString("en-US", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
@@ -367,7 +374,7 @@ function Profile() {
               </span>
               <span className="profile__data__paragraph">
                 <p className="profile__data__title">Points: </p>{" "}
-                <p className="profile__data__description">{user.points}</p>
+                <p className="profile__data__description">{user?.points}</p>
               </span>
               <span className="profile__data__paragraph">
                 <p className="profile__data__title">Headline: </p>{" "}
@@ -376,12 +383,12 @@ function Profile() {
                     type="text"
                     name="headLine"
                     placeholder="Headline"
-                    value={user.headLine}
+                    value={user?.headLine}
                     onChange={handleInputChange}
                   />
                 ) : (
                   <p className="profile__data__description__width">
-                    {user.headLine}
+                    {user?.headLine}
                   </p>
                 )}
               </span>
@@ -392,12 +399,12 @@ function Profile() {
                     type="text"
                     name="summary"
                     placeholder="Summary"
-                    value={user.summary}
+                    value={user?.summary}
                     onChange={handleInputChange}
                   />
                 ) : (
                   <p className="profile__data__description__width">
-                    {user.summary}
+                    {user?.summary}
                   </p>
                 )}
               </span>
@@ -425,12 +432,12 @@ function Profile() {
                     type="text"
                     name="contactInfo"
                     placeholder="Contact Info"
-                    value={user.contactInfo}
+                    value={user?.contactInfo}
                     onChange={handleInputChange}
                   />
                 ) : (
                   <p className="profile__data__description">
-                    {user.contactInfo}
+                    {user?.contactInfo}
                   </p>
                 )}
               </span>
@@ -440,11 +447,11 @@ function Profile() {
                   <input
                     type="date"
                     name="DOB"
-                    value={user.DOB}
+                    value={user?.DOB}
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="profile__data__description">{user.DOB}</p>
+                  <p className="profile__data__description">{user?.DOB}</p>
                 )}
               </span>
               {editMode ? (
