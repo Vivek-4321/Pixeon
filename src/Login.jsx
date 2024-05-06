@@ -38,12 +38,11 @@ function Login() {
       .then((response) => {
         // Assuming the token is returned in the response data
         const token = response.data.token;
-        const maxAge = 10 * 24 * 60 * 60;
-        setCookie("token", token, {
+        const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
           maxAge,
-          sameSite: "none",
-          secure: true,
+          sameSite: "Lax", // or 'Strict'
+          // secure: true, // Only set if your frontend and backend are both served over HTTPS
         });
         console.log(response.headers);
         console.log(response.data);

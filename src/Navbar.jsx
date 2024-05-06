@@ -99,7 +99,7 @@ function Navbar() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/User/mydetails",
+          "https://pixeon-server.onrender.com/api/User/mydetails",
           { withCredentials: true, credentials: "include" }
         );
         setUser(response.data);
