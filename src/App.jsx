@@ -27,9 +27,9 @@ import ImageVerification from "./ImageVerification.jsx";
 function App() {
   return (
     <CookiesProvider>
-      <BrowserRouter>
+      <HashRouter>
         <AppContent />
-      </BrowserRouter>
+      </HashRouter>
     </CookiesProvider>
   );
 }

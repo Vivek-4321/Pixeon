@@ -43,7 +43,7 @@ function Login() {
           path: "/",
           maxAge,
           sameSite: "none",
-          secure: false,
+          secure: true,
         });
         console.log(response.headers);
         console.log(response.data);
