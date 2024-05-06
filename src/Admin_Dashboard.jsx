@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { Chart } from "react-google-charts";
 import "./Admin_Dashboard.css";
 import { toast, Toaster } from "react-hot-toast";
-const socket = io("https://pixeon-server.onrender.com:3000");
+const socket = io("https://pixeon-server.onrender.com");
 import useStore from "./store.js";
 import TaskSidebar from "./TaskSidebar";
 import { HiOutlineUsers } from "react-icons/hi2";
