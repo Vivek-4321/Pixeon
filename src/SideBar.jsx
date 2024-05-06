@@ -14,6 +14,7 @@ import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import useStore from "./store.js";
 import ModalSettings from "./ModalSettings.jsx";
+import {useNavigate} from "react-router-dom";
 
 function SideBar() {
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
@@ -23,6 +24,7 @@ function SideBar() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenCookieModal = () => {
     setIsCookieModalOpen(true);
