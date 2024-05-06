@@ -103,7 +103,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
     if (post) {
       // Update post
       result = await axios.put(
-        "http://localhost:3000/api/Post/updatePost",
+        "https://pixeon-server.onrender.com/api/Post/updatePost",
         {
           postId: post.postId,
           newPostData: {
@@ -118,7 +118,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
     } else {
       // Create post
       result = await axios.post(
-        "http://localhost:3000/api/Post/createPost",
+        "https://pixeon-server.onrender.com/api/Post/createPost",
         {
           content: inputValue,
           title: title,

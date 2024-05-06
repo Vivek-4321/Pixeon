@@ -31,7 +31,7 @@ function Login() {
 
     const promise = axios
       .post(
-        "http://localhost:3000/api/User/login",
+        "https://pixeon-server.onrender.com/api/User/login",
         { email, password },
         { withCredentials: true, credentials: "include" }
       )

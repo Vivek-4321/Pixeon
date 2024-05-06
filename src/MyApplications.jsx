@@ -24,7 +24,7 @@ function MyApplications() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/App/getAllUserApp",
+          "https://pixeon-server.onrender.com/api/App/getAllUserApp",
           { withCredentials: true, credentials: "include" }
         );
         setData(response.data);

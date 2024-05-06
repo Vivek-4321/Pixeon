@@ -73,7 +73,7 @@ function Signup() {
     setLoading(!loading);
 
     const promise = axios
-      .post("http://localhost:3000/api/User/signUp", {
+      .post("https://pixeon-server.onrender.com/api/User/signUp", {
         email,
         password,
         username,

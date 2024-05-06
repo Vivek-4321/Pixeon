@@ -25,7 +25,7 @@ import ModalOptions from "./ModalOptions";
 import ModalComponentForTask from "./ModalComponentForTask";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://pixeon-server.onrender.com");
 
 function TaskPage() {
   const { id } = useParams();
@@ -69,7 +69,7 @@ function TaskPage() {
   const deleteTask = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/Task/deleteTask/${user?.userId}/${task?.taskId}`,
+        `https://pixeon-server.onrender.com/api/Task/deleteTask/${user?.userId}/${task?.taskId}`,
         {
           withCredentials: true,
           credentials: "include",
@@ -92,7 +92,7 @@ function TaskPage() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/Task/getTask",
+          "https://pixeon-server.onrender.com/api/Task/getTask",
           { taskId: id },
           {
             withCredentials: true,
@@ -144,7 +144,7 @@ function TaskPage() {
       console.log(referenceId);
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/User/getMessages",
+          "https://pixeon-server.onrender.com/api/User/getMessages",
           { referenceId },
           {
             withCredentials: true,
@@ -162,7 +162,7 @@ function TaskPage() {
     async function getSubmissionDetailsFromAPI() {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/Sub/getDetails",
+          "https://pixeon-server.onrender.com/api/Sub/getDetails",
           { taskId: id },
           { withCredentials: true, credentials: "include" }
         );
@@ -305,7 +305,7 @@ function TaskPage() {
   const handleStatusChange = async (taskId, status, applicationId) => {
     const toastId = toast.promise(
       axios.post(
-        "http://localhost:3000/api/App/statusChange",
+        "https://pixeon-server.onrender.com/api/App/statusChange",
         {
           taskId,
           status,
@@ -325,7 +325,7 @@ function TaskPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/App/statusChange",
+        "https://pixeon-server.onrender.com/api/App/statusChange",
         {
           taskId,
           status,
@@ -380,7 +380,7 @@ function TaskPage() {
 
                   // Make the POST request to the API endpoint using Axios
                   const response = await axios.post(
-                    "http://localhost:3000/api/Sub/create",
+                    "https://pixeon-server.onrender.com/api/Sub/create",
                     requestBody,
                     {
                       withCredentials: true, // Include credentials in cross-origin requests
@@ -411,7 +411,7 @@ function TaskPage() {
 
         // Make the POST request to the API endpoint using Axios
         const response = await axios.post(
-          "http://localhost:3000/api/Sub/create",
+          "https://pixeon-server.onrender.com/api/Sub/create",
           requestBody,
           {
             withCredentials: true, // Include credentials in cross-origin requests
@@ -436,7 +436,7 @@ function TaskPage() {
 
   const changeSubmissionStatus = async (value) => {
     const promise = axios.post(
-      `http://localhost:3000/api/Sub/changeStatus`,
+      `https://pixeon-server.onrender.com/api/Sub/changeStatus`,
       {
         status: value.toUpperCase(),
         submissionId: submission.submissionId,

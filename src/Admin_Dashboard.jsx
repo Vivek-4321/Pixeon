@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { Chart } from "react-google-charts";
 import "./Admin_Dashboard.css";
 import { toast, Toaster } from "react-hot-toast";
-const socket = io("http://localhost:3000");
+const socket = io("https://pixeon-server.onrender.com:3000");
 import useStore from "./store.js";
 import TaskSidebar from "./TaskSidebar";
 import { HiOutlineUsers } from "react-icons/hi2";
@@ -77,7 +77,7 @@ function Admin_Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Task/getAllUsersTask",
+          "https://pixeon-server.onrender.com/api/Task/getAllUsersTask",
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is from tasks", response.data);
@@ -93,7 +93,7 @@ function Admin_Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Post/getAllUsersPost",
+          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is userPost", response.data);
@@ -109,7 +109,7 @@ function Admin_Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/User/getAllUsers",
+          "https://pixeon-server.onrender.com/api/User/getAllUsers",
           { withCredentials: true, credentials: "include" }
         );
         console.log("Users", response.data);
@@ -124,7 +124,7 @@ function Admin_Dashboard() {
   function verifyUser(userId) {
     const promise = axios
       .put(
-        "http://localhost:3000/api/User/update",
+        "https://pixeon-server.onrender.com/api/User/update",
         {
           userId: userId,
           newUserData: {
@@ -151,7 +151,7 @@ function Admin_Dashboard() {
 
   async function deleteUser(userId) {
     const promise = axios
-      .delete(`http://localhost:3000/api/User/delete/${userId}`, {
+      .delete(`https://pixeon-server.onrender.com/api/User/delete/${userId}`, {
         withCredentials: true,
         credentials: "include",
       })
@@ -192,7 +192,7 @@ function Admin_Dashboard() {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/Post/deletePost`,
+        `https://pixeon-server.onrender.com/api/Post/deletePost`,
         { data: { postId } }
       );
       toast.promise(
@@ -215,7 +215,7 @@ function Admin_Dashboard() {
   const deleteTask = async (taskId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/Task/deleteTask/${user?.userId}/${taskId}`,
+        `https://pixeon-server.onrender.com/api/Task/deleteTask/${user?.userId}/${taskId}`,
         {
           withCredentials: true,
           credentials: "include",

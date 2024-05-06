@@ -13,7 +13,7 @@ function Leaderboard() {
   const [data, setData] = useState([]);
 
   async function fetchData() {
-    const response = await axios.get('http://localhost:3000/api/User/leaderboard', { withCredentials: true, credentials: 'include' });
+    const response = await axios.get('https://pixeon-server.onrender.com/api/User/leaderboard', { withCredentials: true, credentials: 'include' });
     setData(response.data);
     console.log(response.data);
   }

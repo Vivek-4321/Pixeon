@@ -38,7 +38,7 @@ function TaskDashboard() {
   const deleteTask = async (taskId) => {
     const promise = axios
       .delete(
-        `http://localhost:3000/api/Task/deleteTask/${user?.userId}/${taskId}`,
+        `https://pixeon-server.onrender.com/Task/deleteTask/${user?.userId}/${taskId}`,
         {
           withCredentials: true,
           credentials: "include",
@@ -101,7 +101,7 @@ function TaskDashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Task/getAllUsersTask",
+          "https://pixeon-server.onrender.com/api/Task/getAllUsersTask",
           { withCredentials: true, credentials: "include" }
         );
         setData(response.data);
@@ -131,7 +131,7 @@ function TaskDashboard() {
   const handleApplyTask = async (task) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/App/create",
+        "https://pixeon-server.onrender.com/api/App/create",
         { taskId: task.taskId },
         { withCredentials: true, credentials: "include" }
       );

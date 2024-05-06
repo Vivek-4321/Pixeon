@@ -67,7 +67,7 @@ const OtpInput = ({ length = 6 }) => {
     setLoading(true);
 
     try {
-      const promise = axios.post("http://localhost:3000/api/User/verify", {
+      const promise = axios.post("https://pixeon-server.onrender.com/api/User/verify", {
         id: email,
         otp: otpValue,
       });

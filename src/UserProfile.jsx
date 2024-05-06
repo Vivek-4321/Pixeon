@@ -53,7 +53,7 @@ function UserProfile() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/User/getSingleUserData",
+        "https://pixeon-server.onrender.com/api/User/getSingleUserData",
         {
           params: {
             userId: id,

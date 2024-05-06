@@ -26,7 +26,7 @@ function Forget() {
     }
   
     const promise = axios.post(
-      "http://localhost:3000/api/User/forgotPassword",
+      "https://pixeon-server.onrender.com/api/User/forgotPassword",
       {
         data: { email: email },
         withCredentials: true,

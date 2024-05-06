@@ -33,7 +33,7 @@ function Profile() {
 
         // Make the API call to fetch the user? profile
         const response = await axios.get(
-          "http://localhost:3000/api/User/mydetails",
+          "https://pixeon-server.onrender.com/api/User/mydetails",
           {
             withCredentials: true,
             credentials: "include",
@@ -125,7 +125,7 @@ function Profile() {
             console.log(downloadURL);
             const token = cookie.token;
             const result = await axios.put(
-              "http://localhost:3000/api/User/update",
+              "https://pixeon-server.onrender.com/api/User/update",
               {
                 newUserData: {
                   profilePicLink: downloadURL,
@@ -167,7 +167,7 @@ function Profile() {
         const resultPromise = new Promise((resolve, reject) => {
           axios
             .put(
-              "http://localhost:3000/api/User/update",
+              "https://pixeon-server.onrender.com/api/User/update",
               {
                 newUserData: {
                   userName: user?.userName,

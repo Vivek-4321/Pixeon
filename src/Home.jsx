@@ -46,7 +46,7 @@ function Home() {
       //http://localhost:3000/api/Post/getAllUsersPost
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Post/getAllUsersPost",
+          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",
           { withCredentials: true, credentials: "include" }
         );
 
@@ -63,7 +63,7 @@ function Home() {
     const fetchNotifications = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/Notify/notifications",
+          "https://pixeon-server.onrender.com/api/Notify/notifications",
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is from notifications: ",response.data);

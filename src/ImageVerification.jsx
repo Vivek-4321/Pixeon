@@ -149,7 +149,7 @@ function ImageVerification() {
                   downloadURL = downloadURL_;
                   
                   const response = await axios.post(
-                          "http://localhost:3000/api/User/imageVerification",
+                          "https://pixeon-server.onrender.com/api/User/imageVerification",
                           { details, idCardLink:downloadURL },
                           {
                             withCredentials: true,

@@ -24,7 +24,7 @@ function ResetPassword() {
     try{
 
         const response = await axios.post(
-          "http://localhost:3000/api/User/resetPassVerify",
+          "https://pixeon-server.onrender.com/api/User/resetPassVerify",
           
           { data:{ resetId: id, newPassword: password }, withCredentials: true, credentials: "include" }
         );

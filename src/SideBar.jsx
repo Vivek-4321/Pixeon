@@ -62,7 +62,7 @@ function SideBar() {
 
   const handleFunction = async () => {
     const requestPromise = axios.post(
-      "http://localhost:3000/api/Request/create",
+      "https://pixeon-server.onrender.com/api/Request/create",
       {
         message: "Can you convert my points to activity points?",
       },

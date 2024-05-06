@@ -64,7 +64,7 @@ function Post({ post, userLiked, posts, setPosts }) {
 
     // Make the POST request to the API endpoint using Axios
     const promise = axios
-      .post("http://localhost:3000/api/Comment/create", requestBody, {
+      .post("https://pixeon-server.onrender.com/api/Comment/create", requestBody, {
         withCredentials: true,
         credentials: "include",
       })
@@ -109,7 +109,7 @@ function Post({ post, userLiked, posts, setPosts }) {
 
     // Make a POST request to the /likes endpoint with the postId and authentication headers
     const promise = axios
-      .post("http://localhost:3000/api/Like/create", requestBody, {
+      .post("https://pixeon-server.onrender.com/api/Like/create", requestBody, {
         withCredentials: true,
         credentials: "include",
       })
@@ -190,7 +190,7 @@ function Post({ post, userLiked, posts, setPosts }) {
     // Use toast.promise to handle loading, success, and error states
     toast.promise(
       // Create a promise for the deletion operation
-      axios.delete("http://localhost:3000/api/Post/deletePost", {
+      axios.delete("https://pixeon-server.onrender.com/api/Post/deletePost", {
         data: { postId: postId.postId },
         withCredentials: true,
         credentials: "include",

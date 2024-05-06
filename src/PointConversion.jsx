@@ -29,7 +29,7 @@ function PointConversion() {
   const updateRequest = async (reqId, status) => {
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/Request/reqStatusChange',
+        'https://pixeon-server.onrender.com/api/Request/reqStatusChange',
         { reqId, status },
         { withCredentials: true, credentials: 'include' }
       );
