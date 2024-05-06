@@ -42,7 +42,7 @@ function Login() {
           path: "/",
           maxAge,
           sameSite: "Lax", // or 'Strict'
-          // secure: true, // Only set if your frontend and backend are both served over HTTPS
+          secure: true, // Only set if your frontend and backend are both served over HTTPS
         });
         console.log(response.headers);
         console.log(response.data);
