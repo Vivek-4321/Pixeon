@@ -164,7 +164,6 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
               },
               { withCredentials: true, credentials: "include" }
             );
-            console.log("This is for testing...", url);
           } else {
             // Call the create API
             result = await axios.post(

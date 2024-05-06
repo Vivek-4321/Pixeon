@@ -55,27 +55,8 @@ function Home() {
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {
-        try {
-          const response = await axios.get(
-            "http://localhost:3000/api/User/mydetails",
-            { withCredentials: true, credentials: "include" }
-          );
-          setUser(response.data);
-          const maxAge = 10 * 24 * 60 * 60;
-          setCookie("user", response.data, {
-            path: "/",
-            maxAge,
-            sameSite: "none",
-            secure: false,
-          });
-
-          console.log(response.data);
-          console.log(cookies.user);
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        } finally {
-          setIsLoading(false);
-        }
+        setIsLoading(false);
+        console.log("Everything finished....");
       }
     };
 

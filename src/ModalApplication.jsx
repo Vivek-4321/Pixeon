@@ -88,7 +88,7 @@ function ModalApplication({ isModalOpen, handleCloseModal, selectedTask, handleF
           <button className="cancel__button" onClick={handleCloseModal}>
             Cancel
           </button>
-          {selectedTask && (
+          { (
             <button
               className="ok__button"
               onClick={() => handleFunction(selectedTask)}

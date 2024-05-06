@@ -39,6 +39,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
     if (post) {
       setInputValue(post.content);
       setPreviewUrl(post.link);
+      setTitle(post.title);
     }
   }, [post]);
 
@@ -49,110 +50,105 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const fileUploadPromise = new Promise(async (resolve, reject) => {
-        let downloadURL = "";
+      let downloadURL = "";
 
-        if (selectedFile) {
-          // Upload image
-          const storageRef = ref(storage, `/assets/${selectedFile.name}`);
-          const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+      if (selectedFile) {
+        // Upload image
+        const storageRef = ref(storage, `/assets/${selectedFile.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, selectedFile);
 
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              // Track upload progress
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              setProgressValue(progress);
-          
-              console.log(progress);
-            },
-            (error) => {
-              console.error(error);
-              reject(error);
-            },
-            () => {
-              // Upload complete, get the download URL
-              getDownloadURL(uploadTask.snapshot.ref)
-                .then(async (downloadURL_) => {
-                  console.log("File available at", downloadURL_);
-                  downloadURL = downloadURL_;
-                  let result;
-                  if (post) {
-                    // Update post
-                    console.log(post);
-                    result = await axios.put(
-                      "http://localhost:3000/api/Post/updatePost",
-                      {
-                        postId: post.postId,
-                        newPostData: {
-                          content: inputValue,
-                          link: downloadURL,
-                          title: title,
-                        },
-                      },
-                      { withCredentials: true, credentials: "include" }
-                    );
-                    console.log(result.data);
-                  } else {
-                    // Create post
-                    result = await axios.post(
-                      "http://localhost:3000/api/Post/createPost",
-                      {
-                        content: inputValue,
-                        title: title,
-                        link: downloadURL,
-                      },
-                      { withCredentials: true, credentials: "include" }
-                    );
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Track upload progress
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgressValue(progress);
 
-                    console.log(result.data);
+            console.log(progress);
+          },
+          (error) => {
+            console.error(error);
+            setLoading(false);
+          },
+          () => {
+            // Upload complete, get the download URL
+            getDownloadURL(uploadTask.snapshot.ref)
+              .then(async (downloadURL_) => {
+                console.log("File available at", downloadURL_);
+                downloadURL = downloadURL_;
 
-                    const token = cookies.token;
-
-                    if (downloadURL.includes("mp4")) {
-                      const videoTranscoderResult = await axios.post(
-                        "http://localhost:8000/transcode",
-                        {
-                          url: downloadURL,
-                          videoName: selectedFile?.name || "",
-                          postId: result.data.postId,
-                          authenticationBearer: `Bear ${token}`,
-                        }
-                      );
-
-                      console.log(videoTranscoderResult.data);
-                    }
-                  }
-
-                  console.log(result);
-                  setLoading(false);
-                  onClose();
-                  resolve(downloadURL_);
-                })
-                .catch((error) => {
-                  console.error("Error getting download URL:", error);
-                  reject(error);
-                });
-            }
-          );
-        } else if (post && post.link) {
-          // Use existing image URL for update case if no new image is selected
-          downloadURL = post.link;
-          resolve(downloadURL);
-        }
-      });
-
-      const toastId = toast.promise(fileUploadPromise, {
-        loading: `Uploading...`,
-        success: "File uploaded successfully",
-        error: "Error uploading file",
-      });
-
-      const downloadURL = await fileUploadPromise;
+                // Continue with the post creation or update
+                await handlePostCreationOrUpdate(downloadURL);
+              })
+              .catch((error) => {
+                console.error("Error getting download URL:", error);
+                setLoading(false);
+              });
+          }
+        );
+      } else {
+        // No file selected, continue with the post creation or update
+        await handlePostCreationOrUpdate(downloadURL);
+      }
     } catch (error) {
       console.error("Error:", error);
       toast.error("Error uploading file");
     }
+  };
+
+  const handlePostCreationOrUpdate = async (downloadURL) => {
+    let result;
+
+    if (post) {
+      // Update post
+      result = await axios.put(
+        "http://localhost:3000/api/Post/updatePost",
+        {
+          postId: post.postId,
+          newPostData: {
+            content: inputValue,
+            link: downloadURL,
+            title: title,
+          },
+        },
+        { withCredentials: true, credentials: "include" }
+      );
+      console.log(result.data);
+    } else {
+      // Create post
+      result = await axios.post(
+        "http://localhost:3000/api/Post/createPost",
+        {
+          content: inputValue,
+          title: title,
+          link: downloadURL,
+        },
+        { withCredentials: true, credentials: "include" }
+      );
+
+      console.log(result.data);
+
+      const token = cookies.token;
+
+      if (downloadURL.includes("mp4")) {
+        const videoTranscoderResult = await axios.post(
+          "http://localhost:8000/transcode",
+          {
+            url: downloadURL,
+            videoName: selectedFile?.name || "",
+            postId: result.data.postId,
+            authenticationBearer: `Bear ${token}`,
+          }
+        );
+
+        console.log(videoTranscoderResult.data);
+      }
+    }
+
+    console.log(result);
+    setLoading(false);
+    onClose();
   };
 
   const handleFileChange = async (e) => {
@@ -250,7 +246,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
       <input
         className="title__inputbar"
         placeholder="Title..."
-        value={post ? post.title : title}
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <Wysiwyg

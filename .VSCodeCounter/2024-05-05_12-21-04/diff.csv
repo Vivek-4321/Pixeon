@@ -1,0 +1,15 @@
+"filename", "language", "JSON", "JavaScript JSX", "CSS", "comment", "blank", "total"
+"/home/vivek/Desktop/Pixeon/package-lock.json", "JSON", 78, 0, 0, 0, 0, 78
+"/home/vivek/Desktop/Pixeon/package.json", "JSON", 1, 0, 0, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/App.jsx", "JavaScript JSX", 0, 5, 0, 0, 0, 5
+"/home/vivek/Desktop/Pixeon/src/ImageVerification.css", "CSS", 0, 0, 14, 2, 1, 17
+"/home/vivek/Desktop/Pixeon/src/ImageVerification.jsx", "JavaScript JSX", 0, 34, 0, 0, 5, 39
+"/home/vivek/Desktop/Pixeon/src/MyApplications.css", "CSS", 0, 0, 1, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/MyApplications.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"/home/vivek/Desktop/Pixeon/src/PointConversion.css", "CSS", 0, 0, 28, 1, 4, 33
+"/home/vivek/Desktop/Pixeon/src/PointConversion.jsx", "JavaScript JSX", 0, 89, 0, 0, 8, 97
+"/home/vivek/Desktop/Pixeon/src/SideBar.jsx", "JavaScript JSX", 0, 25, 0, 0, 3, 28
+"/home/vivek/Desktop/Pixeon/src/TaskPage.css", "CSS", 0, 0, 88, 0, 9, 97
+"/home/vivek/Desktop/Pixeon/src/TaskPage.jsx", "JavaScript JSX", 0, 118, 0, 43, 19, 180
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.jsx", "JavaScript JSX", 0, 5, 0, 0, 1, 6
+"Total", "-", 79, 276, 131, 46, 51, 583

@@ -39,7 +39,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 6rem;
+    width: 12rem;
 
     button{
         width: 100%;
@@ -47,6 +47,7 @@
         border: none;
         border-radius: 0.5rem;
         color: var(--common-white);
+        margin-left: 1rem;
         background-color: var(--secondary-color);
         transition: all 0.3s ease-out;
     }

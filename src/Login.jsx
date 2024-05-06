@@ -91,6 +91,7 @@ function Login() {
               credentials: "include",
             }
           );
+          console.log(response.data);
           const token = response.data.token;
           const maxAge = 10 * 24 * 60 * 60;
           setCookie("token", token, {
@@ -121,6 +122,8 @@ function Login() {
         },
       }
     );
+
+    
   };
 
   return (

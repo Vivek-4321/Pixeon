@@ -7,7 +7,7 @@ import ModalTaskView from "./ModalTaskView";
 
 function MyApplications() {
   const [data, setData] = useState([]);
-  const [activeButton, setActiveButton] = useState("Accepted");
+  const [activeButton, setActiveButton] = useState("ACCEPTED");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +19,6 @@ function MyApplications() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +41,10 @@ function MyApplications() {
     setActiveButton(buttonName);
   };
 
+  const filteredData = activeButton === "ALL"
+    ? data
+    : data.filter(item => item.status === activeButton);
+
   return (
     <div className="my_applications__container">
       <TaskSidebar />
@@ -50,42 +53,43 @@ function MyApplications() {
         <div className="userProfile__buttons">
           <button
             className={`userProfile__button ${
-              activeButton === "Accepted" ? "active" : ""
+              activeButton === "ACCEPTED" ? "active" : ""
             }`}
-            onClick={() => handleButtonClick("Accepted")}
+            onClick={() => handleButtonClick("ACCEPTED")}
           >
             Accepted
           </button>
           <button
             className={`userProfile__button ${
-              activeButton === "Rejected" ? "active" : ""
+              activeButton === "REJECTED" ? "active" : ""
             }`}
-            onClick={() => handleButtonClick("Rejected")}
+            onClick={() => handleButtonClick("REJECTED")}
           >
             Rejected
           </button>
           <button
             className={`userProfile__button ${
-              activeButton === "All" ? "active" : ""
+              activeButton === "ALL" ? "active" : ""
             }`}
-            onClick={() => handleButtonClick("All")}
+            onClick={() => handleButtonClick("ALL")}
           >
             All
           </button>
         </div>
       </div>
       <div className="applications__wrapper">
-        {data.map((item, index) => (
+        {filteredData.map((item, index) => (
           <div className="application__card">
             <div className="application__title">
               <span>{index+1}.</span>{item.task.title}
             </div>
-            <div className="application__points">
-              <img src={Coin} />
-              <span>{item.task.points}</span>
-            </div>
+
             <div className="application__button">
-            <button onClick={() => handleOpenModal(item)}>View More</button>
+              <div className="application__points">
+                <img src={Coin} />
+                <span>{item.task.points}</span>
+              </div>
+              <button onClick={() => handleOpenModal(item)}>View More</button>
             </div>
           </div>
         ))}

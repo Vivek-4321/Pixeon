@@ -1,0 +1,17 @@
+"filename", "language", "JSON", "JavaScript JSX", "CSS", "comment", "blank", "total"
+"/home/vivek/Desktop/Pixeon/package-lock.json", "JSON", 20, 0, 0, 0, 0, 20
+"/home/vivek/Desktop/Pixeon/package.json", "JSON", 1, 0, 0, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/AddPost.jsx", "JavaScript JSX", 0, 2, 0, 0, -1, 1
+"/home/vivek/Desktop/Pixeon/src/ModalApplication.css", "CSS", 0, 0, 12, 0, 2, 14
+"/home/vivek/Desktop/Pixeon/src/ModalSettings.jsx", "JavaScript JSX", 0, 98, 0, 0, 7, 105
+"/home/vivek/Desktop/Pixeon/src/ModalTaskView.jsx", "JavaScript JSX", 0, 2, 0, 0, 0, 2
+"/home/vivek/Desktop/Pixeon/src/MyApplications.jsx", "JavaScript JSX", 0, 3, 0, 0, 0, 3
+"/home/vivek/Desktop/Pixeon/src/Navbar.css", "CSS", 0, 0, 23, 0, 3, 26
+"/home/vivek/Desktop/Pixeon/src/Navbar.jsx", "JavaScript JSX", 0, 42, 0, 2, 7, 51
+"/home/vivek/Desktop/Pixeon/src/PointsModal.jsx", "JavaScript JSX", 0, 98, 0, 0, 7, 105
+"/home/vivek/Desktop/Pixeon/src/SideBar.jsx", "JavaScript JSX", 0, 51, 0, 2, 12, 65
+"/home/vivek/Desktop/Pixeon/src/TaskPage.jsx", "JavaScript JSX", 0, -5, 0, 0, -1, -6
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.jsx", "JavaScript JSX", 0, 127, 0, 2, 17, 146
+"/home/vivek/Desktop/Pixeon/src/UserProfile.css", "CSS", 0, 0, 18, 0, 2, 20
+"/home/vivek/Desktop/Pixeon/src/UserProfile.jsx", "JavaScript JSX", 0, 4, 0, 0, 1, 5
+"Total", "-", 21, 422, 53, 6, 56, 558

@@ -31,7 +31,6 @@ function Signup() {
   }, [selectedTheme]);
 
   const signInWithGoogle = async () => {
-    // You can return the document data and ID if needed
     toast.promise(
       new Promise(async (resolve, reject) => {
         try {
@@ -41,8 +40,9 @@ function Signup() {
           console.log(User);
 
           const response = await axios.post(
-            `http://localhost:3000/api/auth/google-login`,
-            { User }
+            `http://localhost:3000/api/User/google-signup`,
+            { User },
+            { withCredentials: true, credentials: "include" }
           );
           const token = response.data.token;
           const maxAge = 10 * 24 * 60 * 60;
@@ -53,17 +53,17 @@ function Signup() {
             secure: false,
           });
           console.log("Token:", token);
-          resolve("Registration successful!");
           navigate("/");
+          resolve("Registration successful!");
         } catch (error) {
-          reject(error.msg);
-          resolve("Error Occured");
+          console.error("Error signing up with Google:", error);
+          reject("Error Occurred");
         }
       }),
       {
-        pending: "Processing...", // Optional message shown when promise is pending
-        success: (msg) => msg, // The success message will be the resolved value of the promise
-        error: (msg) => msg, // The error message will be the rejected value of the promise
+        pending: "Processing...",
+        success: "Registration Succesful...",
+        error: "Error Occurred",
       }
     );
   };

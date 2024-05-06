@@ -10,10 +10,9 @@
 }
 
 .task__container {
-  width: 58%;
+  width: 60.5%;
   min-height: 22rem;
   margin-right: 0.7rem;
-  margin-top: 0.6rem;
   border-radius: 0.6rem;
   margin-left: -0.5rem;
   display: flex;
@@ -138,9 +137,9 @@
 }
 
 .task__container__map {
-  min-width: 55.5rem !important;
+  min-width: 56.7rem !important;
   border-radius: 0.6rem;
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   align-items: center;
   display: flex;
   align-items: center;

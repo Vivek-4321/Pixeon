@@ -6,6 +6,7 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { AiOutlineComment } from "react-icons/ai";
 import Modal from "react-modal";
 import axios from "axios";
+import useStore from "./store";
 import { useCookies } from "react-cookie";
 import { formatDistanceToNow } from "date-fns";
 import VideoPlayer from "./VideoPlayer";
@@ -26,6 +27,8 @@ function Post({ post, userLiked, posts, setPosts }) {
   const [isModalOpenPost, setIsModalOpenPost] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const threeDotsButtonRef = useRef(null);
+  const user = useStore((state) => state.user);
+  const setUser = useStore((state) => state.setUser);
 
   const handleOpenModalPost = (post) => {
     console.log(post);
@@ -179,7 +182,6 @@ function Post({ post, userLiked, posts, setPosts }) {
   };
 
   const handleEditPost = (post) => {
-    console.log("Editing post:", post);
     handleCloseModalPost();
     setIsModalComponentOpen(true);
   };
@@ -187,32 +189,32 @@ function Post({ post, userLiked, posts, setPosts }) {
   const handleDeletePost = (postId) => {
     // Use toast.promise to handle loading, success, and error states
     toast.promise(
-        // Create a promise for the deletion operation
-        axios.delete("http://localhost:3000/api/Post/deletePost", {
-            data: { postId: postId.postId },
-            withCredentials: true,
-            credentials: "include",
-        }),
-        {
-            loading: 'Deleting post...', // Displayed while the request is in progress
-            success: (response) => {
-                // Called when the request succeeds
-                console.log("Post deleted:", response.data);
-                const updatedPosts = posts.filter(
-                    (post) => post.postId !== postId.postId
-                );
-                setPosts(updatedPosts);
-                handleCloseModalPost();
-                return "Post deleted successfully";
-            },
-            error: (error) => {
-                // Called when the request fails
-                console.error("Error deleting post:", error);
-                return "Failed to delete post. Please try again.";
-            },
-        }
+      // Create a promise for the deletion operation
+      axios.delete("http://localhost:3000/api/Post/deletePost", {
+        data: { postId: postId.postId },
+        withCredentials: true,
+        credentials: "include",
+      }),
+      {
+        loading: "Deleting post...", // Displayed while the request is in progress
+        success: (response) => {
+          // Called when the request succeeds
+          console.log("Post deleted:", response.data);
+          const updatedPosts = posts.filter(
+            (post) => post.postId !== postId.postId
+          );
+          setPosts(updatedPosts);
+          handleCloseModalPost();
+          return "Post deleted successfully";
+        },
+        error: (error) => {
+          // Called when the request fails
+          console.error("Error deleting post:", error);
+          return "Failed to delete post. Please try again.";
+        },
+      }
     );
-};
+  };
 
   return (
     <div className="post__show__container">
@@ -252,7 +254,14 @@ function Post({ post, userLiked, posts, setPosts }) {
         <div
           ref={threeDotsButtonRef}
           className="post__icon__container"
-          onClick={() => handleOpenModalPost(post)}
+          onClick={() => {
+            if (user?.userId === post?.user?.id) {
+              handleOpenModalPost(post);
+            }
+            else if(user?.userId === post?.userId){
+              handleOpenModalPost(post);
+            }
+          }}
         >
           <BsThreeDotsVertical />
         </div>

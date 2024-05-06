@@ -1,0 +1,78 @@
+"filename", "language", "Markdown", "JSON", "JavaScript", "CSS", "JavaScript JSX", "XML", "HTML", "comment", "blank", "total"
+"/home/vivek/Desktop/Pixeon/.eslintrc.cjs", "JavaScript", 0, 0, 21, 0, 0, 0, 0, 0, 1, 22
+"/home/vivek/Desktop/Pixeon/README.md", "Markdown", 5, 0, 0, 0, 0, 0, 0, 0, 4, 9
+"/home/vivek/Desktop/Pixeon/index.html", "HTML", 0, 0, 0, 0, 0, 0, 19, 0, 1, 20
+"/home/vivek/Desktop/Pixeon/package-lock.json", "JSON", 0, 14327, 0, 0, 0, 0, 0, 0, 1, 14328
+"/home/vivek/Desktop/Pixeon/package.json", "JSON", 0, 56, 0, 0, 0, 0, 0, 0, 1, 57
+"/home/vivek/Desktop/Pixeon/public/vite.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/AddPost.css", "CSS", 0, 0, 0, 93, 0, 0, 0, 0, 14, 107
+"/home/vivek/Desktop/Pixeon/src/AddPost.jsx", "JavaScript JSX", 0, 0, 0, 0, 37, 0, 0, 0, 4, 41
+"/home/vivek/Desktop/Pixeon/src/AddTask.jsx", "JavaScript JSX", 0, 0, 0, 0, 40, 0, 0, 0, 4, 44
+"/home/vivek/Desktop/Pixeon/src/Admin_Dashboard.css", "CSS", 0, 0, 0, 8, 0, 0, 0, 0, 0, 8
+"/home/vivek/Desktop/Pixeon/src/Admin_Dashboard.jsx", "JavaScript JSX", 0, 0, 0, 0, 596, 0, 0, 16, 33, 645
+"/home/vivek/Desktop/Pixeon/src/App.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/home/vivek/Desktop/Pixeon/src/App.jsx", "JavaScript JSX", 0, 0, 0, 0, 65, 0, 0, 3, 8, 76
+"/home/vivek/Desktop/Pixeon/src/Applicants.css", "CSS", 0, 0, 0, 46, 0, 0, 0, 1, 9, 56
+"/home/vivek/Desktop/Pixeon/src/Applicants.jsx", "JavaScript JSX", 0, 0, 0, 0, 56, 0, 0, 0, 3, 59
+"/home/vivek/Desktop/Pixeon/src/Forget.css", "CSS", 0, 0, 0, 110, 0, 0, 0, 0, 9, 119
+"/home/vivek/Desktop/Pixeon/src/Forget.jsx", "JavaScript JSX", 0, 0, 0, 0, 81, 0, 0, 0, 8, 89
+"/home/vivek/Desktop/Pixeon/src/Home.css", "CSS", 0, 0, 0, 57, 0, 0, 0, 2, 13, 72
+"/home/vivek/Desktop/Pixeon/src/Home.jsx", "JavaScript JSX", 0, 0, 0, 0, 185, 0, 0, 2, 11, 198
+"/home/vivek/Desktop/Pixeon/src/ImageVerification.css", "CSS", 0, 0, 0, 42, 0, 0, 0, 2, 7, 51
+"/home/vivek/Desktop/Pixeon/src/ImageVerification.jsx", "JavaScript JSX", 0, 0, 0, 0, 185, 0, 0, 53, 31, 269
+"/home/vivek/Desktop/Pixeon/src/Leaderboard.css", "CSS", 0, 0, 0, 92, 0, 0, 0, 0, 12, 104
+"/home/vivek/Desktop/Pixeon/src/Leaderboard.jsx", "JavaScript JSX", 0, 0, 0, 0, 56, 0, 0, 0, 10, 66
+"/home/vivek/Desktop/Pixeon/src/Login.css", "CSS", 0, 0, 0, 149, 0, 0, 0, 2, 26, 177
+"/home/vivek/Desktop/Pixeon/src/Login.jsx", "JavaScript JSX", 0, 0, 0, 0, 173, 0, 0, 4, 14, 191
+"/home/vivek/Desktop/Pixeon/src/ModalApplication.css", "CSS", 0, 0, 0, 35, 0, 0, 0, 0, 4, 39
+"/home/vivek/Desktop/Pixeon/src/ModalApplication.jsx", "JavaScript JSX", 0, 0, 0, 0, 99, 0, 0, 0, 7, 106
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.css", "CSS", 0, 0, 0, 96, 0, 0, 0, 9, 16, 121
+"/home/vivek/Desktop/Pixeon/src/ModalComponent.jsx", "JavaScript JSX", 0, 0, 0, 0, 261, 0, 0, 17, 26, 304
+"/home/vivek/Desktop/Pixeon/src/ModalComponentForTask.jsx", "JavaScript JSX", 0, 0, 0, 0, 352, 0, 0, 11, 21, 384
+"/home/vivek/Desktop/Pixeon/src/ModalOptions.css", "CSS", 0, 0, 0, 20, 0, 0, 0, 0, 3, 23
+"/home/vivek/Desktop/Pixeon/src/ModalOptions.jsx", "JavaScript JSX", 0, 0, 0, 0, 105, 0, 0, 0, 8, 113
+"/home/vivek/Desktop/Pixeon/src/ModalTaskView.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"/home/vivek/Desktop/Pixeon/src/ModalTaskView.jsx", "JavaScript JSX", 0, 0, 0, 0, 171, 0, 0, 0, 10, 181
+"/home/vivek/Desktop/Pixeon/src/MyApplications.css", "CSS", 0, 0, 0, 90, 0, 0, 0, 0, 12, 102
+"/home/vivek/Desktop/Pixeon/src/MyApplications.jsx", "JavaScript JSX", 0, 0, 0, 0, 93, 0, 0, 0, 11, 104
+"/home/vivek/Desktop/Pixeon/src/Navbar.css", "CSS", 0, 0, 0, 316, 0, 0, 0, 13, 46, 375
+"/home/vivek/Desktop/Pixeon/src/Navbar.jsx", "JavaScript JSX", 0, 0, 0, 0, 261, 0, 0, 3, 14, 278
+"/home/vivek/Desktop/Pixeon/src/Otp.css", "CSS", 0, 0, 0, 49, 0, 0, 0, 0, 6, 55
+"/home/vivek/Desktop/Pixeon/src/Otp.jsx", "JavaScript JSX", 0, 0, 0, 0, 128, 0, 0, 7, 16, 151
+"/home/vivek/Desktop/Pixeon/src/PointConversion.css", "CSS", 0, 0, 0, 28, 0, 0, 0, 1, 4, 33
+"/home/vivek/Desktop/Pixeon/src/PointConversion.jsx", "JavaScript JSX", 0, 0, 0, 0, 89, 0, 0, 0, 8, 97
+"/home/vivek/Desktop/Pixeon/src/Post.css", "CSS", 0, 0, 0, 308, 0, 0, 0, 1, 62, 371
+"/home/vivek/Desktop/Pixeon/src/Post.jsx", "JavaScript JSX", 0, 0, 0, 0, 434, 0, 0, 19, 26, 479
+"/home/vivek/Desktop/Pixeon/src/Profile.css", "CSS", 0, 0, 0, 158, 0, 0, 0, 0, 27, 185
+"/home/vivek/Desktop/Pixeon/src/Profile.jsx", "JavaScript JSX", 0, 0, 0, 0, 444, 0, 0, 8, 22, 474
+"/home/vivek/Desktop/Pixeon/src/RecommendationSideBar.css", "CSS", 0, 0, 0, 51, 0, 0, 0, 1, 6, 58
+"/home/vivek/Desktop/Pixeon/src/RecommendationSideBar.jsx", "JavaScript JSX", 0, 0, 0, 0, 49, 0, 0, 0, 3, 52
+"/home/vivek/Desktop/Pixeon/src/RecommendationSkeletonLoader.jsx", "JavaScript JSX", 0, 0, 0, 0, 27, 0, 0, 0, 4, 31
+"/home/vivek/Desktop/Pixeon/src/ResetPassword.jsx", "JavaScript JSX", 0, 0, 0, 0, 75, 0, 0, 0, 13, 88
+"/home/vivek/Desktop/Pixeon/src/SideBar.css", "CSS", 0, 0, 0, 53, 0, 0, 0, 0, 6, 59
+"/home/vivek/Desktop/Pixeon/src/SideBar.jsx", "JavaScript JSX", 0, 0, 0, 0, 86, 0, 0, 0, 7, 93
+"/home/vivek/Desktop/Pixeon/src/SidebarSkeletonLoader.jsx", "JavaScript JSX", 0, 0, 0, 0, 27, 0, 0, 0, 3, 30
+"/home/vivek/Desktop/Pixeon/src/Signup.css", "CSS", 0, 0, 0, 50, 0, 0, 0, 0, 8, 58
+"/home/vivek/Desktop/Pixeon/src/Signup.jsx", "JavaScript JSX", 0, 0, 0, 0, 154, 0, 0, 14, 13, 181
+"/home/vivek/Desktop/Pixeon/src/TaskDashboard.css", "CSS", 0, 0, 0, 137, 0, 0, 0, 2, 21, 160
+"/home/vivek/Desktop/Pixeon/src/TaskDashboard.jsx", "JavaScript JSX", 0, 0, 0, 0, 259, 0, 0, 6, 21, 286
+"/home/vivek/Desktop/Pixeon/src/TaskPage.css", "CSS", 0, 0, 0, 230, 0, 0, 0, 0, 30, 260
+"/home/vivek/Desktop/Pixeon/src/TaskPage.jsx", "JavaScript JSX", 0, 0, 0, 0, 733, 0, 0, 52, 69, 854
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.css", "CSS", 0, 0, 0, 33, 0, 0, 0, 0, 5, 38
+"/home/vivek/Desktop/Pixeon/src/TaskSidebar.jsx", "JavaScript JSX", 0, 0, 0, 0, 61, 0, 0, 0, 11, 72
+"/home/vivek/Desktop/Pixeon/src/Test.jsx", "JavaScript JSX", 0, 0, 0, 0, 22, 0, 0, 0, 5, 27
+"/home/vivek/Desktop/Pixeon/src/Test.test.jsx", "JavaScript JSX", 0, 0, 0, 0, 27, 0, 0, 0, 6, 33
+"/home/vivek/Desktop/Pixeon/src/UserProfile.css", "CSS", 0, 0, 0, 111, 0, 0, 0, 0, 14, 125
+"/home/vivek/Desktop/Pixeon/src/UserProfile.jsx", "JavaScript JSX", 0, 0, 0, 0, 371, 0, 0, 1, 15, 387
+"/home/vivek/Desktop/Pixeon/src/UserRecommendations.css", "CSS", 0, 0, 0, 64, 0, 0, 0, 2, 6, 72
+"/home/vivek/Desktop/Pixeon/src/UserRecommendations.jsx", "JavaScript JSX", 0, 0, 0, 0, 82, 0, 0, 0, 5, 87
+"/home/vivek/Desktop/Pixeon/src/VideoPlayer.css", "CSS", 0, 0, 0, 5, 0, 0, 0, 0, 0, 5
+"/home/vivek/Desktop/Pixeon/src/VideoPlayer.jsx", "JavaScript JSX", 0, 0, 0, 0, 16, 0, 0, 0, 3, 19
+"/home/vivek/Desktop/Pixeon/src/assets/react.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"/home/vivek/Desktop/Pixeon/src/firebase.js", "JavaScript", 0, 0, 20, 0, 0, 0, 0, 1, 3, 24
+"/home/vivek/Desktop/Pixeon/src/index.css", "CSS", 0, 0, 0, 96, 0, 0, 0, 4, 9, 109
+"/home/vivek/Desktop/Pixeon/src/main.jsx", "JavaScript JSX", 0, 0, 0, 0, 9, 0, 0, 0, 2, 11
+"/home/vivek/Desktop/Pixeon/src/setup.js", "JavaScript", 0, 0, 3, 0, 0, 0, 0, 0, 2, 5
+"/home/vivek/Desktop/Pixeon/src/store.js", "JavaScript", 0, 0, 8, 0, 0, 0, 0, 0, 3, 11
+"/home/vivek/Desktop/Pixeon/vite.config.js", "JavaScript", 0, 0, 15, 0, 0, 0, 0, 1, 2, 18
+"Total", "-", 5, 14383, 67, 2527, 5909, 2, 19, 258, 870, 24040

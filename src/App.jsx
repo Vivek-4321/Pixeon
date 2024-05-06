@@ -21,6 +21,8 @@ import MyApplications from "./MyApplications.jsx";
 import ResetPassword from "./ResetPassword.jsx";
 import TaskPage from "./TaskPage.jsx";
 import Admin_Dashboard from "./Admin_Dashboard.jsx";
+import PointConversion from "./PointConversion.jsx";
+import ImageVerification from "./ImageVerification.jsx";
 
 function App() {
   return (
@@ -41,9 +43,10 @@ function AppContent() {
   // Check if the current path starts with "/otp/"
   const isOtpPath = location.pathname.startsWith("/otp/");
   const isResetPath = location.pathname.startsWith("/password_reset/");
+  const isVerification = location.pathname.startsWith("/imageVerification");
 
   // Check if the current path is in the hiddenPaths array or is an OTP path
-  const isNavbarHidden = hiddenPaths.includes(location.pathname) || isOtpPath || isResetPath;
+  const isNavbarHidden = hiddenPaths.includes(location.pathname) || isOtpPath || isResetPath || isVerification;
 
   return (
     <>
@@ -62,6 +65,8 @@ function AppContent() {
         <Route path="/password_reset/:id" element={<ResetPassword />} />
         <Route path="/task/:id" element={<TaskPage />} />
         <Route path="/admin" element={<Admin_Dashboard/>} />
+        <Route path="/point_conversion" element={<PointConversion />} />
+        <Route path="/imageVerification" element={<ImageVerification/>} />
       </Routes>
     </>
   );

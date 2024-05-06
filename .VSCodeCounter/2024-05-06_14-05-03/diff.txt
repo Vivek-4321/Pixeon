@@ -1,0 +1,43 @@
+Date : 2024-05-06 14:05:03
+Directory : /home/vivek/Desktop/Pixeon
+Total : 15 files,  496 codes, 6 comments, 56 blanks, all 558 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         10 |        422 |          6 |         49 |        477 |
+| CSS            |          3 |         53 |          0 |          7 |         60 |
+| JSON           |          2 |         21 |          0 |          0 |         21 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                   |         15 |        496 |          6 |         56 |        558 |
+| . (Files)                                           |          2 |         21 |          0 |          0 |         21 |
+| src                                                 |         13 |        475 |          6 |         56 |        537 |
++-----------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                            | language       | code       | comment    | blank      | total      |
++-----------------------------------------------------+----------------+------------+------------+------------+------------+
+| /home/vivek/Desktop/Pixeon/package-lock.json        | JSON           |         20 |          0 |          0 |         20 |
+| /home/vivek/Desktop/Pixeon/package.json             | JSON           |          1 |          0 |          0 |          1 |
+| /home/vivek/Desktop/Pixeon/src/AddPost.jsx          | JavaScript JSX |          2 |          0 |         -1 |          1 |
+| /home/vivek/Desktop/Pixeon/src/ModalApplication.css | CSS            |         12 |          0 |          2 |         14 |
+| /home/vivek/Desktop/Pixeon/src/ModalSettings.jsx    | JavaScript JSX |         98 |          0 |          7 |        105 |
+| /home/vivek/Desktop/Pixeon/src/ModalTaskView.jsx    | JavaScript JSX |          2 |          0 |          0 |          2 |
+| /home/vivek/Desktop/Pixeon/src/MyApplications.jsx   | JavaScript JSX |          3 |          0 |          0 |          3 |
+| /home/vivek/Desktop/Pixeon/src/Navbar.css           | CSS            |         23 |          0 |          3 |         26 |
+| /home/vivek/Desktop/Pixeon/src/Navbar.jsx           | JavaScript JSX |         42 |          2 |          7 |         51 |
+| /home/vivek/Desktop/Pixeon/src/PointsModal.jsx      | JavaScript JSX |         98 |          0 |          7 |        105 |
+| /home/vivek/Desktop/Pixeon/src/SideBar.jsx          | JavaScript JSX |         51 |          2 |         12 |         65 |
+| /home/vivek/Desktop/Pixeon/src/TaskPage.jsx         | JavaScript JSX |         -5 |          0 |         -1 |         -6 |
+| /home/vivek/Desktop/Pixeon/src/TaskSidebar.jsx      | JavaScript JSX |        127 |          2 |         17 |        146 |
+| /home/vivek/Desktop/Pixeon/src/UserProfile.css      | CSS            |         18 |          0 |          2 |         20 |
+| /home/vivek/Desktop/Pixeon/src/UserProfile.jsx      | JavaScript JSX |          4 |          0 |          1 |          5 |
+| Total                                               |                |        496 |          6 |         56 |        558 |
++-----------------------------------------------------+----------------+------------+------------+------------+------------+

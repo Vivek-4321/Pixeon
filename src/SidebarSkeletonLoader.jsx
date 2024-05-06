@@ -15,7 +15,7 @@ function SideBar() {
       <div className="sidebar__navigation">
         <div className="sidebar__navigation__loading">
           <Skeleton
-            count={6}
+            count={8}
             height={40}
             width={200}
             style={{ marginBottom: "10px" }}

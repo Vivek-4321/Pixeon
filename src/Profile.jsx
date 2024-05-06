@@ -29,9 +29,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Assuming you have the JWT token stored in localStorage or elsewhere
-        const token = cookie.token;
-        console.log(token);
+        setLoading(true);
 
         // Make the API call to fetch the user? profile
         const response = await axios.get(
@@ -43,14 +41,7 @@ function Profile() {
         );
         console.log(response.data);
         setUser(response.data);
-        const maxAge = 10 * 24 * 60 * 60;
-        setCookie("user", response.data.user, {
-          path: "/",
-          maxAge,
-          sameSite: "none",
-          secure: true,
-        });
-        console.log(user);
+
         setLoading(false);
       } catch (err) {
         setError(err?.response?.data?.error);
@@ -101,6 +92,7 @@ function Profile() {
               const progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
               // Update the toast message with the upload progress
+              console.log(progress);
             },
             (error) => {
               console.error(error);

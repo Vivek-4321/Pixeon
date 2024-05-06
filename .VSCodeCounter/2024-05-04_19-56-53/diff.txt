@@ -1,0 +1,55 @@
+Date : 2024-05-04 19:56:53
+Directory : /home/vivek/Desktop/Pixeon
+Total : 26 files,  1324 codes, 3 comments, 84 blanks, all 1411 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         17 |        967 |          2 |         38 |      1,007 |
+| CSS            |          6 |        294 |          1 |         43 |        338 |
+| JSON           |          2 |         55 |          0 |          0 |         55 |
+| JavaScript     |          1 |          8 |          0 |          3 |         11 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                     | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                        |         26 |      1,324 |          3 |         84 |      1,411 |
+| . (Files)                                                |          2 |         55 |          0 |          0 |         55 |
+| src                                                      |         24 |      1,269 |          3 |         84 |      1,356 |
++----------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                 | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------+----------------+------------+------------+------------+------------+
+| /home/vivek/Desktop/Pixeon/package-lock.json             | JSON           |         52 |          0 |          0 |         52 |
+| /home/vivek/Desktop/Pixeon/package.json                  | JSON           |          3 |          0 |          0 |          3 |
+| /home/vivek/Desktop/Pixeon/src/Admin_Dashboard.css       | CSS            |          7 |          0 |          0 |          7 |
+| /home/vivek/Desktop/Pixeon/src/Admin_Dashboard.jsx       | JavaScript JSX |        216 |          1 |          9 |        226 |
+| /home/vivek/Desktop/Pixeon/src/App.jsx                   | JavaScript JSX |          2 |          0 |          0 |          2 |
+| /home/vivek/Desktop/Pixeon/src/Applicants.css            | CSS            |         46 |          1 |          9 |         56 |
+| /home/vivek/Desktop/Pixeon/src/Applicants.jsx            | JavaScript JSX |         56 |          0 |          3 |         59 |
+| /home/vivek/Desktop/Pixeon/src/Forget.jsx                | JavaScript JSX |          1 |          0 |          2 |          3 |
+| /home/vivek/Desktop/Pixeon/src/Home.jsx                  | JavaScript JSX |         58 |          0 |         -1 |         57 |
+| /home/vivek/Desktop/Pixeon/src/Login.jsx                 | JavaScript JSX |         24 |         -7 |         -2 |         15 |
+| /home/vivek/Desktop/Pixeon/src/ModalComponent.jsx        | JavaScript JSX |         17 |          7 |          2 |         26 |
+| /home/vivek/Desktop/Pixeon/src/ModalComponentForTask.jsx | JavaScript JSX |         48 |          4 |         -3 |         49 |
+| /home/vivek/Desktop/Pixeon/src/ModalOptions.css          | CSS            |         20 |          0 |          2 |         22 |
+| /home/vivek/Desktop/Pixeon/src/Navbar.css                | CSS            |         65 |          0 |          9 |         74 |
+| /home/vivek/Desktop/Pixeon/src/Navbar.jsx                | JavaScript JSX |         40 |          0 |          0 |         40 |
+| /home/vivek/Desktop/Pixeon/src/Otp.jsx                   | JavaScript JSX |         14 |        -10 |         -1 |          3 |
+| /home/vivek/Desktop/Pixeon/src/Post.css                  | CSS            |         14 |          0 |          3 |         17 |
+| /home/vivek/Desktop/Pixeon/src/Post.jsx                  | JavaScript JSX |         23 |          3 |         -1 |         25 |
+| /home/vivek/Desktop/Pixeon/src/Profile.jsx               | JavaScript JSX |          9 |          0 |          0 |          9 |
+| /home/vivek/Desktop/Pixeon/src/ResetPassword.jsx         | JavaScript JSX |          7 |          0 |          0 |          7 |
+| /home/vivek/Desktop/Pixeon/src/Signup.jsx                | JavaScript JSX |          7 |         -9 |          0 |         -2 |
+| /home/vivek/Desktop/Pixeon/src/TaskDashboard.jsx         | JavaScript JSX |          8 |          0 |          0 |          8 |
+| /home/vivek/Desktop/Pixeon/src/TaskPage.css              | CSS            |        142 |          0 |         20 |        162 |
+| /home/vivek/Desktop/Pixeon/src/TaskPage.jsx              | JavaScript JSX |        436 |         13 |         31 |        480 |
+| /home/vivek/Desktop/Pixeon/src/UserProfile.jsx           | JavaScript JSX |          1 |          0 |         -1 |          0 |
+| /home/vivek/Desktop/Pixeon/src/store.js                  | JavaScript     |          8 |          0 |          3 |         11 |
+| Total                                                    |                |      1,324 |          3 |         84 |      1,411 |
++----------------------------------------------------------+----------------+------------+------------+------------+------------+

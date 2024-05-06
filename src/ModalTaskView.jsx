@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import Modal from "react-modal";
 import Coin from "./assets/Vivecoin1.png";
 import { MdDateRange } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { formatDistanceToNow, format, parseISO } from "date-fns";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -11,6 +12,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 function ModalTaskView({ isModalOpen, handleCloseModal, task }) {
   const [isViewingImage, setIsViewingImage] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const navigate = useNavigate();
 
   const formatDate = (dateString) => {
     const date = parseISO(dateString);
@@ -103,7 +105,7 @@ function ModalTaskView({ isModalOpen, handleCloseModal, task }) {
       }
     >
       <div className="task__container__map">
-        <div key={task?.taskId} className="task__post__container__top">
+        <div key={task?.taskId} className="task__post__container__top" onClick={() => {navigate(`/task/${task?.id}`)}}>
           <div className="container__left">
             <div className="container__image">
               <img src={task?.owner?.profilePicLink} />

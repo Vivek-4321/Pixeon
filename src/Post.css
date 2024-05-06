@@ -207,6 +207,10 @@
   overflow-y: auto; /* Enable vertical scrolling */
   margin-bottom: 1rem;
   margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .post__icon__container{

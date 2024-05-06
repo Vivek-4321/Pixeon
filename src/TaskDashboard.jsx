@@ -13,6 +13,7 @@ import { useCookies } from "react-cookie";
 import ModalTaskView from "./ModalTaskView";
 import Coin from "./assets/Vivecoin1.png";
 import { MdDateRange } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import TaskSidebar from "./TaskSidebar";
 import AddTask from "./AddTask";
 import ModalComponentForTask from "./ModalComponentForTask";
@@ -20,6 +21,7 @@ import axios from "axios";
 import { formatDistanceToNow, format } from "date-fns";
 import ModalApplication from "./ModalApplication";
 import { toast, Toaster } from "react-hot-toast";
+import useStore from "./store.js";
 
 function TaskDashboard() {
   const [isViewingImage, setIsViewingImage] = useState(false);
@@ -29,6 +31,36 @@ function TaskDashboard() {
   const [isModalAppOpen, setIsModalAppOpen] = useState(false);
   const [isModalTaskOpen, setIsModalTaskOpen] = useState(false);
   const [task, setTask] = useState(null);
+  const navigate = useNavigate();
+  const user = useStore((state) => state.user);
+  const setUser = useStore((state) => state.setUser);
+
+  const deleteTask = async (taskId) => {
+    const promise = axios
+      .delete(
+        `http://localhost:3000/api/Task/deleteTask/${user?.userId}/${taskId}`,
+        {
+          withCredentials: true,
+          credentials: "include",
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        // handle successful response
+        return response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+        // handle error
+        throw error;
+      });
+
+    toast.promise(promise, {
+      loading: "Deleting task...",
+      success: "Task deleted successfully",
+      error: "Error deleting task",
+    });
+  };
 
   const handleImageClick = () => {
     console.log(post);
@@ -49,11 +81,11 @@ function TaskDashboard() {
     setIsModalTaskOpen(true);
     setTask(task);
     console.log("task clicked... ");
-  }
+  };
 
   const handleCloseModalTask = () => {
     setIsModalTaskOpen(false);
-  }
+  };
 
   const handleCloseModalApp = () => {
     setIsModalAppOpen(false);
@@ -109,9 +141,13 @@ function TaskDashboard() {
     }
   };
 
+  const handleViewTask = (taskId) => {
+    navigate(`/task/${taskId}`);
+  };
+
   return (
     <div className="taskDashboard__container">
-        <Toaster
+      <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{
@@ -126,11 +162,15 @@ function TaskDashboard() {
           onClose={handleCloseModal}
         />
         {data.map((task, index) => (
-          <div className="task__container__map" >
-            <div key={index} className="task__post__container__top" onClick={() => handleOpenModalTask(task)}>
+          <div className="task__container__map">
+            <div
+              key={index}
+              className="task__post__container__top"
+              onClick={() => handleOpenModalTask(task)}
+            >
               <div className="container__left">
                 <div className="container__image">
-                  <img src={task?.owner?.profilePicLink} />
+                  <img src={task?.owner?.profilePicLink || "https://imgs.search.brave.com/K0dB0P72H9JRxFsZG-pTF8xlPmqPzd_fa94PwnTWJN8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93d3cu/d2luaGVscG9ubGlu/ZS5jb20vYmxvZy93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxNy8x/Mi91c2VyLnBuZw"} />
                 </div>
                 <div className="container__desc">
                   <span className="user__name">{task?.owner?.userName}</span>
@@ -190,14 +230,34 @@ function TaskDashboard() {
                   <span>{formatDate(task?.createdAt)}</span>
                 </div>
               </div>
-              <div className="task__bottom__right">
+              <div
+                className="task__bottom__right"
+                style={{
+                  width: user?.userId === task.ownerId ? "14.5rem" : "8rem",
+                }}
+              >
                 {task.status === "OPEN" ? (
-                  <button onClick={() => handleOpenModalApp(task)}>
-                    Apply Now
+                  <button
+                    onClick={() =>
+                      user?.userId === task.ownerId
+                        ? handleViewTask(task.taskId)
+                        : handleOpenModalApp(task)
+                    }
+                  >
+                    {user?.userId === task.ownerId ? "View" : "Apply Now"}
                   </button>
                 ) : (
-                  <button className="closed__button">Closed</button>
+                  <button className="closed__button">{task.status}</button>
                 )}
+                <button
+                  style={{
+                    display: user?.userId === task.ownerId ? "block" : "none",
+                  }}
+                  onClick={() => deleteTask(task.taskId)}
+                  className="task__bottom__right"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
@@ -212,7 +272,7 @@ function TaskDashboard() {
           handleFunction={handleApplyTask}
           heading="Are sure want to apply for this task?"
         />
-         <ModalTaskView
+        <ModalTaskView
           isModalOpen={isModalTaskOpen}
           handleCloseModal={handleCloseModalTask}
           task={task}
