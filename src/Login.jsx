@@ -37,24 +37,24 @@ function Login() {
       )
       .then((response) => {
         // Assuming the token is returned in the response data
-        // const token = response.data.token;
-        // const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
-        //   path: "/",
-        //   maxAge,
-        //   sameSite: "Lax", // or 'Strict'
-        //   secure: true, 
-        //   domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
-        // });
-        // console.log(response.headers);
-        // console.log(response.data);
-        // console.log("Token:", token);
-        const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
-            path: "/",
-            maxAge,
-            secure: true,
-            sameSite: 'Lax', 
-            domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
-          });
+        const token = response.data.token;
+        const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
+          path: "/",
+          maxAge,
+          sameSite: "Lax", // or 'Strict'
+          secure: true, 
+          domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
+        });
+        console.log(response.headers);
+        console.log(response.data);
+        console.log("Token:", token);
+        // const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
+        //     path: "/",
+        //     maxAge,
+        //     secure: true,
+        //     sameSite: 'Lax', 
+        //     domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
+        //   });
 
         console.log("Token:", getCookie("token"));
 
