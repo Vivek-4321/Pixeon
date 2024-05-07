@@ -150,7 +150,7 @@ function Login() {
         }}
       />
       <div className="navbar_pixeon">
-        <h1>Pixeon</h1>
+        <h1>P</h1>
       </div>
       <div className="container_1">
         <h1 className="container__header">Sign in to Pixeon</h1>
