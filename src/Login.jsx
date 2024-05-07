@@ -41,6 +41,7 @@ function Login() {
       .then((response) => {
         // Assuming the token is returned in the response data
         const Token = response.data.token;
+        console.log("Token from post request:", Token);
         setToken(Token);
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
