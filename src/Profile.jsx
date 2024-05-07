@@ -15,6 +15,7 @@ import {
 import RecommendationSkeletonLoader from "./RecommendationSkeletonLoader";
 import SidebarSkeletonLoader from "./SidebarSkeletonLoader";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import useStore from './store.js';
 
 function Profile() {
   const [editMode, setEditMode] = useState(false);

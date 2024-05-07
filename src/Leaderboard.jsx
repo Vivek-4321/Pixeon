@@ -8,6 +8,7 @@ import TaskSidebar from './TaskSidebar';
 import Coin from "./assets/Vivecoin1.png";
 import axios from "axios";
 import { TbDeviceAudioTape } from 'react-icons/tb';
+import useStore from './store.js';
 
 function Leaderboard() {
   const [data, setData] = useState([]);
