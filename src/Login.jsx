@@ -51,7 +51,8 @@ function Login() {
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
             path: "/",
             maxAge,
-            secure: false, 
+            secure: true,
+            sameSite: 'Lax', 
             domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
           });
 
