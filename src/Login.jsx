@@ -41,10 +41,11 @@ function Login() {
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
           httpOnly: false,
+          sameSite: 'Lax',
         });
         console.log(response.headers);
         console.log(response.data);
-        console.log("Token:", token);
+        console.log("Token:", cookie.token);
         // const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
         //     path: "/",
         //     maxAge,

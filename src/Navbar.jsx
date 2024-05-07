@@ -119,7 +119,7 @@ function Navbar() {
     document.documentElement.setAttribute("data-theme", themeClass);
 
     // Update the selectedTheme cookie
-    setCookie("selectedTheme", selectedTheme, { path: "/", httpOnly: false });
+    setCookie("selectedTheme", selectedTheme, { path: "/", httpOnly: false, sameSite: 'Lax' });
     console.log("Theme:", cookies.theme);
     console.log(
       "Is Dark Theme:",
