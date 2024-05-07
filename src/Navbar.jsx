@@ -62,7 +62,7 @@ function Navbar() {
   const debouncedSearch = _.debounce(async (searchTerm) => {
     if (searchTerm.trim().length > 0) {
       try {
-        const response = await axios.get(
+        const response = await axios.post(
           `http://localhost:3000/api/User/searchUsersData`,
           {
             params: {
@@ -98,7 +98,7 @@ function Navbar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const response = await axios.post(
           "https://pixeon-server.onrender.com/api/User/mydetails",
           { withCredentials: true, credentials: "include" }
         );
