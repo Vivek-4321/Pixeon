@@ -50,7 +50,7 @@ function Login() {
         });
         console.log(response.headers);
         console.log(response.data);
-        console.log("Token:", token);
+        console.log("Token from post request--:", token);
         // const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
         //     path: "/",
         //     maxAge,
