@@ -40,8 +40,7 @@ function Login() {
         const token = response.data.token;
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
-          maxAge,
-          secure: false,
+          httpOnly: false,
         });
         console.log(response.headers);
         console.log(response.data);
