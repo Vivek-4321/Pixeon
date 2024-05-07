@@ -36,6 +36,7 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
   const [points, setPoints] = useState(0);
   const [status, setStatus] = useState("OPEN");
   const [title, setTitle] = useState("");
+  const token = useStore((state) => state.token);
 
   useEffect(() => {
     if (task) {
@@ -93,9 +94,10 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
                   if (task) {
                     // Call the update API
                     result = await axios.put(
-                      "http://localhost:3000/api/Task/updateTask",
+                      "https://pixeon-server.onrender.com/api/Task/updateTask",
                       {
                         taskId: task.taskId,
+                        token: token,
                         taskData: {
                           title: title,
                           description: inputValue,
@@ -111,8 +113,9 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
                   } else {
                     // Call the create API
                     result = await axios.post(
-                      "http://localhost:3000/api/Task/createTask",
+                      "https://pixeon-server.onrender.com/api/Task/createTask",
                       {
+                        token: token,
                         taskData: {
                           title: title,
                           description: inputValue,
@@ -149,9 +152,10 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
           let result;
           if (task) {
             // Call the update API
-            result = await axios.put(
-              "http://localhost:3000/api/Task/updateTask",
+            result = await axios.post(
+              "https://pixeon-server.onrender.com/api/Task/updateTask",
               {
+                token: token,
                 taskId: task.taskId,
                 taskData: {
                   title: title,
@@ -167,8 +171,9 @@ const ModalComponent = ({ isOpen, onClose, task }) => {
           } else {
             // Call the create API
             result = await axios.post(
-              "http://localhost:3000/api/Task/createTask",
+              "https://pixeon-server.onrender.com/api/Task/createTask",
               {
+                token: token,
                 taskData: {
                   title: title,
                   description: inputValue,

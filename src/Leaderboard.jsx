@@ -11,9 +11,10 @@ import { TbDeviceAudioTape } from 'react-icons/tb';
 
 function Leaderboard() {
   const [data, setData] = useState([]);
+  const token = useStore((state) => state.token);
 
   async function fetchData() {
-    const response = await axios.get('https://pixeon-server.onrender.com/api/User/leaderboard', { withCredentials: true, credentials: 'include' });
+    const response = await axios.post('https://pixeon-server.onrender.com/api/User/leaderboard',{token:token}, { withCredentials: true, credentials: 'include' });
     setData(response.data);
     console.log(response.data);
   }

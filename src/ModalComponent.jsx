@@ -22,6 +22,7 @@ import {
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
+import useStore from "./store.js";
 
 const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
   const [inputValue, setInputValue] = useState("");
@@ -34,6 +35,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [progressValue, setProgressValue] = useState(0);
+  const token = useStore((state) => state.token);
 
   useEffect(() => {
     if (post) {
@@ -102,9 +104,10 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
 
     if (post) {
       // Update post
-      result = await axios.put(
+      result = await axios.post(
         "https://pixeon-server.onrender.com/api/Post/updatePost",
         {
+          token: token,
           postId: post.postId,
           newPostData: {
             content: inputValue,
@@ -120,6 +123,7 @@ const ModalComponent = ({ isOpen, onClose, post, posts, setPosts }) => {
       result = await axios.post(
         "https://pixeon-server.onrender.com/api/Post/createPost",
         {
+          token: token,
           content: inputValue,
           title: title,
           link: downloadURL,

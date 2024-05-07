@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useParams } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import axios from "axios";
+import useStore from './store.js'
 
 function ResetPassword() {
     const { id } = useParams();
@@ -12,6 +13,7 @@ function ResetPassword() {
   const [cookie, setCookie, getCookie] = useCookies(["user"]);
   const [cookies] = useCookies(["selectedTheme"]);
   const selectedTheme = cookies.selectedTheme || "blue-dark";
+  const token = useStore((state) => state.token);
 
   const handleSubmit = async (event) => {
     console.log("reached here")
@@ -26,7 +28,7 @@ function ResetPassword() {
         const response = await axios.post(
           "https://pixeon-server.onrender.com/api/User/resetPassVerify",
           
-          { data:{ resetId: id, newPassword: password }, withCredentials: true, credentials: "include" }
+          { data:{ resetId: id, newPassword: password, token: token }, withCredentials: true, credentials: "include" }
         );
 
       console.log(response.data);

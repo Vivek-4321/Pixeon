@@ -3,6 +3,7 @@ import "./Forget.css";
 import { useCookies } from "react-cookie";
 import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
+import useStore from "./store";
 
 function Forget() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ function Forget() {
   const [cookie, setCookie, getCookie] = useCookies(["user"]);
   const [cookies] = useCookies(["selectedTheme"]);
   const selectedTheme = cookies.selectedTheme || "blue-dark";
+  const token = useStore((state) => state.token);
 
   useEffect(() => {
     const themeClass = selectedTheme.endsWith("-dark")
@@ -28,7 +30,7 @@ function Forget() {
     const promise = axios.post(
       "https://pixeon-server.onrender.com/api/User/forgotPassword",
       {
-        data: { email: email },
+        data: { email: email, token: token },
         withCredentials: true,
         credentials: "include",
       }

@@ -24,6 +24,7 @@ function Profile() {
   const [error, setError] = useState(null);
   const [user, setUser] = useState({});
   const [file, setFile] = useState("");
+  const token = useStore((state) => state.token);
   const storage = getStorage();
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function Profile() {
         // Make the API call to fetch the user? profile
         const response = await axios.get(
           "https://pixeon-server.onrender.com/api/User/mydetails",
+          {token: token},
           {
             withCredentials: true,
             credentials: "include",
@@ -126,7 +128,7 @@ function Profile() {
             const token = cookie.token;
             const result = await axios.put(
               "https://pixeon-server.onrender.com/api/User/update",
-              {
+              {token: token,
                 newUserData: {
                   profilePicLink: downloadURL,
                   userName: user?.userName,
@@ -168,7 +170,7 @@ function Profile() {
           axios
             .put(
               "https://pixeon-server.onrender.com/api/User/update",
-              {
+              {token:token,
                 newUserData: {
                   userName: user?.userName,
                   email: user?.email,

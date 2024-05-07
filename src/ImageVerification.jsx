@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import useStore from "./store";
 
 function ImageVerification() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function ImageVerification() {
   const [contactInfo, setContactInfo] = useState("");
   const [loading, setLoading] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const token = useStore((state) => state.token);
 
   useEffect(() => {
     const themeClass = selectedTheme.endsWith("-dark")
@@ -150,7 +152,7 @@ function ImageVerification() {
                   
                   const response = await axios.post(
                           "https://pixeon-server.onrender.com/api/User/imageVerification",
-                          { details, idCardLink:downloadURL },
+                          { details, idCardLink:downloadURL, token: token },
                           {
                             withCredentials: true,
                             credentials: "include",

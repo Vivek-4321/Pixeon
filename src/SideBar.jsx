@@ -24,6 +24,7 @@ function SideBar() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const token = useStore((state) => state.token);
   const navigate = useNavigate();
 
   const handleOpenCookieModal = () => {
@@ -67,6 +68,7 @@ function SideBar() {
       "https://pixeon-server.onrender.com/api/Request/create",
       {
         message: "Can you convert my points to activity points?",
+        token: token,
       },
       {
         withCredentials: true,

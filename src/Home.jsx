@@ -24,6 +24,7 @@ function Home() {
   const notifications = useStore((state) => state.notifications);
   const setNotifications = useStore((state) => state.setNotifications);
   const user = useStore((state) => state.user);
+  const token = useStore((state) => state.token);
   const setUser = useStore((state) => state.setUser);
 
   const handleOpenModal = () => {
@@ -39,14 +40,13 @@ function Home() {
   };
 
   useEffect(() => {
-    const token = cookies.token;
     const fetchPosts = async () => {
       setIsLoading(true);
       console.log(cookies.token);
       //http://localhost:3000/api/Post/getAllUsersPost
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",{token: token},
           { withCredentials: true, credentials: "include" }
         );
 
@@ -62,8 +62,8 @@ function Home() {
 
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/Notify/notifications",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/Notify/notifications",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is from notifications: ",response.data);

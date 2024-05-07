@@ -29,6 +29,7 @@ function Post({ post, userLiked, posts, setPosts }) {
   const threeDotsButtonRef = useRef(null);
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
+  const token = useStore((state) => state.token);
 
   const handleOpenModalPost = (post) => {
     console.log(post);
@@ -48,6 +49,7 @@ function Post({ post, userLiked, posts, setPosts }) {
     event.preventDefault(); // Prevent the default form submission behavior
     // Construct the request body
     const requestBody = {
+      token: token,
       content: content,
       postId: post.postId,
     };
@@ -104,6 +106,7 @@ function Post({ post, userLiked, posts, setPosts }) {
 
     // Define the request body containing the postId
     const requestBody = {
+      token:token,
       postId: postId,
     };
 
@@ -191,7 +194,7 @@ function Post({ post, userLiked, posts, setPosts }) {
     toast.promise(
       // Create a promise for the deletion operation
       axios.delete("https://pixeon-server.onrender.com/api/Post/deletePost", {
-        data: { postId: postId.postId },
+        data: { postId: postId.postId, token: token },
         withCredentials: true,
         credentials: "include",
       }),

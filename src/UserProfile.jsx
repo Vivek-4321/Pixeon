@@ -30,6 +30,7 @@ function UserProfile() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const user = useStore((state) => state.user);
+  const token = useStore((state) => state.token);
 
   const handleOpenModal = (task) => {
     setSelectedTask(task);
@@ -56,6 +57,7 @@ function UserProfile() {
         "https://pixeon-server.onrender.com/api/User/getSingleUserData",
         {
           params: {
+            token: token,
             userId: id,
           },
           withCredentials: true,

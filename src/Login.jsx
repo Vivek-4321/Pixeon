@@ -105,7 +105,8 @@ function Login() {
             }
           );
           console.log(response.data);
-          const token = response.data.token;
+          const Token = response.data.token;
+          setToken(Token);
           const maxAge = 10 * 24 * 60 * 60;
           setCookie("token", token, {
             path: "/",
@@ -150,7 +151,7 @@ function Login() {
         }}
       />
       <div className="navbar_pixeon">
-        <h1>P</h1>
+        <h1>Pixeon</h1>
       </div>
       <div className="container_1">
         <h1 className="container__header">Sign in to Pixeon</h1>

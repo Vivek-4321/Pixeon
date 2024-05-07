@@ -4,12 +4,14 @@ import axios from "axios";
 import TaskSidebar from "./TaskSidebar";
 import Coin from "./assets/Vivecoin1.png";
 import ModalTaskView from "./ModalTaskView";
+import useStore from './store.js'
 
 function MyApplications() {
   const [data, setData] = useState([]);
   const [activeButton, setActiveButton] = useState("ACCEPTED");
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const token = useStore((state) => state.token);
 
   const handleOpenModal = (task) => {
     setIsModalOpen(true);
@@ -23,8 +25,8 @@ function MyApplications() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/App/getAllUserApp",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/App/getAllUserApp",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         setData(response.data);

@@ -5,12 +5,13 @@ import TaskSidebar from "./TaskSidebar";
 
 function PointConversion() {
   const [requests, setRequests] = useState([]);
+  const token = useStore((state) => state.token);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/Request/getAllRequest",
+        const response = await axios.post(
+          "http://localhost:3000/api/Request/getAllRequest",{token: token},
           {
             withCredentials: true,
             credentials: "include",
@@ -30,7 +31,7 @@ function PointConversion() {
     try {
       const response = await axios.post(
         'https://pixeon-server.onrender.com/api/Request/reqStatusChange',
-        { reqId, status },
+        { reqId, status, token:token },
         { withCredentials: true, credentials: 'include' }
       );
       console.log(response.data);

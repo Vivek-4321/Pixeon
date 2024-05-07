@@ -33,6 +33,7 @@ function Navbar() {
   const [searchResults, setSearchResults] = useState([]);
   // const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
+  const token = useStore((state) => state.token);
   const user = useStore((state) => state.user);
   const notifications = useStore((state) => state.notifications);
   const [isPointsModalOpen, setIsPointsModalOpen] = useState(false);
@@ -67,6 +68,7 @@ function Navbar() {
           {
             params: {
               searchTerm: searchTerm,
+              token: token,
             },
             withCredentials: true,
             credentials: "include",
@@ -99,7 +101,7 @@ function Navbar() {
     const fetchData = async () => {
       try {
         const response = await axios.post(
-          "https://pixeon-server.onrender.com/api/User/mydetails",
+          "https://pixeon-server.onrender.com/api/User/mydetails",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         setUser(response.data);

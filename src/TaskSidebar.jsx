@@ -31,7 +31,7 @@ function TaskSidebar() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const user = useStore((state) => state.user);
   const [isPointsModalOpen, setIsPointsModalOpen] = useState(false);
-
+  const token = useStore((state) => state.token);
   const handleOpenPointsModal = () => {
     setIsPointsModalOpen(true);
   };
@@ -81,6 +81,7 @@ function TaskSidebar() {
       "https://pixeon-server.onrender.com/api/Request/create",
       {
         message: "Can you convert my points to activity points?",
+        token: token,
       },
       {
         withCredentials: true,

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./TaskPage.css";
 import TaskSidebar from "./TaskSidebar";
-import { MdDateRange } from "react-icons/md";
+import { MdDateRange, MdOutlineToken } from "react-icons/md";
 import { formatDistanceToNow, format } from "date-fns";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Coin from "./assets/Vivecoin1.png";
@@ -43,7 +43,7 @@ function TaskPage() {
   const [message, setMessage] = useState("");
   const [showChatBox, setShowChatBox] = useState(false);
   const [messages, setMessages] = useState([]);
-
+  const token = useStore((state) => state.token);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalTaskOpen, setIsModalTaskOpen] = useState(false);
   const buttonRef = useRef(null);
@@ -70,6 +70,7 @@ function TaskPage() {
     try {
       const response = await axios.delete(
         `https://pixeon-server.onrender.com/api/Task/deleteTask/${user?.userId}/${task?.taskId}`,
+        {token: MdOutlineToken},
         {
           withCredentials: true,
           credentials: "include",
@@ -93,7 +94,7 @@ function TaskPage() {
       try {
         const response = await axios.post(
           "https://pixeon-server.onrender.com/api/Task/getTask",
-          { taskId: id },
+          { taskId: id , token: token},
           {
             withCredentials: true,
             credentials: "include",
@@ -145,7 +146,7 @@ function TaskPage() {
       try {
         const response = await axios.post(
           "https://pixeon-server.onrender.com/api/User/getMessages",
-          { referenceId },
+          { referenceId, token: token },
           {
             withCredentials: true,
             credentials: "include",
@@ -163,7 +164,7 @@ function TaskPage() {
       try {
         const response = await axios.post(
           "https://pixeon-server.onrender.com/api/Sub/getDetails",
-          { taskId: id },
+          { taskId: id ,token: token },
           { withCredentials: true, credentials: "include" }
         );
         setSubmission(response.data);

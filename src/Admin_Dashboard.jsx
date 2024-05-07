@@ -12,6 +12,7 @@ import { GiTargetPoster } from "react-icons/gi";
 import { MdOutlineAssignment } from "react-icons/md";
 import { RiFilePaper2Line } from "react-icons/ri";
 
+
 function Admin_Dashboard() {
   const [items, setItems] = useState([]);
   const [users, setUsers] = useState([]);
@@ -21,7 +22,7 @@ function Admin_Dashboard() {
   const [showTasks, setShowTasks] = useState(false);
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
-
+  const token = useStore((state) => state.token);
   const [cpuUsageData, setCpuUsageData] = useState([]);
   const [memoryUsageData, setMemoryUsageData] = useState([]);
   const [networkUsageData, setNetworkUsageData] = useState([]);
@@ -76,8 +77,8 @@ function Admin_Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/Task/getAllUsersTask",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/Task/getAllUsersTask",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is from tasks", response.data);
@@ -92,8 +93,8 @@ function Admin_Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/Post/getAllUsersPost",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         console.log("This is userPost", response.data);
@@ -108,8 +109,8 @@ function Admin_Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://pixeon-server.onrender.com/api/User/getAllUsers",
+        const response = await axios.post(
+          "https://pixeon-server.onrender.com/api/User/getAllUsers",{token: token},
           { withCredentials: true, credentials: "include" }
         );
         console.log("Users", response.data);
@@ -127,6 +128,7 @@ function Admin_Dashboard() {
         "https://pixeon-server.onrender.com/api/User/update",
         {
           userId: userId,
+          token: token,
           newUserData: {
             verified: true,
           },
@@ -151,7 +153,7 @@ function Admin_Dashboard() {
 
   async function deleteUser(userId) {
     const promise = axios
-      .delete(`https://pixeon-server.onrender.com/api/User/delete/${userId}`, {
+      .delete(`https://pixeon-server.onrender.com/api/User/delete/${userId}`,{token: token}, {
         withCredentials: true,
         credentials: "include",
       })
@@ -192,7 +194,7 @@ function Admin_Dashboard() {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(
-        `https://pixeon-server.onrender.com/api/Post/deletePost`,
+        `https://pixeon-server.onrender.com/api/Post/deletePost`,{token: token},
         { data: { postId } }
       );
       toast.promise(
@@ -215,7 +217,7 @@ function Admin_Dashboard() {
   const deleteTask = async (taskId) => {
     try {
       const response = await axios.delete(
-        `https://pixeon-server.onrender.com/api/Task/deleteTask/${user?.userId}/${taskId}`,
+        `https://pixeon-server.onrender.com/api/Task/deleteTask/${user?.userId}/${taskId}`,{token: token},
         {
           withCredentials: true,
           credentials: "include",
