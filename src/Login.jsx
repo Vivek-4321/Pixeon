@@ -7,6 +7,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
 import { useNavigate, Link } from "react-router-dom";
+import useStore from "./store.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,8 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [cookie, setCookie, getCookie] = useCookies(["user"]);
   const provider = new GoogleAuthProvider();
+  const setToken = useStore((state) => state.setToken);
+  const token = useStore((state) => state.token);
   provider.addScope("email");
   const navigate = useNavigate();
   const [cookies] = useCookies(["selectedTheme"]);
@@ -37,7 +40,8 @@ function Login() {
       )
       .then((response) => {
         // Assuming the token is returned in the response data
-        const token = response.data.token;
+        const Token = response.data.token;
+        setToken(Token);
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
           httpOnly: false,
@@ -45,7 +49,7 @@ function Login() {
         });
         console.log(response.headers);
         console.log(response.data);
-        console.log("Token:", cookie.token);
+        console.log("Token:", token);
         // const maxAge = 10 * 24 * 60 * 60; setCookie("token", "wow", {
         //     path: "/",
         //     maxAge,
