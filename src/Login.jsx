@@ -59,10 +59,10 @@ function Login() {
         //     domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
         //   });
 
-        console.log("Token:", getCookie("token"));
+        console.log("Token from  post request..:", getCookie("token"));
 
         navigate("/");
-        return response.data;
+        return token;
       })
       .catch((error) => {
         console.error("Error logging in:", error);
