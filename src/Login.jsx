@@ -41,9 +41,7 @@ function Login() {
         const maxAge = 10 * 24 * 60 * 60; setCookie("token", token, {
           path: "/",
           maxAge,
-          sameSite: "Lax", // or 'Strict'
-          secure: true, 
-          domain: "https://pixeon-eight.vercel.app"// Only set if your frontend and backend are both served over HTTPS
+          secure: false,
         });
         console.log(response.headers);
         console.log(response.data);
